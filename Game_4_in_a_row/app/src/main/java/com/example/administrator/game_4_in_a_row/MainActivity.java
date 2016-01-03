@@ -47,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("debug","two players");
+                intent = new Intent(v.getContext(), Game.class);
+                startActivity(intent);
+
             }
         });
 
@@ -69,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("debug","game history");
+                intent = new Intent(v.getContext(), Game_history.class);
+                startActivity(intent);
+
             }
         });
 
