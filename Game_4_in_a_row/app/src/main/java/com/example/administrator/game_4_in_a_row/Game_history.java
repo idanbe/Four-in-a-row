@@ -1,11 +1,14 @@
 package com.example.administrator.game_4_in_a_row;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class Game_history extends AppCompatActivity {
+
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,11 @@ public class Game_history extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            intent = new Intent(Game_history.this, Settings.class);
+            startActivity(intent);
+
+
             return true;
         }
 
