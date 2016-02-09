@@ -13,4 +13,7 @@
     <string name="title_activity_game">Game</string>
     <string name="title_activity_game_history">Game History</string>
     <string name="textView_history">Game History</string>
+    <string name="button_Vibration">Vibration On</string>
+    <string name="button_sound">Sound On</string>
+
 </resources>
