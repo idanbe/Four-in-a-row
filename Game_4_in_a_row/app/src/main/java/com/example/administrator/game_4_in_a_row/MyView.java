@@ -137,12 +137,12 @@ public class MyView extends View {
                 if(event.getX()<witdh_cell)
                 {
                     Log.d("check777","col 0");
-                    cell_arr[5][0]="R";
+                    //cell_arr[5][0]="R";
                 }
                 if((event.getX()>(witdh_cell))&&(event.getX()<(witdh_cell*2)))
                 {
                     Log.d("check777","col 1");
-                    cell_arr[5][1]="G";
+
                 }
                 if((event.getX()>(witdh_cell*2))&&(event.getX()<(witdh_cell*3)))
                 {
