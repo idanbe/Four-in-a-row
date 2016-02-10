@@ -110,7 +110,7 @@ public class MyView extends View {
                         }
                         else // player 2
                         {
-                            paint.setColor(Color.GREEN);
+                            paint.setColor(Color.YELLOW);
                         }
                         rx=(witdh_cell*j); //x,y of cell to paint
                         ry=(height_cell*i);
