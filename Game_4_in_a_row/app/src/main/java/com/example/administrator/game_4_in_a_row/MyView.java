@@ -27,25 +27,22 @@ public class MyView extends View {
     private Path path;
     private Random random;
     private float top, right, width, height;
-    private String [][] cell_arr ;
+    private String [][] cell_arr;
     private final String EMPTY ="E";
     private final String PLAYER1="R";
     private final String PLAYER2="G";
-    private Game game;
-    private int flag ;
+    private int col_presed;
     private float rx,ry,witdh_cell,height_cell;
-
+    private String turn;
 
     public MyView(Context context) {
         super(context);
-        flag=1;
         init(null, 0);
         Log.d("check4145","init 1");
     }
 
     public MyView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        flag=2;
         init(attrs, 0);
         Log.d("check4145", "init 2");
     }
@@ -56,22 +53,21 @@ public class MyView extends View {
         Log.d("check4145", "init 3");
     }
 
+
     private void init(AttributeSet attrs, int defStyle) {
 
-        // Load attributes
-        // set circle configuration
-        paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setColor(Color.RED);
-        paint.setStrokeWidth(ten);
-        paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        path = new Path();
-        random = new Random();
-        cell_arr = new String[6][7];
-        clear_cell_Arr();
-        Log.d("check414", "init");
 
-
+            // Load attributes
+            paint = new Paint();
+            paint.setAntiAlias(true);
+            paint.setColor(Color.RED);
+            paint.setStrokeWidth(ten);
+            paint.setStyle(Paint.Style.FILL_AND_STROKE);
+            path = new Path();
+            random = new Random();
+            cell_arr = new String[6][7];
+            clear_cell_Arr();
+            turn=PLAYER1;
 
     }
 
@@ -97,11 +93,11 @@ public class MyView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.d("check212", "OnDraw");
+        Log.d("check777", "OnDraw");
 
             //for test
-              cell_arr[2][4]=PLAYER1;
-              cell_arr[1][6]=PLAYER2;
+            //  cell_arr[2][4]=PLAYER1;
+            //  cell_arr[1][6]=PLAYER2;
 
         for (int i = 0; i < 6; i++) {
                 for (int j = 0; j < 7; j++) {
@@ -122,7 +118,7 @@ public class MyView extends View {
                     }
                     else
                     {
-                        Log.d("check414", "empty cell"+i+""+j);
+        //                Log.d("check414", "empty cell"+i+""+j);
                     }
                 }
             }
@@ -136,33 +132,45 @@ public class MyView extends View {
             case MotionEvent.ACTION_DOWN:
                 if(event.getX()<witdh_cell)
                 {
-                    Log.d("check777","col 0");
-                    //cell_arr[5][0]="R";
+                    Log.d("check777", "col 0");
+                    chose_cell(turn,0);
+                    turn();
                 }
                 if((event.getX()>(witdh_cell))&&(event.getX()<(witdh_cell*2)))
                 {
                     Log.d("check777","col 1");
-
+                    chose_cell(turn,1);
+                    turn();
                 }
                 if((event.getX()>(witdh_cell*2))&&(event.getX()<(witdh_cell*3)))
                 {
                     Log.d("check777","col 2");
+                    chose_cell(turn,2);
+                    turn();
                 }
                 if((event.getX()>(witdh_cell*3))&&(event.getX()<(witdh_cell*4)))
                 {
                     Log.d("check777","col 3");
+                    chose_cell(turn,3);
+                    turn();
                 }
                 if((event.getX()>(witdh_cell*4))&&(event.getX()<(witdh_cell*5)))
                 {
                     Log.d("check777","col 4");
+                    chose_cell(turn,4);
+                    turn();
                 }
                 if((event.getX()>(witdh_cell*5))&&(event.getX()<(witdh_cell*6)))
                 {
                     Log.d("check777","col 5");
+                    chose_cell(turn,5);
+                    turn();
                 }
                 if((event.getX()>(witdh_cell*6))&&(event.getX()<(witdh_cell*7)))
                 {
                     Log.d("check777","col 6");
+                    chose_cell(turn,6);
+                    turn();
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -177,11 +185,52 @@ public class MyView extends View {
     }
 
 
+    private  void turn()
+    {
+
+            if(turn.equals(PLAYER1))
+            {
+                turn=PLAYER2;
+            }
+            else
+            {
+                turn=PLAYER1;
+            }
+    }
+
+
+
+    private void chose_cell(String player,int col)
+    {
+        int i=5;
+        while ((i>=0)&&(!cell_arr[i][col].equals(EMPTY)))//check if empty cell in col
+        {
+            i=i-1;
+        }
+        if(i==-1)//col is full
+        {
+            return;
+        }
+
+        if(player.equals(PLAYER1)) {
+            cell_arr[i][col]=PLAYER1;
+        }
+        else
+        {
+            cell_arr[i][col]=PLAYER2;
+        }
+    }
+
+
+    public int getCol_presed()
+    {
+        return col_presed;
+    }
 
     private void clear_cell_Arr()
     {
 
-        Log.d("check414", "clear_cell_Arr");
+        Log.d("check777", "clear_cell_Arr");
         for (int i = 0; i < 6; i++)
         {
             for (int j = 0; j < 7; j++)
@@ -192,10 +241,13 @@ public class MyView extends View {
     }
 
 
-    public void setCell_arr(String[][] arr)
+    public void setCell_arr(int i,int j,String p)
     {
 
         Log.d("check414", "in set cell_arr");
+
+        cell_arr[i][j]=p;
+        /*
         for(int i=0;i<6;i++)
         {
             for(int j=0;j<7;j++)
@@ -207,7 +259,8 @@ public class MyView extends View {
                 }
             }
         }
-
+        /*/
+        return;
     }
 
 

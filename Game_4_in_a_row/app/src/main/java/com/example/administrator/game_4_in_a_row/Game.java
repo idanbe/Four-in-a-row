@@ -22,10 +22,10 @@ public class Game extends AppCompatActivity {
     private final String PLAYER1_turn="Player1 turn";
     private final String PLAYER2_turn="Player2 turn";
     private String turn;
- //   private MyView myView ;
+    private MyView myView ;
     private boolean Game_on;
     private View view ;
-
+    private float witdh_cell,height_cell;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +39,10 @@ public class Game extends AppCompatActivity {
         clear_cell_Arr();
         view = findViewById(R.id.view);
         turn=PLAYER1_turn;
-        //myView= new MyView(this);
+        myView= new MyView(this);
 
 
         player_turn = (TextView)findViewById(R.id.text_player_turn);
-
-
 
 
             if (turn.equals(PLAYER1_turn)) {
@@ -58,12 +56,43 @@ public class Game extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                Log.d("check767", "onTouch" + event.getX());
-                Log.d("check555",v.getWidth()+"");
+                if(Game_on) {
+                    witdh_cell = v.getWidth() / 7;
+                    height_cell = v.getHeight() / 6;
 
-                v.invalidate();
+                    if (event.getX() < witdh_cell) {
+                        Log.d("check767", "col 0");
+                        insert_coin(turn, 0);
+                    }
+                    if ((event.getX() > (witdh_cell)) && (event.getX() < (witdh_cell * 2))) {
+                        Log.d("check767", "col 1");
+                        insert_coin(turn, 1);
+                    }
+                    if ((event.getX() > (witdh_cell * 2)) && (event.getX() < (witdh_cell * 3))) {
+                        Log.d("check767", "col 2");
+                        insert_coin(turn, 2);
 
+                        //cell_arr[5][2]=PLAYER1;
+                    }
+                    if ((event.getX() > (witdh_cell * 3)) && (event.getX() < (witdh_cell * 4))) {
+                        Log.d("check767", "col 3");
+                        insert_coin(turn, 3);
+                    }
+                    if ((event.getX() > (witdh_cell * 4)) && (event.getX() < (witdh_cell * 5))) {
+                        Log.d("check767", "col 4");
+                        insert_coin(turn, 4);
 
+                    }
+                    if ((event.getX() > (witdh_cell * 5)) && (event.getX() < (witdh_cell * 6))) {
+                        Log.d("check767", "col 5");
+                        insert_coin(turn, 5);
+                    }
+                    if ((event.getX() > (witdh_cell * 6)) && (event.getX() < (witdh_cell * 7))) {
+                        Log.d("check767", "col 6");
+                        insert_coin(turn, 6);
+                    }
+                    v.invalidate();
+                }
                 return false;
             }
         });
@@ -132,8 +161,6 @@ public class Game extends AppCompatActivity {
         {
             cell_arr[i][col]=PLAYER2;
         }
-
-       // myView.setCell_arr(cell_arr);
 
 
 
@@ -213,40 +240,6 @@ public class Game extends AppCompatActivity {
     }
 
 
-    private int check_col_press()
-    {
-        if(col_press[0])
-        {
-            return 0;
-        }
-        if(col_press[1])
-        {
-            return 1;
-        }
-        if(col_press[2])
-        {
-            return 2;
-        }
-        if(col_press[3])
-        {
-            return 3;
-        }
-        if(col_press[4])
-        {
-            return 4;
-        }
-        if(col_press[5])
-        {
-            return 5;
-        }
-        if(col_press[6])
-        {
-            return 6;
-        }
-        return -1;
-    }
-
-
     private void clear_cell_Arr()
     {
         for (int i = 0; i < 6; i++)
@@ -254,7 +247,6 @@ public class Game extends AppCompatActivity {
             for (int j = 0; j < 7; j++)
             {
             cell_arr[i][j]=EMPTY;
-
             }
         }
     }
@@ -269,8 +261,6 @@ public class Game extends AppCompatActivity {
         {
             player=PLAYER2;
         }
-
-
 
             for(int i=0;i<6;i++)
         {
@@ -321,6 +311,7 @@ public class Game extends AppCompatActivity {
 
         if(r>2)
         {
+            Log.d("check999","in if Up ");
             if((cell_arr[r][c].equals(player))&&(cell_arr[r-1][c].equals(player))
             &&(cell_arr[r-2][c].equals(player))&&(cell_arr[r-3][c].equals(player)))
             {
@@ -335,6 +326,7 @@ public class Game extends AppCompatActivity {
     {
         if(r<3)
         {
+            Log.d("check999","in if Down ");
             if((cell_arr[r][c].equals(player))&&(cell_arr[r+1][c].equals(player))
                     &&(cell_arr[r+2][c].equals(player))&&(cell_arr[r+3][c].equals(player)))
             {
@@ -349,6 +341,7 @@ public class Game extends AppCompatActivity {
     {
         if(c<4)
         {
+            Log.d("check999","in if  Right ");
             if((cell_arr[r][c].equals(player))&&(cell_arr[r][c+1].equals(player))
                     &&(cell_arr[r][c+2].equals(player))&&(cell_arr[r][c+3].equals(player)))
             {
@@ -357,11 +350,13 @@ public class Game extends AppCompatActivity {
         }
         return false;
     }
+        //todo aviram gay!!!
 
     private boolean check_Left(int r,int c,String player)   // r=row , c=col
     {
         if(c>2)
         {
+            Log.d("check999","in if Left ");
             if((cell_arr[r][c].equals(player))&&(cell_arr[r][c-1].equals(player))
                     &&(cell_arr[r][c-2].equals(player))&&(cell_arr[r][c-3].equals(player)))
             {
@@ -370,14 +365,16 @@ public class Game extends AppCompatActivity {
         }
         return false;
     }
-
+            //// TODO: 10/02/2016 check this func have a bug
     private boolean check_Diagonal_up_Right(int r,int c,String player)   // r=row , c=col
     {
         if((r>2)&&(c<4))
         {
+            Log.d("check999","in if diagonal up Right ");
             if((cell_arr[r][c].equals(player))&&(cell_arr[r-1][c+1].equals(player))
                     &&(cell_arr[r-2][c+2].equals(player))&&(cell_arr[r-3][c+3].equals(player)))
             {
+
                 return true; //find 4 cell Diagonal up Right of player
             }
         }
@@ -388,6 +385,7 @@ public class Game extends AppCompatActivity {
     {
         if((r>2)&&(c>2))
         {
+            Log.d("check999","in if diagonal up left ");
             if((cell_arr[r][c].equals(player))&&(cell_arr[r-1][c-1].equals(player))
                     &&(cell_arr[r-2][c-2].equals(player))&&(cell_arr[r-3][c-3].equals(player)))
             {
@@ -402,6 +400,7 @@ public class Game extends AppCompatActivity {
     {
         if((r<3)&&(c<4))
         {
+            Log.d("check999","in if diagonal down Right ");
             if((cell_arr[r][c].equals(player))&&(cell_arr[r+1][c+1].equals(player))
                     &&(cell_arr[r+2][c+2].equals(player))&&(cell_arr[r+3][c+3].equals(player)))
             {
@@ -413,11 +412,14 @@ public class Game extends AppCompatActivity {
 
     private boolean check_Diagonal_Down_Left(int r,int c,String player)   // r=row , c=col
     {
+        //Log.d("check999","in  diagonal down left ");
         if((r<3)&&(c>2))
         {
+            Log.d("check999","in if diagonal down left ");
             if((cell_arr[r][c].equals(player))&&(cell_arr[r+1][c-1].equals(player))
-                    &&(cell_arr[r+2][c-2].equals(player))&&(cell_arr[r-3][c-3].equals(player)))
+                    &&(cell_arr[r+2][c-2].equals(player))&&(cell_arr[r+3][c-3].equals(player)))
             {
+
                 return true; //find 4 cell Diagonal Down Left of player
             }
         }
