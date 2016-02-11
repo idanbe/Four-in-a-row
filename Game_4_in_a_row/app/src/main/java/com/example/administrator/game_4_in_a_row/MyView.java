@@ -1,20 +1,16 @@
 package com.example.administrator.game_4_in_a_row;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-
 import java.util.Random;
-
+import android.os.Vibrator;
 
 
 
@@ -30,11 +26,10 @@ public class MyView extends View {
     private String [][] cell_arr;
     private final String EMPTY ="E";
     private final String PLAYER1="R";
-    private final String PLAYER2="G";
-    private int col_presed;
+    private final String PLAYER2="Y";
     private float rx,ry,witdh_cell,height_cell;
     private String turn;
-
+    private Vibrator v;
     public MyView(Context context) {
         super(context);
         init(null, 0);
@@ -68,6 +63,7 @@ public class MyView extends View {
             cell_arr = new String[6][7];
             clear_cell_Arr();
             turn=PLAYER1;
+            v =(Vibrator)this.getContext().getSystemService(Context.VIBRATOR_SERVICE);
 
     }
 
@@ -115,11 +111,9 @@ public class MyView extends View {
                         rx=(witdh_cell*j); //x,y of cell to paint
                         ry=(height_cell*i);
                         canvas.drawRect(rx,ry,(rx+witdh_cell),(ry+height_cell),paint);
+                        v.vibrate(50);
                     }
-                    else
-                    {
-        //                Log.d("check414", "empty cell"+i+""+j);
-                    }
+
                 }
             }
     }
@@ -222,10 +216,7 @@ public class MyView extends View {
     }
 
 
-    public int getCol_presed()
-    {
-        return col_presed;
-    }
+
 
     private void clear_cell_Arr()
     {

@@ -13,6 +13,7 @@
         android:textSize="40dp"
         android:id="@+id/text_main_title"
         android:text="@string/text_main_title"
+        android:textColor="#66a3ff"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="48dp" />

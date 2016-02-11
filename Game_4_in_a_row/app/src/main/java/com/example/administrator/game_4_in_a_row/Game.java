@@ -1,5 +1,6 @@
 package com.example.administrator.game_4_in_a_row;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.os.Vibrator;
 
 public class Game extends AppCompatActivity {
 
@@ -18,21 +20,21 @@ public class Game extends AppCompatActivity {
     private String [][] cell_arr ;
     private final String EMPTY ="E";
     private final String PLAYER1="R";
-    private final String PLAYER2="G";
+    private final String PLAYER2="Y";
     private final String PLAYER1_turn="Player1 turn";
     private final String PLAYER2_turn="Player2 turn";
     private String turn;
     private MyView myView ;
     private boolean Game_on;
     private View view ;
-    private float witdh_cell,height_cell;
-
+    private float witdh_cell;
+    private Vibrator v;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        Log.d("check414","onCreate Game");
+        Log.d("check414", "onCreate Game");
         Game_on=true;
         cell_arr = new String[6][7];
         col_press = new boolean[7];
@@ -40,6 +42,7 @@ public class Game extends AppCompatActivity {
         view = findViewById(R.id.view);
         turn=PLAYER1_turn;
         myView= new MyView(this);
+        v =(Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
 
 
         player_turn = (TextView)findViewById(R.id.text_player_turn);
@@ -58,7 +61,6 @@ public class Game extends AppCompatActivity {
 
                 if(Game_on) {
                     witdh_cell = v.getWidth() / 7;
-                    height_cell = v.getHeight() / 6;
 
                     if (event.getX() < witdh_cell) {
                         Log.d("check767", "col 0");
@@ -199,10 +201,14 @@ public class Game extends AppCompatActivity {
         {
             if(turn.equals(PLAYER1_turn))
             {
+
+                v.vibrate(400);
                 player_turn.setText("Player1 Win");
+
             }
             else
             {
+                v.vibrate(400);
                 player_turn.setText("Player2 Win");
             }
         }
