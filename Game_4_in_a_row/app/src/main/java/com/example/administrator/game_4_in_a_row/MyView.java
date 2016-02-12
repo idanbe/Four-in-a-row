@@ -24,11 +24,15 @@ public class MyView extends View {
     private Random random;
     private float top, right, width, height;
     private static String [][] cell_arr;
+    private static int [][] win_cell;
+    private static boolean find_win;
     private final String EMPTY ="E";
     private final String PLAYER1="R";
     private final String PLAYER2="Y";
     private float rx,ry,witdh_cell,height_cell;
-    private Vibrator v;
+    private Vibrator v; //for AVIRAHM GAY
+
+
     public MyView(Context context) {
         super(context);
         init(null, 0);
@@ -50,7 +54,6 @@ public class MyView extends View {
 
     private void init(AttributeSet attrs, int defStyle) {
 
-
             // Load attributes
             paint = new Paint();
             paint.setAntiAlias(true);
@@ -61,6 +64,7 @@ public class MyView extends View {
             random = new Random();
             cell_arr = new String[6][7];
             clear_cell_Arr();
+            win_cell= new int[4][2];
             v =(Vibrator)this.getContext().getSystemService(Context.VIBRATOR_SERVICE);
 
     }
@@ -87,9 +91,6 @@ public class MyView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.d("check777", "OnDraw");
-
-
 
         for (int i = 0; i < 6; i++) {
                 for (int j = 0; j < 7; j++) {
@@ -108,7 +109,12 @@ public class MyView extends View {
                         ry=(height_cell*i);
                         canvas.drawRect(rx, ry, (rx + witdh_cell), (ry + height_cell), paint);
                         v.vibrate(50);
-                        //Log.d("check949",rw1+""+rw2);
+
+                        if(find_win)
+                        {
+                            Log.d("check789",win_cell[0][0]+","+win_cell[0][1]);
+                            //// TODO: 12/02/2016  mark win cells
+                        }
                     }
 
                 }
@@ -134,7 +140,10 @@ public class MyView extends View {
     }
 
 
-
+    public void set_find_win(boolean b)
+    {
+        find_win=b;
+    }
 
     private void clear_cell_Arr()
     {
@@ -162,10 +171,17 @@ public class MyView extends View {
         }
     }
 
-    public void setwin_Cell(int r1,int r2,int r3, int r4)
+    public void setwin_Cell(int[][] arr)
     {
 
-        Log.d("check949", "in set win cell"+r1);
+        for (int i=0;i<4;i++)
+        {
+            for(int j =0; j<2;j++)
+            {
+                win_cell[i][j]=arr[i][j];
+            }
+        }
+        Log.d("check949", "in set win cell");
 
         return;
     }

@@ -16,8 +16,8 @@ public class Game extends AppCompatActivity {
 
     private Intent intent;
     private TextView player_turn;
-    private boolean[] col_press;
     private String [][] cell_arr ;
+    private int win_cell[][];
     private final String EMPTY ="E";
     private final String PLAYER1="R";
     private final String PLAYER2="Y";
@@ -28,8 +28,8 @@ public class Game extends AppCompatActivity {
     private boolean Game_on;
     private View view ;
     private float witdh_cell;
-    private Vibrator v;
-    private boolean in_coin=true;
+    private Vibrator v; //for aviram
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +38,12 @@ public class Game extends AppCompatActivity {
         Log.d("check414", "onCreate Game");
         Game_on=true;
         cell_arr = new String[6][7];
-        col_press = new boolean[7];
         clear_cell_Arr();
+        win_cell =new int [4][2];
         view = findViewById(R.id.view);
         turn=PLAYER1_turn;
         myView= new MyView(this);
         v =(Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
-
-
         player_turn = (TextView)findViewById(R.id.text_player_turn);
 
 
@@ -74,8 +72,6 @@ public class Game extends AppCompatActivity {
                     if ((event.getX() > (witdh_cell * 2)) && (event.getX() < (witdh_cell * 3))) {
                         Log.d("check767", "col 2");
                         insert_coin(turn, 2);
-
-                        //cell_arr[5][2]=PLAYER1;
                     }
                     if ((event.getX() > (witdh_cell * 3)) && (event.getX() < (witdh_cell * 4))) {
                         Log.d("check767", "col 3");
@@ -84,7 +80,6 @@ public class Game extends AppCompatActivity {
                     if ((event.getX() > (witdh_cell * 4)) && (event.getX() < (witdh_cell * 5))) {
                         Log.d("check767", "col 4");
                         insert_coin(turn, 4);
-
                     }
                     if ((event.getX() > (witdh_cell * 5)) && (event.getX() < (witdh_cell * 6))) {
                         Log.d("check767", "col 5");
@@ -122,18 +117,6 @@ public class Game extends AppCompatActivity {
         return true;
     }
 
-
-    //for test
-    private void print_cell_arr()
-    {
-        for(int i=0;i<6;i++)
-        {
-            for (int j=0;j<7;j++)
-            {
-                Log.d("check1",i+""+""+j+":"+cell_arr[i][j].toString());
-            }
-        }
-    }
 
 
     private void insert_coin(String player,int col)
@@ -331,6 +314,16 @@ public class Game extends AppCompatActivity {
             if((cell_arr[r][c].equals(player))&&(cell_arr[r-1][c].equals(player))
             &&(cell_arr[r-2][c].equals(player))&&(cell_arr[r-3][c].equals(player)))
             {
+                win_cell[0][0]=r;
+                win_cell[0][1]=c;
+                win_cell[1][0]=r-1;
+                win_cell[1][1]=c;
+                win_cell[2][0]=r-2;
+                win_cell[2][1]=c;
+                win_cell[3][0]=r-3;
+                win_cell[3][1]=c;
+                myView.setwin_Cell(win_cell);
+                myView.set_find_win(true);
                 return true; //find 4 cell up of player
             }
         }
@@ -346,6 +339,16 @@ public class Game extends AppCompatActivity {
             if((cell_arr[r][c].equals(player))&&(cell_arr[r+1][c].equals(player))
                     &&(cell_arr[r+2][c].equals(player))&&(cell_arr[r+3][c].equals(player)))
             {
+                win_cell[0][0]=r;
+                win_cell[0][1]=c;
+                win_cell[1][0]=r+1;
+                win_cell[1][1]=c;
+                win_cell[2][0]=r+2;
+                win_cell[2][1]=c;
+                win_cell[3][0]=r+3;
+                win_cell[3][1]=c;
+                myView.setwin_Cell(win_cell);
+                myView.set_find_win(true);
                 return true; //find 4 cell Down of player
             }
         }
@@ -361,7 +364,16 @@ public class Game extends AppCompatActivity {
             if((cell_arr[r][c].equals(player))&&(cell_arr[r][c+1].equals(player))
                     &&(cell_arr[r][c+2].equals(player))&&(cell_arr[r][c+3].equals(player)))
             {
-                myView.setwin_Cell(r,r,r,r);
+                win_cell[0][0]=r;
+                win_cell[0][1]=c;
+                win_cell[1][0]=r;
+                win_cell[1][1]=c+1;
+                win_cell[2][0]=r;
+                win_cell[2][1]=c+2;
+                win_cell[3][0]=r;
+                win_cell[3][1]=c+3;
+                myView.setwin_Cell(win_cell);
+                myView.set_find_win(true);
                 return true; //find 4 cell Right of player
             }
         }
@@ -377,7 +389,16 @@ public class Game extends AppCompatActivity {
             if((cell_arr[r][c].equals(player))&&(cell_arr[r][c-1].equals(player))
                     &&(cell_arr[r][c-2].equals(player))&&(cell_arr[r][c-3].equals(player)))
             {
-                myView.setwin_Cell(r,r,r,r);
+                win_cell[0][0]=r;
+                win_cell[0][1]=c;
+                win_cell[1][0]=r;
+                win_cell[1][1]=c-1;
+                win_cell[2][0]=r;
+                win_cell[2][1]=c-2;
+                win_cell[3][0]=r;
+                win_cell[3][1]=c-3;
+                myView.setwin_Cell(win_cell);
+                myView.set_find_win(true);
                 return true; //find 4 cell Left of player
             }
         }
@@ -392,7 +413,16 @@ public class Game extends AppCompatActivity {
             if((cell_arr[r][c].equals(player))&&(cell_arr[r-1][c+1].equals(player))
                     &&(cell_arr[r-2][c+2].equals(player))&&(cell_arr[r-3][c+3].equals(player)))
             {
-                myView.setwin_Cell(r,r-1,r-2,r-3);
+                win_cell[0][0]=r;
+                win_cell[0][1]=c;
+                win_cell[1][0]=r-1;
+                win_cell[1][1]=c+1;
+                win_cell[2][0]=r-2;
+                win_cell[2][1]=c+2;
+                win_cell[3][0]=r-3;
+                win_cell[3][1]=c+3;
+                myView.setwin_Cell(win_cell);
+                myView.set_find_win(true);
                 return true; //find 4 cell Diagonal up Right of player
             }
         }
@@ -407,6 +437,16 @@ public class Game extends AppCompatActivity {
             if((cell_arr[r][c].equals(player))&&(cell_arr[r-1][c-1].equals(player))
                     &&(cell_arr[r-2][c-2].equals(player))&&(cell_arr[r-3][c-3].equals(player)))
             {
+                win_cell[0][0]=r;
+                win_cell[0][1]=c;
+                win_cell[1][0]=r-1;
+                win_cell[1][1]=c-1;
+                win_cell[2][0]=r-2;
+                win_cell[2][1]=c-2;
+                win_cell[3][0]=r-3;
+                win_cell[3][1]=c-3;
+                myView.setwin_Cell(win_cell);
+                myView.set_find_win(true);
                 return true; //find 4 cell Diagonal up Left of player
             }
         }
@@ -422,6 +462,16 @@ public class Game extends AppCompatActivity {
             if((cell_arr[r][c].equals(player))&&(cell_arr[r+1][c+1].equals(player))
                     &&(cell_arr[r+2][c+2].equals(player))&&(cell_arr[r+3][c+3].equals(player)))
             {
+                win_cell[0][0]=r;
+                win_cell[0][1]=c;
+                win_cell[1][0]=r+1;
+                win_cell[1][1]=c+1;
+                win_cell[2][0]=r+2;
+                win_cell[2][1]=c+2;
+                win_cell[3][0]=r+3;
+                win_cell[3][1]=c+3;
+                myView.setwin_Cell(win_cell);
+                myView.set_find_win(true);
                 return true; //find 4 cell Diagonal Down Right of player
             }
         }
@@ -437,7 +487,16 @@ public class Game extends AppCompatActivity {
             if((cell_arr[r][c].equals(player))&&(cell_arr[r+1][c-1].equals(player))
                     &&(cell_arr[r+2][c-2].equals(player))&&(cell_arr[r+3][c-3].equals(player)))
             {
-
+                win_cell[0][0]=r;
+                win_cell[0][1]=c;
+                win_cell[1][0]=r+1;
+                win_cell[1][1]=c-1;
+                win_cell[2][0]=r+2;
+                win_cell[2][1]=c-2;
+                win_cell[3][0]=r+3;
+                win_cell[3][1]=c-3;
+                myView.setwin_Cell(win_cell);
+                myView.set_find_win(true);
                 return true; //find 4 cell Diagonal Down Left of player
             }
         }
