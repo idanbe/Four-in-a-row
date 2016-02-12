@@ -23,12 +23,11 @@ public class MyView extends View {
     private Path path;
     private Random random;
     private float top, right, width, height;
-    private String [][] cell_arr;
+    private static String [][] cell_arr;
     private final String EMPTY ="E";
     private final String PLAYER1="R";
     private final String PLAYER2="Y";
     private float rx,ry,witdh_cell,height_cell;
-    private String turn;
     private Vibrator v;
     public MyView(Context context) {
         super(context);
@@ -62,7 +61,6 @@ public class MyView extends View {
             random = new Random();
             cell_arr = new String[6][7];
             clear_cell_Arr();
-            turn=PLAYER1;
             v =(Vibrator)this.getContext().getSystemService(Context.VIBRATOR_SERVICE);
 
     }
@@ -91,9 +89,7 @@ public class MyView extends View {
         super.onDraw(canvas);
         Log.d("check777", "OnDraw");
 
-            //for test
-            //  cell_arr[2][4]=PLAYER1;
-            //  cell_arr[1][6]=PLAYER2;
+
 
         for (int i = 0; i < 6; i++) {
                 for (int j = 0; j < 7; j++) {
@@ -110,8 +106,9 @@ public class MyView extends View {
                         }
                         rx=(witdh_cell*j); //x,y of cell to paint
                         ry=(height_cell*i);
-                        canvas.drawRect(rx,ry,(rx+witdh_cell),(ry+height_cell),paint);
+                        canvas.drawRect(rx, ry, (rx + witdh_cell), (ry + height_cell), paint);
                         v.vibrate(50);
+                        //Log.d("check949",rw1+""+rw2);
                     }
 
                 }
@@ -124,48 +121,6 @@ public class MyView extends View {
         // touch on view
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if(event.getX()<witdh_cell)
-                {
-                    Log.d("check777", "col 0");
-                    chose_cell(turn,0);
-                    turn();
-                }
-                if((event.getX()>(witdh_cell))&&(event.getX()<(witdh_cell*2)))
-                {
-                    Log.d("check777","col 1");
-                    chose_cell(turn,1);
-                    turn();
-                }
-                if((event.getX()>(witdh_cell*2))&&(event.getX()<(witdh_cell*3)))
-                {
-                    Log.d("check777","col 2");
-                    chose_cell(turn,2);
-                    turn();
-                }
-                if((event.getX()>(witdh_cell*3))&&(event.getX()<(witdh_cell*4)))
-                {
-                    Log.d("check777","col 3");
-                    chose_cell(turn,3);
-                    turn();
-                }
-                if((event.getX()>(witdh_cell*4))&&(event.getX()<(witdh_cell*5)))
-                {
-                    Log.d("check777","col 4");
-                    chose_cell(turn,4);
-                    turn();
-                }
-                if((event.getX()>(witdh_cell*5))&&(event.getX()<(witdh_cell*6)))
-                {
-                    Log.d("check777","col 5");
-                    chose_cell(turn,5);
-                    turn();
-                }
-                if((event.getX()>(witdh_cell*6))&&(event.getX()<(witdh_cell*7)))
-                {
-                    Log.d("check777","col 6");
-                    chose_cell(turn,6);
-                    turn();
-                }
                 break;
             case MotionEvent.ACTION_MOVE:
                 break;
@@ -176,43 +131,6 @@ public class MyView extends View {
 
         }
         return false;
-    }
-
-
-    private  void turn()
-    {
-
-            if(turn.equals(PLAYER1))
-            {
-                turn=PLAYER2;
-            }
-            else
-            {
-                turn=PLAYER1;
-            }
-    }
-
-
-
-    private void chose_cell(String player,int col)
-    {
-        int i=5;
-        while ((i>=0)&&(!cell_arr[i][col].equals(EMPTY)))//check if empty cell in col
-        {
-            i=i-1;
-        }
-        if(i==-1)//col is full
-        {
-            return;
-        }
-
-        if(player.equals(PLAYER1)) {
-            cell_arr[i][col]=PLAYER1;
-        }
-        else
-        {
-            cell_arr[i][col]=PLAYER2;
-        }
     }
 
 
@@ -232,25 +150,23 @@ public class MyView extends View {
     }
 
 
-    public void setCell_arr(int i,int j,String p)
+
+    public void setCell_arr(String[][] arr)
     {
-
-        Log.d("check414", "in set cell_arr");
-
-        cell_arr[i][j]=p;
-        /*
         for(int i=0;i<6;i++)
         {
             for(int j=0;j<7;j++)
             {
-                this.cell_arr[i][j]=arr[i][j];
-                if(!cell_arr[i][j].equals(EMPTY))
-                {
-                    Log.d("check414", "[" + i + "]" + "[" + j + "]:" + cell_arr[i][j].toString());
-                }
+                cell_arr[i][j]=arr[i][j];
             }
         }
-        /*/
+    }
+
+    public void setwin_Cell(int r1,int r2,int r3, int r4)
+    {
+
+        Log.d("check949", "in set win cell"+r1);
+
         return;
     }
 

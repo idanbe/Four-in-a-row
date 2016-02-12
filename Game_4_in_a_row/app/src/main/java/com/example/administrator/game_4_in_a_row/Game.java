@@ -29,6 +29,7 @@ public class Game extends AppCompatActivity {
     private View view ;
     private float witdh_cell;
     private Vibrator v;
+    private boolean in_coin=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +94,7 @@ public class Game extends AppCompatActivity {
                         Log.d("check767", "col 6");
                         insert_coin(turn, 6);
                     }
+                    myView.setCell_arr(cell_arr);
                     v.invalidate();
                 }
                 return false;
@@ -137,11 +139,10 @@ public class Game extends AppCompatActivity {
     private void insert_coin(String player,int col)
     {
         Log.d("check1","in insert coin");
-
         if(check_board_full())
         {
           //  player_turn.setText("Game End it tie");
-          //  Game_on=false;
+            Game_on=false;
             return;
         }
 
@@ -153,6 +154,7 @@ public class Game extends AppCompatActivity {
         if(i==-1)//col is full
         {
             return;
+
         }
 
         if(player.equals(PLAYER1_turn))
@@ -274,34 +276,42 @@ public class Game extends AppCompatActivity {
             {
                 if(check_up(i,j,player))
                 {
+                    Log.d("CheckWin:","win up");
                     return true;// win found 4 cell Up
                 }
                 if(check_Down(i, j, player))
                 {
+                    Log.d("CheckWin:","win Down");
                     return true;// win found 4 cell Down
                 }
                 if(check_Right(i, j, player))
                 {
+                    Log.d("CheckWin:","win Right");
                     return true;// win found 4 cell Right
                 }
                 if(check_Left(i, j, player))
                 {
+                    Log.d("CheckWin:","win LEFT");
                     return true;//win found 4 cell Left
                 }
                 if(check_Diagonal_up_Right(i, j, player))
                 {
+                    Log.d("CheckWin:","win Diagnoal up right");
                   return true; // win found 4 cell Diagonal Up Right
                 }
                 if(check_Diagonal_up_Left(i, j, player))
                 {
+                    Log.d("CheckWin:","win Diagnoal up Left");
                     return true; // win found 4 cell Diagonal Up Left
                 }
                 if(check_Diagonal_Down_Right(i, j, player))
                 {
+                    Log.d("CheckWin:","win Diagnoal Down right");
                     return true;// win found 4 cell Diagonal Down Right
                 }
                 if(check_Diagonal_Down_Left(i,j,player))
                 {
+                    Log.d("CheckWin:","win Diagnoal Down left");
                     return true;// win found 4 cell Diagonal Down Left
                 }
             }
@@ -351,6 +361,7 @@ public class Game extends AppCompatActivity {
             if((cell_arr[r][c].equals(player))&&(cell_arr[r][c+1].equals(player))
                     &&(cell_arr[r][c+2].equals(player))&&(cell_arr[r][c+3].equals(player)))
             {
+                myView.setwin_Cell(r,r,r,r);
                 return true; //find 4 cell Right of player
             }
         }
@@ -366,12 +377,13 @@ public class Game extends AppCompatActivity {
             if((cell_arr[r][c].equals(player))&&(cell_arr[r][c-1].equals(player))
                     &&(cell_arr[r][c-2].equals(player))&&(cell_arr[r][c-3].equals(player)))
             {
+                myView.setwin_Cell(r,r,r,r);
                 return true; //find 4 cell Left of player
             }
         }
         return false;
     }
-            //// TODO: 10/02/2016 check this func have a bug
+
     private boolean check_Diagonal_up_Right(int r,int c,String player)   // r=row , c=col
     {
         if((r>2)&&(c<4))
@@ -380,7 +392,7 @@ public class Game extends AppCompatActivity {
             if((cell_arr[r][c].equals(player))&&(cell_arr[r-1][c+1].equals(player))
                     &&(cell_arr[r-2][c+2].equals(player))&&(cell_arr[r-3][c+3].equals(player)))
             {
-
+                myView.setwin_Cell(r,r-1,r-2,r-3);
                 return true; //find 4 cell Diagonal up Right of player
             }
         }
