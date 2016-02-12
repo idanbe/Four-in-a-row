@@ -43,6 +43,7 @@ public class Game extends AppCompatActivity {
         view = findViewById(R.id.view);
         turn=PLAYER1_turn;
         myView= new MyView(this);
+        myView.set_find_win(false);
         v =(Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
         player_turn = (TextView)findViewById(R.id.text_player_turn);
 
@@ -58,7 +59,8 @@ public class Game extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                if(Game_on) {
+                if(Game_on)
+                {
                     witdh_cell = v.getWidth() / 7;
 
                     if (event.getX() < witdh_cell) {

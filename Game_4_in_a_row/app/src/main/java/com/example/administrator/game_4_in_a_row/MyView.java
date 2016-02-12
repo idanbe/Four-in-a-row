@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 import android.os.Vibrator;
 
 
@@ -89,10 +91,12 @@ public class MyView extends View {
 
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas)
+    {
         super.onDraw(canvas);
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 6; i++)
+        {
                 for (int j = 0; j < 7; j++) {
 
                     if (!cell_arr[i][j].equals(EMPTY))//if cell not empty paint
@@ -109,16 +113,20 @@ public class MyView extends View {
                         ry=(height_cell*i);
                         canvas.drawRect(rx, ry, (rx + witdh_cell), (ry + height_cell), paint);
                         v.vibrate(50);
-
-                        if(find_win)
-                        {
-                            Log.d("check789",win_cell[0][0]+","+win_cell[0][1]);
-                            //// TODO: 12/02/2016  mark win cells
-                        }
                     }
-
                 }
-            }
+        }
+        if(find_win) //mark 4 cells of win
+        {
+            for (int i = 0; i < 4; i++) {
+                    rx = (witdh_cell * win_cell[i][1]); //x,y of cell to paint
+                    ry = (height_cell * win_cell[i][0]);
+
+                    paint.setColor(Color.WHITE);
+                    canvas.drawRect(rx, ry, (rx + witdh_cell), (ry + height_cell), paint);
+                }
+
+        }
     }
 
 
