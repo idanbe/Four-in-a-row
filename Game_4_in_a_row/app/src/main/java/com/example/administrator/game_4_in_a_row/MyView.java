@@ -122,9 +122,13 @@ public class MyView extends View {
                     rx = (witdh_cell * win_cell[i][1]); //x,y of cell to paint
                     ry = (height_cell * win_cell[i][0]);
 
-                    paint.setColor(Color.WHITE);
-                    canvas.drawRect(rx, ry, (rx + witdh_cell), (ry + height_cell), paint);
-                }
+                    paint.setColor(Color.BLACK);
+                    canvas.drawLine(rx+(witdh_cell/2)+2, ry, rx+(witdh_cell/2)+2, ry + height_cell, paint);
+                    canvas.drawLine(rx,ry+(height_cell/2)-5,rx+witdh_cell,ry+(witdh_cell/2)-5,paint);
+                    canvas.drawLine(rx, ry, rx+witdh_cell, ry + height_cell, paint);
+                    canvas.drawLine(rx+witdh_cell,ry,rx,ry+height_cell,paint);
+
+            }
 
         }
     }
