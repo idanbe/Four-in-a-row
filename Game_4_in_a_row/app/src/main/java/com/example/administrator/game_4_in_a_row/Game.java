@@ -2,15 +2,22 @@ package com.example.administrator.game_4_in_a_row;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.os.Vibrator;
+import android.view.ViewGroup.LayoutParams;
+
+
 
 public class Game extends AppCompatActivity {
 
@@ -28,31 +35,42 @@ public class Game extends AppCompatActivity {
     private boolean Game_on;
     private View view ;
     private float witdh_cell;
-    private Vibrator v; //for aviram
+    private Vibrator v;
+
+    private DAL dal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        dal = new DAL(this);
+
+        TableLayout tl = (TableLayout) findViewById(R.id.history);
+        TableRow tr = new TableRow(this);
+        LayoutParams lp = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+        tr.setLayoutParams(lp);
+
+
         Log.d("check414", "onCreate Game");
-        Game_on=true;
+        Game_on = true;
         cell_arr = new String[6][7];
         clear_cell_Arr();
-        win_cell =new int [4][2];
+        win_cell = new int[4][2];
         view = findViewById(R.id.view);
-        turn=PLAYER1_turn;
-        myView= new MyView(this);
+        turn = PLAYER1_turn;
+        myView = new MyView(this);
         myView.set_find_win(false);
-        v =(Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
-        player_turn = (TextView)findViewById(R.id.text_player_turn);
+        v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        player_turn = (TextView) findViewById(R.id.text_player_turn);
 
 
-            if (turn.equals(PLAYER1_turn)) {
-                player_turn.setText(PLAYER1_turn);
-            } else {
-                player_turn.setText(PLAYER2_turn);
-            }
+        if (turn.equals(PLAYER1_turn)) {
+            player_turn.setText(PLAYER1_turn);
+        } else {
+            player_turn.setText(PLAYER2_turn);
+        }
 
 
         view.setOnTouchListener(new View.OnTouchListener() {

@@ -1,14 +1,20 @@
 package com.example.administrator.game_4_in_a_row;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 public class Game_history extends AppCompatActivity {
 
     private Intent intent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

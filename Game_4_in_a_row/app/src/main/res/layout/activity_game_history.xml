@@ -24,21 +24,27 @@
         android:stretchColumns="4"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:id="@+id/history"
         android:layout_below="@+id/textView_history">
 
-        <TableRow>
+        <TableRow
+            android:id="@+id/row1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="#ffee00">
+
             <TextView
                 android:textAlignment="center"
-                android:text="Wins"
+                android:text="Name"
                 android:padding="25dip" />
             <TextView
                 android:textAlignment="center"
-                android:text="Losses"
+                android:text="Win"
                 android:gravity="right"
                 android:padding="25dip" />
             <TextView
                 android:textAlignment="center"
-                android:text="Draws"
+                android:text="Losses"
                 android:gravity="right"
                 android:padding="25dip" />
             <TextView
@@ -50,26 +56,34 @@
         </TableRow>
 
 
-        <TableRow>
+        <TableRow
+            android:id="@+id/row2"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="#eeff00">
             <TextView
                 android:textAlignment="center"
+                android:id="@+id/Text_View_Name"
                 android:text="2"
                 android:padding="25dip" />
             <TextView
                 android:textAlignment="center"
                 android:text="5"
+                android:id="@+id/Text_View_win"
                 android:gravity="right"
                 android:padding="25dip"
                  />
             <TextView
                 android:textAlignment="center"
                 android:text="1"
+                android:id="@+id/Text_View_loss"
                 android:gravity="right"
                 android:padding="25dip"
                 android:visibility="visible" />
             <TextView
                 android:textAlignment="center"
                 android:text="67%"
+                android:id="@+id/Text_View_Percent"
                 android:gravity="right"
                 android:padding="25dip" />
 
