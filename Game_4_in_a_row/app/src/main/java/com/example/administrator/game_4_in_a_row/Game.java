@@ -28,22 +28,52 @@ public class Game extends AppCompatActivity {
     private final String EMPTY ="E";
     private final String PLAYER1="R";
     private final String PLAYER2="Y";
-    private final String PLAYER1_turn="Player1 turn";
-    private final String PLAYER2_turn="Player2 turn";
+    private  String PLAYER1_turn="Player1 turn";
+    private  String PLAYER2_turn="Player2 turn";
+    private String player1_name="Player1";
+    private String player2_name="Player2";
     private String turn;
     private MyView myView ;
     private boolean Game_on;
     private View view ;
     private float witdh_cell;
-    private Vibrator v;
-
+    private Vibrator v;         //for aviraM GAYYY
+    private Bundle bundle;
     private DAL dal;
+    static final String p1_key ="key1";
+    static final String p2_key ="key2";
+    static final String gameType_key ="key3";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+
+        bundle = getIntent().getExtras();
+
+        // get names of players
+        if (bundle != null) {
+            if(!bundle.getString(p1_key).toString().equals("")) //check not empty
+            {
+                player1_name=bundle.getString(p1_key).toString();
+                PLAYER1_turn=player1_name + " turn";
+            }
+            if(!bundle.getString(p2_key).toString().equals(""))
+            {
+                player2_name=bundle.getString(p2_key).toString();
+                PLAYER2_turn=player2_name + " turn";
+            }
+           // Log.d("gameType",bundle.getString(gameType_key).toString());
+
+
+        }
+
+
+
+
+
 
         dal = new DAL(this);
 
@@ -208,13 +238,13 @@ public class Game extends AppCompatActivity {
             {
 
                 v.vibrate(400);
-                player_turn.setText("Player1 Win");
+                player_turn.setText(player1_name + " Win");
 
             }
             else
             {
                 v.vibrate(400);
-                player_turn.setText("Player2 Win");
+                player_turn.setText(player2_name + " Win");
             }
         }
         return;

@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_player_turn"
-        android:textSize="50dp"
+        android:textSize="30dp"
         android:layout_below="@id/view"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />

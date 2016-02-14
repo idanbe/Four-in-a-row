@@ -3,7 +3,7 @@ package com.example.administrator.game_4_in_a_row;
 import android.provider.BaseColumns;
 
 /**
- * Created by AviramAlkobi on 14/02/2016.
+ * Created by AviramAlkobi gay on 14/02/2016.
  */
 public class Tables {
 
