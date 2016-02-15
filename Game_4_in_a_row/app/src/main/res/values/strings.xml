@@ -19,6 +19,8 @@
     <string name="title_activity_names">names</string>
     <string name="title_activity_game_options">Game_options</string>
     <string name="title_activity_device_list">DeviceListActivity</string>
+    <string name="Bluetooth">Bluetooth</string>
+
 
 
 
