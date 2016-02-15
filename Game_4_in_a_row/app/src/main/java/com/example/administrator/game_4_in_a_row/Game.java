@@ -42,12 +42,17 @@ public class Game extends AppCompatActivity {
     static final String p1_key ="key1";
     static final String p2_key ="key2";
     static final String gameType_key ="key3";
+    Game_history history = new Game_history();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        // how to use in DB and HistoryTable?
+        // this function write the user in the table and in DB
+        history.addToHistoryTable("idan vibrator back" );
 
 
         bundle = getIntent().getExtras();

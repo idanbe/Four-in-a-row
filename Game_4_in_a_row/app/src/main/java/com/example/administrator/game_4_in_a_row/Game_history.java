@@ -29,7 +29,7 @@ public class Game_history extends AppCompatActivity {
     }
 
     // add row
-    private void addToHistoryTable(String name){
+    public void addToHistoryTable(String name){
 
         RowHolder rowHolder = new RowHolder();
         Row = new TableRow(this);
@@ -77,6 +77,21 @@ public class Game_history extends AppCompatActivity {
 
         // TODO : to remove test !!
         System.out.println(dal.getDb().toString());
+    }
+
+    // not complete !!!!!!!!!!!!!!!!!!!
+    public void upDateHistoryTable(String name , boolean ifwin , boolean ifStendOff){
+
+        // need to edit table .
+
+        dal.upDateWinOrLoss(name, ifwin, ifStendOff);
+    }
+
+    public void removeRowFromHistory(String name){
+
+        // need to remove from table
+
+        dal.removeRow(name);
     }
 
     @Override
