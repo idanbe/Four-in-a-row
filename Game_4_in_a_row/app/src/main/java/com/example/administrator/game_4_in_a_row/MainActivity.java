@@ -4,16 +4,27 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
 
     private Intent intent;
     private Button single_button,two_button,setting_button,game_history_button,exit_button;
+    private TableLayout HistoryTable ;
+    private TableRow Row ;
+    private DAL dal;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         exit_button = (Button)findViewById(R.id.button_Exit);
 
 
+        dal = new DAL(this);
 
 
         // single player

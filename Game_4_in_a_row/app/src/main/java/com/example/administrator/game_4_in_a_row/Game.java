@@ -37,9 +37,8 @@ public class Game extends AppCompatActivity {
     private boolean Game_on;
     private View view ;
     private float witdh_cell;
-    private Vibrator v;         //for aviraM GAYYY
+    private Vibrator/*btoh tahat shel idan*/ v;
     private Bundle bundle;
-    private DAL dal;
     static final String p1_key ="key1";
     static final String p2_key ="key2";
     static final String gameType_key ="key3";
@@ -73,11 +72,7 @@ public class Game extends AppCompatActivity {
 
 
 
-
-
-        dal = new DAL(this);
-
-        TableLayout tl = (TableLayout) findViewById(R.id.history);
+        TableLayout tl = (TableLayout) findViewById(R.id.history_table);
         TableRow tr = new TableRow(this);
         LayoutParams lp = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
         tr.setLayoutParams(lp);

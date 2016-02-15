@@ -28,7 +28,8 @@ public class DBHelper extends SQLiteOpenHelper {
                         Tables.winnersTable.NAME + " TEXT ," +
                         Tables.winnersTable.WINS + " INTEGER ," +
                         Tables.winnersTable.LOSSES + " INTEGER ," +
-                        Tables.winnersTable.PERCENT_OF_WINS + " INTEGER" + ");"
+                        Tables.winnersTable.STAND_OFF + " INTEGER ," +
+                        Tables.winnersTable.PERCENT_OF_WINS + " TEXT" + ");"
         );
     }
 

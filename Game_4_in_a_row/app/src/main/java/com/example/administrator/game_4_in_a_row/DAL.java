@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
@@ -23,6 +24,7 @@ public class DAL {
     private static class WinnersHolder {
         int win;
         int loss;
+        int standoff;
     }
 
     public DAL(Context context){
@@ -40,6 +42,7 @@ public class DAL {
         values.put(Tables.winnersTable.NAME, name);
         values.put(Tables.winnersTable.WINS, 0);
         values.put(Tables.winnersTable.LOSSES, 0);
+        values.put(Tables.winnersTable.STAND_OFF, 0);
         values.put(Tables.winnersTable.PERCENT_OF_WINS , 0);
 
         //save the values
@@ -48,8 +51,9 @@ public class DAL {
 
     }
 
+
     // upDate DB
-    public void upDateWinOrLoss(String name , Boolean thereIsWin){
+    public void upDateWinOrLoss(String name , Boolean thereIsWin , Boolean standoff){
         SQLiteDatabase db = helper.getWritableDatabase();
 
         // New value for one column
@@ -58,26 +62,41 @@ public class DAL {
         // Holder for 2 integer
         WinnersHolder info  = getPrevResult(name);
 
-        // if player win
-        if (thereIsWin) {
-            values.put(Tables.winnersTable.WINS, info.win+1);
-            values.put(Tables.winnersTable.PERCENT_OF_WINS , info.win+1 / (info.loss + info.win+1) );
-        }
-        // if player loss
-        else {
-            values.put(Tables.winnersTable.LOSSES , info.loss+1);
-            values.put(Tables.winnersTable.PERCENT_OF_WINS , info.win / (info.loss + info.win+1) );
+        // standoff
+        if(standoff){
+            info.standoff++;
+            values.put(Tables.winnersTable.STAND_OFF , info.standoff );
         }
 
+        // win or loss
+        else{
+            // if player win
+            if (thereIsWin) {
+                info.win++;
+                values.put(Tables.winnersTable.WINS, info.win);
+            }
+            // if player loss
+            else {
+                info.loss++;
+                values.put(Tables.winnersTable.LOSSES , info.loss);
+            }
+        }
+        double avg = 0;
+        double temp = (info.loss + info.win + info.standoff);
+        avg = (info.win / temp) * 100 ;
+
+        // double format
+        DecimalFormat twoDForm = new DecimalFormat("#.##");
+        values.put(Tables.winnersTable.PERCENT_OF_WINS , Double.valueOf(twoDForm.format(avg)) );
+
         // Which row to update, based on the ID
-        String selection = Tables.winnersTable.NAME + " = " + name ;
-        //String[] selectionArgs = { String.valueOf(rowId) };
+        String selection = Tables.winnersTable.NAME + "='" + name + "'" ;
 
         int count = db.update(Tables.winnersTable.TABLE_NAME, values, selection, null);
     }
 
 
-    // get number of wins and loss according to user name
+    // get number of wins , loss , standoff according to user name
     public WinnersHolder getPrevResult(String name){
 
         WinnersHolder info = new WinnersHolder() ;
@@ -89,12 +108,14 @@ public class DAL {
             while (c.moveToNext()) {
 
                 //get column index
-                int lossColumnIndex = c.getColumnIndex(Tables.winnersTable.WINS);
+                int lossColumnIndex = c.getColumnIndex(Tables.winnersTable.LOSSES);
                 int winColumnIndex = c.getColumnIndex(Tables.winnersTable.WINS);
+                int StandOffColumnIndex = c.getColumnIndex(Tables.winnersTable.STAND_OFF);
 
                 try{
                     info.win = c.getInt(winColumnIndex);
                     info.loss = c.getInt(lossColumnIndex);
+                    info.standoff = c.getInt(StandOffColumnIndex);
                 }
                 catch (Exception e){
                 }
@@ -117,7 +138,7 @@ public class DAL {
         SQLiteDatabase db = helper.getWritableDatabase();
 
         Cursor c = db.rawQuery("SELECT * FROM " + Tables.winnersTable.TABLE_NAME + " WHERE "
-                + Tables.winnersTable.NAME + " = " + name, null);
+                + Tables.winnersTable.NAME + "='" + name + "'"  , null);
 
         return c;
     }
@@ -135,7 +156,7 @@ public class DAL {
         SQLiteDatabase db = helper.getWritableDatabase();
 
         // search the correct row
-        String selection = Tables.winnersTable.NAME + " = " + name ;
+        String selection = Tables.winnersTable.NAME + "='" + name+"'" ;
 
         // remove from DB
         db.delete(Tables.winnersTable.TABLE_NAME, selection, null);
@@ -186,6 +207,17 @@ public class DAL {
                 }
 
                 entryTimeColumnIndex = c.getColumnIndex(Tables.winnersTable.LOSSES);
+
+                //get entry
+                try{
+                    String entryTime = c.getString(entryTimeColumnIndex);
+                    entryTimes.add(entryTime);
+                }
+                //save in array
+                catch (Exception e){
+
+                }
+                entryTimeColumnIndex = c.getColumnIndex(Tables.winnersTable.STAND_OFF);
 
                 //get entry
                 try{

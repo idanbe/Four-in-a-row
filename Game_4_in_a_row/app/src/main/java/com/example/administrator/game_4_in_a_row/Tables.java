@@ -18,6 +18,7 @@ public class Tables {
         public static final String NAME = "name";
         public static final String WINS = "wins";
         public static final String LOSSES = "losses";
+        public static final String STAND_OFF = "standoff";
         public static final String PERCENT_OF_WINS = "percents";
     }
 }
