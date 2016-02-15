@@ -3,6 +3,8 @@
     package="com.example.administrator.game_4_in_a_row" >
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:allowBackup="true"
@@ -41,6 +43,14 @@
         <activity
             android:name=".Game_options"
             android:label="@string/title_activity_game_options" >
+        </activity>
+        <activity
+            android:name=".DeviceListActivity"
+            android:label="@string/title_activity_device_list" >
+        </activity>
+        <activity
+            android:name=".MainBluethooth"
+            android:label="@string/title_activity_main_bluethooth" >
         </activity>
     </application>
 
