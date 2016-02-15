@@ -1,8 +1,6 @@
 package com.example.administrator.game_4_in_a_row;
 
-
-import android.widget.TextView;
-
+// TODO : maybe should this class in the future , not delete !!!
 public class Row {
 
     private String Name;

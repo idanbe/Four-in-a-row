@@ -22,7 +22,6 @@ public class Settings extends AppCompatActivity {
     private final String OFF="off";
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

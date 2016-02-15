@@ -15,9 +15,69 @@ public class Game_history extends AppCompatActivity {
 
     private Intent intent;
     private DAL dal;
-    TableLayout HistoryTable ;
-    TableRow Row ;
+    private TableLayout HistoryTable ;
+    private TableRow Row ;
 
+
+     //object like struct
+    static class RowHolder {
+        TextView name;
+        TextView win;
+        TextView loss;
+        TextView standoff;
+        TextView percent_win;
+    }
+
+    // add row
+    private void addToHistoryTable(String name){
+
+        RowHolder rowHolder = new RowHolder();
+        Row = new TableRow(this);
+
+        rowHolder.name = new TextView(this);
+        rowHolder.win = new TextView(this);
+        rowHolder.loss = new TextView(this);
+        rowHolder.standoff = new TextView(this);
+        rowHolder.percent_win = new TextView(this);
+
+        // name col
+        rowHolder.name.setText(name);
+        rowHolder.name.setGravity(Gravity.LEFT);
+
+        // win col
+        rowHolder.win.setText("0");
+        rowHolder.win.setGravity(Gravity.CENTER);
+
+        // loss col
+        rowHolder.loss.setText("0");
+        rowHolder.loss.setGravity(Gravity.CENTER);
+
+        // standoff col
+        rowHolder.standoff.setText("0");
+        rowHolder.standoff.setGravity(Gravity.CENTER);
+
+        // percent_win col
+        rowHolder.percent_win.setText("0%");
+        rowHolder.percent_win.setGravity(Gravity.RIGHT);
+
+        // add to row
+        Row.addView(rowHolder.name);
+        Row.addView(rowHolder.win);
+        Row.addView(rowHolder.loss);
+        Row.addView(rowHolder.standoff);
+        Row.addView(rowHolder.percent_win);
+        // Color yellow
+        Row.setBackgroundColor(Color.YELLOW);
+
+        // add row to history Table
+        HistoryTable.addView(Row);
+
+        // add to DB
+        dal.addUser(name);
+
+        // TODO : to remove test !!
+        System.out.println(dal.getDb().toString());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,41 +88,11 @@ public class Game_history extends AppCompatActivity {
         HistoryTable = (TableLayout)findViewById(R.id.history_table);
         HistoryTable.setStretchAllColumns(true);
 
-        
-        TextView t0 = new TextView(this);
-        TextView t1 = new TextView(this);
-        TextView t2 = new TextView(this);
-        TextView t3 = new TextView(this);
-        TextView t4 = new TextView(this);
-        t0.setText("0");
-        t0.setTextSize(10);
-        t0.setGravity(Gravity.CENTER);
 
-        t1.setText("0");
-        t1.setTextSize(10);
-        t1.setGravity(Gravity.CENTER);
+        // test history table
+        addToHistoryTable("maximum 15 Char");
 
-        t2.setText("0");
-        t2.setTextSize(10);
-        t2.setGravity(Gravity.CENTER);
 
-        t3.setText("0");
-        t3.setTextSize(10);
-        t3.setGravity(Gravity.CENTER);
-
-        t4.setText("0");
-        t4.setTextSize(10);
-        t4.setGravity(Gravity.CENTER);
-
-        Row = new TableRow(this);
-
-        Row.addView(t0);
-        Row.addView(t1);
-        Row.addView(t2);
-        Row.addView(t3);
-        Row.addView(t4);
-
-        HistoryTable.addView(Row);
 
         /// TODO : test DB
        /* dal.removeAll();

@@ -69,15 +69,6 @@ public class Game extends AppCompatActivity {
 
         }
 
-
-
-
-        TableLayout tl = (TableLayout) findViewById(R.id.history_table);
-        TableRow tr = new TableRow(this);
-        LayoutParams lp = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-        tr.setLayoutParams(lp);
-
-
         Log.d("check414", "onCreate Game");
         Game_on = true;
         cell_arr = new String[6][7];

@@ -39,7 +39,6 @@ public class Names extends AppCompatActivity {
                 intent.putExtra(p2_key, p2.getText().toString());
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-
                 startActivity(intent);
             }
         });

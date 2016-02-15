@@ -20,11 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Intent intent;
     private Button single_button,two_button,setting_button,game_history_button,exit_button;
-    private TableLayout HistoryTable ;
-    private TableRow Row ;
-    private DAL dal;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +34,6 @@ public class MainActivity extends AppCompatActivity {
         exit_button = (Button)findViewById(R.id.button_Exit);
 
 
-        dal = new DAL(this);
-
-
         // single player
         single_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("debug","single player");
                 intent = new Intent(v.getContext(), Names.class);
                 startActivity(intent);
-
-
             }
         });
 
@@ -61,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("debug","two players");
                 intent = new Intent(v.getContext(), Game_options.class);
                 startActivity(intent);
-
             }
         });
 
@@ -72,9 +61,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("debug","settings");
                 intent = new Intent(v.getContext(), Settings.class);
                 startActivity(intent);
-
-
-
             }
         });
 

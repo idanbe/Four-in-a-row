@@ -32,7 +32,7 @@ public class MyView extends View {
     private final String PLAYER1="R";
     private final String PLAYER2="Y";
     private float rx,ry,witdh_cell,height_cell;
-    private Vibrator v; //for AVIRAHM GAY
+    private Vibrator v;
 
 
     public MyView(Context context) {
