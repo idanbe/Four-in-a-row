@@ -31,6 +31,9 @@ public class Game_history extends AppCompatActivity {
     // add row
     public void addToHistoryTable(String name){
 
+        // TODO : remove this line
+        dal.removeAll();
+
         RowHolder rowHolder = new RowHolder();
         Row = new TableRow(this);
 
@@ -106,6 +109,15 @@ public class Game_history extends AppCompatActivity {
 
         // test history table
         addToHistoryTable("maximum 15 Char");
+        addToHistoryTable("maximum 15 Char");
+        addToHistoryTable("maximum 15 Char");
+        addToHistoryTable("maximum 15 Char");
+        addToHistoryTable("maximum 15 Char");
+        addToHistoryTable("maximum 15 Char");
+        addToHistoryTable("maximum 15 Char");
+        addToHistoryTable("maximum 15 Char");
+        
+
 
 
 
