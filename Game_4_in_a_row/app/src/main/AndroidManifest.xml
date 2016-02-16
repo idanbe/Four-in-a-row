@@ -37,6 +37,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".Names"
+            android:label="@string/title_activity_names" >
+        </activity>
+        <activity
             android:name=".Game_options"
             android:label="@string/title_activity_game_options" >
         </activity>
