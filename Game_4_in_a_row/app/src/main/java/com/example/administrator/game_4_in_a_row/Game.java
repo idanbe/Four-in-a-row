@@ -32,16 +32,20 @@ public class Game extends AppCompatActivity {
     private  String PLAYER2_turn="Player2 turn";
     private String player1_name="Player1";
     private String player2_name="Player2";
+    static final String ONE_PLAYER ="one_player";
+    static final String TWO_PLAYER ="two_player";
+    static final String COMPUTER ="Computer";
     private String turn;
     private MyView myView ;
     private boolean Game_on;
     private View view ;
     private float witdh_cell;
-    private Vibrator/*btoh tahat shel idan*/ v;
+    private Vibrator/*btoh tahat shel avirahm*/ v;
     private Bundle bundle;
     static final String p1_key ="key1";
     static final String p2_key ="key2";
-    static final String gameType_key ="key3";
+    static final String gameType_key ="gameType_key";
+    private String gameType;
     Game_history history = new Game_history();
 
 
@@ -50,9 +54,6 @@ public class Game extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        // how to use in DB and HistoryTable?
-        // this function write the user in the table and in DB
-        //history.addToHistoryTable("idan vibrator back" );
 
 
         bundle = getIntent().getExtras();
@@ -69,12 +70,19 @@ public class Game extends AppCompatActivity {
                 player2_name=bundle.getString(p2_key).toString();
                 PLAYER2_turn=player2_name + " turn";
             }
-           // Log.d("gameType",bundle.getString(gameType_key).toString());
-
-
+            if(!(bundle.getString(gameType_key)==null))
+            {
+                gameType=bundle.getString(gameType_key);
+            }
         }
 
-        Log.d("check414", "onCreate Game");
+        if(gameType.equals(ONE_PLAYER))
+        {
+            player2_name=COMPUTER;
+            PLAYER2_turn=COMPUTER + " turn";
+        }
+
+
         Game_on = true;
         cell_arr = new String[6][7];
         clear_cell_Arr();

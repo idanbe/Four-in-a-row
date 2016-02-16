@@ -19,6 +19,8 @@ public class Names extends AppCompatActivity {
     static final String p2_key ="key2";
     static final String onePlayer_key ="player1";
     static final String twoPlayer_key ="player2";
+    static final String Game_Type_key ="gameType_key";
+
     private Bundle bundle;
     private String players="";
     @Override
@@ -38,8 +40,6 @@ public class Names extends AppCompatActivity {
 
         if (bundle != null)
         {
-            //players=bundle.getString(onePlayer_key).toString();
-            //players=bundle.getString(twoPlayer_key).toString();
             if(!(bundle.getString(onePlayer_key)==null))
             {
                 players=bundle.getString(onePlayer_key).toString();
@@ -62,6 +62,8 @@ public class Names extends AppCompatActivity {
                 intent = new Intent(v.getContext(), Game.class);
                 intent.putExtra(p1_key, p1.getText().toString());
                 intent.putExtra(p2_key, p2.getText().toString());
+                intent.putExtra(Game_Type_key,players.toString());
+
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 startActivity(intent);
