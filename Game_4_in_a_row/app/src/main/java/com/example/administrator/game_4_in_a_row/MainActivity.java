@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("debug","two players");
-                intent = new Intent(v.getContext(), Game_options.class);
+                intent = new Intent(v.getContext(), Names.class);
                 startActivity(intent);
             }
         });
