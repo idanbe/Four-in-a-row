@@ -28,6 +28,7 @@ public class MyView extends View {
     private static String [][] cell_arr;
     private static int [][] win_cell;
     private static boolean find_win;
+    private static String Winner;
     private final String EMPTY ="E";
     private final String PLAYER1="R";
     private final String PLAYER2="Y";
@@ -122,15 +123,36 @@ public class MyView extends View {
                     rx = (witdh_cell * win_cell[i][1]); //x,y of cell to paint
                     ry = (height_cell * win_cell[i][0]);
 
+
+                if(Winner.equals(PLAYER1))
+                {
+                    paint.setColor(Color.rgb(159, 0, 15));
+
+                }
+                else
+                {
+                    paint.setColor(Color.rgb(253, 208, 23 ));
+
+                }
+                canvas.drawRect(rx, ry, (rx + witdh_cell), (ry + height_cell), paint);
+                    /*/
                     paint.setColor(Color.BLACK);
                     canvas.drawLine(rx+(witdh_cell/2)+2, ry, rx+(witdh_cell/2)+2, ry + height_cell, paint);
                     canvas.drawLine(rx,ry+(height_cell/2)-5,rx+witdh_cell,ry+(witdh_cell/2)-5,paint);
                     canvas.drawLine(rx, ry, rx+witdh_cell, ry + height_cell, paint);
                     canvas.drawLine(rx+witdh_cell,ry,rx,ry+height_cell,paint);
-
+                    /*/
             }
 
         }
+    }
+
+
+
+
+    public void set_winer(String win)
+    {
+        Winner=win;
     }
 
 

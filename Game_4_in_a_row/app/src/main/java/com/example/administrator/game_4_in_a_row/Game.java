@@ -107,7 +107,7 @@ public class Game extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                if(Game_on &&(!(turn.equals(COMPUTER+" turn"))))
+                if(Game_on )
                 {
                     witdh_cell = v.getWidth() / 7;
 
@@ -134,7 +134,7 @@ public class Game extends AppCompatActivity {
                     }
                     myView.setCell_arr(cell_arr);
                     v.invalidate();
-                    change_turn();
+                    //change_turn();
                 }
                 return false;
             }
@@ -173,7 +173,7 @@ public class Game extends AppCompatActivity {
         while (check_ifCol_full(randomcol));
         insert_coin(turn, randomcol);
     //    SystemClock.sleep(500);
-        change_turn();
+    //    change_turn();
         return;
     }
 
@@ -215,7 +215,6 @@ public class Game extends AppCompatActivity {
 
     private void insert_coin(String player,int col)
     {
-        Log.d("check1","in insert coin");
         if(check_board_full())
         {
             player_turn.setText("Game End it tie");
@@ -250,7 +249,7 @@ public class Game extends AppCompatActivity {
         {
             Game_on=false;
         }
-       // change_turn();
+        change_turn();
 
     }
 
@@ -269,8 +268,9 @@ public class Game extends AppCompatActivity {
             {
                 turn=PLAYER2_turn;
                 player_turn.setText(PLAYER2_turn);
-
-                comp_move();
+                if(gameType.equals(ONE_PLAYER)) {
+                    comp_move();
+                }
 
             }
             else
@@ -283,13 +283,14 @@ public class Game extends AppCompatActivity {
         {
             if(turn.equals(PLAYER1_turn))
             {
-
+                myView.set_winer(PLAYER1);
                 v.vibrate(400);
                 player_turn.setText(player1_name + " Win");
 
             }
             else
             {
+                myView.set_winer(PLAYER2);
                 v.vibrate(400);
                 player_turn.setText(player2_name + " Win");
             }
