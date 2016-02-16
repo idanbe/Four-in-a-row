@@ -43,13 +43,14 @@ public class Names extends AppCompatActivity {
             if(!(bundle.getString(onePlayer_key)==null))
             {
                 players=bundle.getString(onePlayer_key).toString();
+                p2.setVisibility(View.INVISIBLE);
             }
             if(!(bundle.getString(twoPlayer_key)==null))
             {
                 players=bundle.getString(twoPlayer_key).toString();
             }
-            Log.d("test4545",players.toString());
         }
+
 
 
 
