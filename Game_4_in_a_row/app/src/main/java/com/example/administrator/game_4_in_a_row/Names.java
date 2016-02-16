@@ -47,7 +47,7 @@ public class Names extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(v.getContext(),Game_options.class);
+                intent = new Intent(v.getContext(),MainActivity.class);
                 startActivity(intent);
             }
         });
