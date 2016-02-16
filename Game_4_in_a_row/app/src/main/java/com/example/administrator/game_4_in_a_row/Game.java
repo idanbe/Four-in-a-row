@@ -52,7 +52,7 @@ public class Game extends AppCompatActivity {
 
         // how to use in DB and HistoryTable?
         // this function write the user in the table and in DB
-        history.addToHistoryTable("idan vibrator back" );
+        //history.addToHistoryTable("idan vibrator back" );
 
 
         bundle = getIntent().getExtras();

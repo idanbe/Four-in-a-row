@@ -44,14 +44,6 @@
             android:name=".Game_options"
             android:label="@string/title_activity_game_options" >
         </activity>
-        <activity
-            android:name=".DeviceListActivity"
-            android:label="@string/title_activity_device_list" >
-        </activity>
-        <activity
-            android:name=".MainBluethooth"
-            android:label="@string/title_activity_main_bluethooth" >
-        </activity>
     </application>
 
 </manifest>
