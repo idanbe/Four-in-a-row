@@ -1,6 +1,8 @@
 package com.example.administrator.game_4_in_a_row;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,14 +14,22 @@ import android.widget.Button;
 public class Settings extends AppCompatActivity {
 
     private Button sound,vibriton;
-    private String sound_state="on";
-    private String vibration_state="on";
+
     private final String SOUND_OFF="Sound Off";
     private final String SOUND_ON="Sound On";
     private final String Vibrtion_OFF="Vibration Off";
     private final String Vibrtion_ON="Vibration On";
-    private final String ON="on";
-    private final String OFF="off";
+    private final String SETTING_KEY_SOUND = "SETTING_KEY_SOUND";
+    private final String SETTING_KEY_VIBRITON = "SETTING_KEY_VIBRITON";
+
+    private final String SHARED_PREFERENCES_NAME = "ShardPreferences_setting";
+
+    private final String ON = "on";
+    private final String OFF = "off";
+
+    private SharedPreferences sharedpreferences ;
+    SharedPreferences.Editor editor;
+
 
 
     @Override
@@ -30,18 +40,32 @@ public class Settings extends AppCompatActivity {
         sound = (Button) findViewById(R.id.button_sound);
         vibriton = (Button) findViewById(R.id.button_Vibration);
 
+        sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        editor = sharedpreferences.edit();
+
+        if(sharedpreferences.getString(SETTING_KEY_SOUND , null).equals(OFF)){
+            sound.setText(SOUND_OFF);
+        }
+
+        if(sharedpreferences.getString(SETTING_KEY_VIBRITON , null).equals(OFF)){
+            vibriton.setText(Vibrtion_OFF);
+        }
 
 
         sound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(sound_state.equals(ON)) {
+                String s = sharedpreferences.getString(SETTING_KEY_SOUND , null);
+                if( s == null || s.equals(ON) ) {
                     sound.setText(SOUND_OFF);
+                    editor.putString(SETTING_KEY_SOUND, OFF);
                 }
                 else
                 {
                     sound.setText(SOUND_ON);
+                    editor.putString(SETTING_KEY_SOUND, ON);
                 }
+                editor.commit();
             }
         });
 
@@ -49,15 +73,17 @@ public class Settings extends AppCompatActivity {
         vibriton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (vibration_state.equals(Vibrtion_ON))
-                {
+                String s = sharedpreferences.getString(SETTING_KEY_VIBRITON , null);
+                if( s == null || s.equals(ON) ) {
                     vibriton.setText(Vibrtion_OFF);
+                    editor.putString(SETTING_KEY_VIBRITON , OFF);
                 }
                 else
                 {
                     vibriton.setText(Vibrtion_ON);
+                    editor.putString(SETTING_KEY_VIBRITON, ON);
                 }
+                editor.commit();
             }
         });
 

@@ -82,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
         exit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.exit(1);
                 Log.d("debug", "exit");
-
             }
         });
 
