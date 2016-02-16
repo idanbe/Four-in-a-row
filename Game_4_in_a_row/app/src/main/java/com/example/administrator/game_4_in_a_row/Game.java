@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -50,6 +51,7 @@ public class Game extends AppCompatActivity {
     private String gameType;
     private Random randomGenerator;
     private int randomcol;
+    private Button back_button,reset_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,12 +97,39 @@ public class Game extends AppCompatActivity {
         v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         player_turn = (TextView) findViewById(R.id.text_player_turn);
 
+        back_button = (Button)findViewById(R.id.button_backGame);
+        reset_button = (Button)findViewById(R.id.button_Reset);
 
         if (turn.equals(PLAYER1_turn)) {
             player_turn.setText(PLAYER1_turn);
         } else {
             player_turn.setText(PLAYER2_turn);
         }
+
+
+
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(v.getContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        reset_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                intent = new Intent(v.getContext(), Game.class);
+                intent.putExtra(p1_key, player1_name);
+                intent.putExtra(p2_key, player2_name);
+                intent.putExtra(gameType_key,gameType);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+
+
+
 
 
         view.setOnTouchListener(new View.OnTouchListener() {

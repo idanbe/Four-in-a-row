@@ -49,5 +49,23 @@
         android:layout_below="@+id/textView_game"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:id="@+id/button_Reset"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textView_game"
+        android:layout_alignEnd="@+id/textView_game" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:id="@+id/button_backGame"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/textView_game"
+        android:layout_alignStart="@+id/textView_game" />
+
 
 </RelativeLayout>
