@@ -3,6 +3,7 @@ package com.example.administrator.game_4_in_a_row;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.os.Vibrator;
 import android.view.ViewGroup.LayoutParams;
 
+import java.util.Random;
 
 
 public class Game extends AppCompatActivity {
@@ -36,7 +38,7 @@ public class Game extends AppCompatActivity {
     static final String TWO_PLAYER ="two_player";
     static final String COMPUTER ="Computer";
     private String turn;
-    private MyView myView ;
+    private static MyView myView ;
     private boolean Game_on;
     private View view ;
     private float witdh_cell;
@@ -46,7 +48,8 @@ public class Game extends AppCompatActivity {
     static final String p2_key ="key2";
     static final String gameType_key ="gameType_key";
     private String gameType;
-
+    private Random randomGenerator;
+    private int randomcol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +84,6 @@ public class Game extends AppCompatActivity {
             PLAYER2_turn=COMPUTER + " turn";
         }
 
-
         Game_on = true;
         cell_arr = new String[6][7];
         clear_cell_Arr();
@@ -105,40 +107,34 @@ public class Game extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                if(Game_on)
+                if(Game_on &&(!(turn.equals(COMPUTER+" turn"))))
                 {
                     witdh_cell = v.getWidth() / 7;
 
                     if (event.getX() < witdh_cell) {
-                        Log.d("check767", "col 0");
                         insert_coin(turn, 0);
                     }
                     if ((event.getX() > (witdh_cell)) && (event.getX() < (witdh_cell * 2))) {
-                        Log.d("check767", "col 1");
                         insert_coin(turn, 1);
                     }
                     if ((event.getX() > (witdh_cell * 2)) && (event.getX() < (witdh_cell * 3))) {
-                        Log.d("check767", "col 2");
                         insert_coin(turn, 2);
                     }
                     if ((event.getX() > (witdh_cell * 3)) && (event.getX() < (witdh_cell * 4))) {
-                        Log.d("check767", "col 3");
                         insert_coin(turn, 3);
                     }
                     if ((event.getX() > (witdh_cell * 4)) && (event.getX() < (witdh_cell * 5))) {
-                        Log.d("check767", "col 4");
                         insert_coin(turn, 4);
                     }
                     if ((event.getX() > (witdh_cell * 5)) && (event.getX() < (witdh_cell * 6))) {
-                        Log.d("check767", "col 5");
                         insert_coin(turn, 5);
                     }
                     if ((event.getX() > (witdh_cell * 6)) && (event.getX() < (witdh_cell * 7))) {
-                        Log.d("check767", "col 6");
                         insert_coin(turn, 6);
                     }
                     myView.setCell_arr(cell_arr);
                     v.invalidate();
+                    change_turn();
                 }
                 return false;
             }
@@ -166,16 +162,67 @@ public class Game extends AppCompatActivity {
     }
 
 
+    private void comp_move() //computer move
+    {
+        randomGenerator = new Random();
+
+        do
+        {
+            randomcol = randomGenerator.nextInt(6);
+        }
+        while (check_ifCol_full(randomcol));
+        insert_coin(turn, randomcol);
+    //    SystemClock.sleep(500);
+        change_turn();
+        return;
+    }
+
+
+
+
+
+    private boolean check_ifBoradEmpty()
+    {
+        for(int i=0;i<6;i++)
+        {
+            for (int j=0;j<7;j++)
+            {
+                if(!(cell_arr[i][j].equals(EMPTY)))
+                {
+                    return false;//borad not empty
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean check_ifCol_full(int col)
+    {
+        int i=5;
+        while ((i>=0)&&(!cell_arr[i][col].equals(EMPTY)))//check if empty cell in col
+        {
+            i=i-1;
+        }
+        if(i==-1)//col is full
+        {
+            return true;
+        }
+        return false;  //col not full
+    }
+
+
+
 
     private void insert_coin(String player,int col)
     {
         Log.d("check1","in insert coin");
         if(check_board_full())
         {
-          //  player_turn.setText("Game End it tie");
+            player_turn.setText("Game End it tie");
             Game_on=false;
             return;
         }
+
 
         int i=5;
             while ((i>=0)&&(!cell_arr[i][col].equals(EMPTY)))//check if empty cell in col
@@ -201,11 +248,10 @@ public class Game extends AppCompatActivity {
 
         if(check_win(player))//win
         {
-            Log.d("check21", "win");
             Game_on=false;
         }
-        change_turn();
-        //todo check case col is full no place for new coin
+       // change_turn();
+
     }
 
 
@@ -223,6 +269,9 @@ public class Game extends AppCompatActivity {
             {
                 turn=PLAYER2_turn;
                 player_turn.setText(PLAYER2_turn);
+
+                comp_move();
+
             }
             else
             {
