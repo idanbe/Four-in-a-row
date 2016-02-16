@@ -4,22 +4,20 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
 
     private Intent intent;
     private Button single_button,two_button,setting_button,game_history_button,exit_button;
+    static final String onePlayer_key ="player1";
+    static final String twoPlayer_key ="player2";
+    static final String ONE_PLAYER ="one_player";
+    static final String TWO_PLAYER ="two_player";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("debug","single player");
                 intent = new Intent(v.getContext(), Names.class);
+                intent.putExtra(onePlayer_key,ONE_PLAYER.toString());
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("debug","two players");
                 intent = new Intent(v.getContext(), Names.class);
+                intent.putExtra(twoPlayer_key,TWO_PLAYER.toString());
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });

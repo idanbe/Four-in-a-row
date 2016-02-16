@@ -17,8 +17,10 @@ public class Names extends AppCompatActivity {
     private EditText p1,p2;
     static final String p1_key ="key1";
     static final String p2_key ="key2";
-
-
+    static final String onePlayer_key ="player1";
+    static final String twoPlayer_key ="player2";
+    private Bundle bundle;
+    private String players="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +32,29 @@ public class Names extends AppCompatActivity {
         p1 = (EditText)findViewById(R.id.player1_textv);
         p2 = (EditText)findViewById(R.id.player2_text);
 
-        //
+        // get game type
+
+        bundle = getIntent().getExtras();
+
+        if (bundle != null)
+        {
+            //players=bundle.getString(onePlayer_key).toString();
+            //players=bundle.getString(twoPlayer_key).toString();
+            if(!(bundle.getString(onePlayer_key)==null))
+            {
+                players=bundle.getString(onePlayer_key).toString();
+            }
+            if(!(bundle.getString(twoPlayer_key)==null))
+            {
+                players=bundle.getString(twoPlayer_key).toString();
+            }
+            Log.d("test4545",players.toString());
+        }
+
+
+
+
+            //
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +71,7 @@ public class Names extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(v.getContext(),MainActivity.class);
+                intent = new Intent(v.getContext(), MainActivity.class);
                 startActivity(intent);
             }
         });
