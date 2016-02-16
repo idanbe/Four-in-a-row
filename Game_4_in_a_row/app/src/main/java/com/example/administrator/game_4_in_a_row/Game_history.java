@@ -36,6 +36,10 @@ public class Game_history extends AppCompatActivity {
     public Game_history(DAL dal){
         this.dal = dal;
     }
+
+    public Game_history(){
+
+    }
     // add row
     public void addToHistoryTable(String name , int win , int loss , int draws , double percent ){
 
@@ -117,12 +121,12 @@ public class Game_history extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_history);
 
-        //dal = new DAL(this);
+        dal = new DAL(this);
 
         // TODO : remove this line
-        //dal.removeAll();
+        dal.removeAll();
 
-        /*dal.addUser("1", 0);
+        dal.addUser("1", 0);
         dal.addUser("2" , 1);
         dal.addUser("3" , 10);
         dal.addUser("4" , 70);

@@ -46,7 +46,6 @@ public class Game extends AppCompatActivity {
     static final String p2_key ="key2";
     static final String gameType_key ="gameType_key";
     private String gameType;
-    Game_history history = new Game_history();
 
 
     @Override
