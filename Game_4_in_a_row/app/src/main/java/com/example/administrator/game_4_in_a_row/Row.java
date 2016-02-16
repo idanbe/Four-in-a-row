@@ -1,18 +1,32 @@
 package com.example.administrator.game_4_in_a_row;
 
+import java.util.ArrayList;
+
 // TODO : maybe should this class in the future , not delete !!!
-public class Row {
+public class Row{
 
     private String Name;
     private int Win;
     private int Loss;
-    private int Standoff;
+    private int Draws;
     private double Percent_Win;
+
+    public Row(){
+
+    }
+
+    public Row(String name , int win , int loss , int draws , double percent){
+        this.Name = name;
+        this.Win = win;
+        this.Loss = loss;
+        this.Draws = draws;
+        this.Percent_Win = percent;
+    }
 
 
     public String getName() {
-            return this.Name;
-        }
+        return this.Name;
+    }
     public void setName(String name) {
         this.Name = name;
     }
@@ -29,16 +43,16 @@ public class Row {
     public int getLoss() {
         return this.Loss;
     }
-    public void setTime(int loss) {
+    public void setLoss(int loss) {
         this.Loss = loss;
     }
 
 
-    public int getStandoff() {
-        return this.Standoff;
+    public int getDraws() {
+        return this.Draws;
     }
-    public void setInfo(int standoff) {
-        this.Standoff = standoff;
+    public void setDraws(int standoff) {
+        this.Draws = standoff;
     }
 
     public double getPercent_Win() {
@@ -47,5 +61,7 @@ public class Row {
     public void setPercent_Win(double percent_win) {
         this.Percent_Win = percent_win;
     }
+
+
 
 }

@@ -32,23 +32,32 @@ public class DAL {
     }
 
     // add row to DB
-    public void addUser(String name){
+    public void addUser(String name , double percent){
         SQLiteDatabase db = helper.getWritableDatabase();
 
-        //values to save
-        ContentValues values = new ContentValues();
 
-        // add to table
-        values.put(Tables.winnersTable.NAME, name);
-        values.put(Tables.winnersTable.WINS, 0);
-        values.put(Tables.winnersTable.LOSSES, 0);
-        values.put(Tables.winnersTable.STAND_OFF, 0);
-        values.put(Tables.winnersTable.PERCENT_OF_WINS , 0);
 
-        //save the values
-        db.insert(Tables.winnersTable.TABLE_NAME, null, values);
-        db.close();
 
+        if ( ! thereIsRow(name))
+        {
+            //values to save
+            ContentValues values = new ContentValues();
+
+            // add to table
+            values.put(Tables.winnersTable.NAME, name);
+            values.put(Tables.winnersTable.WINS, 0);
+            values.put(Tables.winnersTable.LOSSES, 0);
+            values.put(Tables.winnersTable.STAND_OFF, 0);
+            values.put(Tables.winnersTable.PERCENT_OF_WINS , percent);
+
+            //save the values
+            db.insert(Tables.winnersTable.TABLE_NAME, null, values);
+            db.close();
+        }
+        else
+        {
+            /* record not exist */
+        }
     }
 
 
@@ -143,8 +152,8 @@ public class DAL {
         return c;
     }
 
- //**********************************************************************//
-        // TODO : remove this function  , only for test
+    //**********************************************************************//
+    // TODO : remove this function  , only for test
     // remove all rows
     public  void removeAll(){
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -173,9 +182,9 @@ public class DAL {
 
     // TODO : remove this function , only for test
     // write all DB in ArrayList
-    public ArrayList getDb(){
+    public ArrayList<Row> getDb(){
 
-        ArrayList entryTimes = new ArrayList();
+        ArrayList arrayListRow = new ArrayList();
 
         //get cursor
         Cursor c = getAllDBCursor();
@@ -183,16 +192,17 @@ public class DAL {
         if (c != null) {
             while (c.moveToNext()) {
                 //get column index
-
+                Row row = new Row();
                 int entryTimeColumnIndex = c.getColumnIndex(Tables.winnersTable.NAME);
 
                 //get entry
                 try{
                     String entryTime = c.getString(entryTimeColumnIndex);
-                    entryTimes.add(entryTime);
+                    row.setName(entryTime);
                 }
                 //save in array
                 catch (Exception e){
+                    row.setName("error");
                 }
 
                 entryTimeColumnIndex = c.getColumnIndex(Tables.winnersTable.WINS);
@@ -200,10 +210,11 @@ public class DAL {
                 //get entry
                 try{
                     String entryTime = c.getString(entryTimeColumnIndex);
-                    entryTimes.add(entryTime);
+                    row.setWin(Integer.parseInt(entryTime));
                 }
                 //save in array
                 catch (Exception e){
+                    row.setWin(0);
                 }
 
                 entryTimeColumnIndex = c.getColumnIndex(Tables.winnersTable.LOSSES);
@@ -211,22 +222,22 @@ public class DAL {
                 //get entry
                 try{
                     String entryTime = c.getString(entryTimeColumnIndex);
-                    entryTimes.add(entryTime);
+                    row.setLoss(Integer.parseInt(entryTime));
                 }
                 //save in array
                 catch (Exception e){
-
+                    row.setLoss(0);
                 }
                 entryTimeColumnIndex = c.getColumnIndex(Tables.winnersTable.STAND_OFF);
 
                 //get entry
                 try{
                     String entryTime = c.getString(entryTimeColumnIndex);
-                    entryTimes.add(entryTime);
+                    row.setDraws(Integer.parseInt(entryTime));
                 }
                 //save in array
                 catch (Exception e){
-
+                    row.setDraws(0);
                 }
 
                 entryTimeColumnIndex = c.getColumnIndex(Tables.winnersTable.PERCENT_OF_WINS);
@@ -234,17 +245,18 @@ public class DAL {
                 //get entry
                 try{
                     String entryTime = c.getString(entryTimeColumnIndex);
-                    entryTimes.add(entryTime);
+                    row.setPercent_Win(Double.parseDouble(entryTime));
                 }
                 //save in array
                 catch (Exception e){
-
+                    row.setPercent_Win(0);
                 }
 
+                arrayListRow.add(row);
             }
 
         }
-        return entryTimes;
+        return arrayListRow;
     }
 
 }

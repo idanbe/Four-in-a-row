@@ -11,15 +11,20 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class Game_history extends AppCompatActivity {
 
     private Intent intent;
     private DAL dal;
     private TableLayout HistoryTable ;
-    private TableRow Row ;
+    private TableRow tableRow;
+    private ArrayList<Row> rowArrayList ;
+
+    private static final int MAX_RESULT = 10;
 
 
-     //object like struct
+    //object like struct
     static class RowHolder {
         TextView name;
         TextView win;
@@ -28,14 +33,14 @@ public class Game_history extends AppCompatActivity {
         TextView percent_win;
     }
 
+    public Game_history(DAL dal){
+        this.dal = dal;
+    }
     // add row
-    public void addToHistoryTable(String name){
-
-        // TODO : remove this line
-        dal.removeAll();
+    public void addToHistoryTable(String name , int win , int loss , int draws , double percent ){
 
         RowHolder rowHolder = new RowHolder();
-        Row = new TableRow(this);
+        tableRow = new TableRow(this);
 
         rowHolder.name = new TextView(this);
         rowHolder.win = new TextView(this);
@@ -48,75 +53,113 @@ public class Game_history extends AppCompatActivity {
         rowHolder.name.setGravity(Gravity.LEFT);
 
         // win col
-        rowHolder.win.setText("0");
+        rowHolder.win.setText(Integer.toString(win));
         rowHolder.win.setGravity(Gravity.CENTER);
 
         // loss col
-        rowHolder.loss.setText("0");
+        rowHolder.loss.setText(Integer.toString(loss));
         rowHolder.loss.setGravity(Gravity.CENTER);
 
         // standoff col
-        rowHolder.standoff.setText("0");
+        rowHolder.standoff.setText(Integer.toString(draws));
         rowHolder.standoff.setGravity(Gravity.CENTER);
 
         // percent_win col
-        rowHolder.percent_win.setText("0%");
+        rowHolder.percent_win.setText(percent + "%");
         rowHolder.percent_win.setGravity(Gravity.RIGHT);
 
         // add to row
-        Row.addView(rowHolder.name);
-        Row.addView(rowHolder.win);
-        Row.addView(rowHolder.loss);
-        Row.addView(rowHolder.standoff);
-        Row.addView(rowHolder.percent_win);
+        tableRow.addView(rowHolder.name);
+        tableRow.addView(rowHolder.win);
+        tableRow.addView(rowHolder.loss);
+        tableRow.addView(rowHolder.standoff);
+        tableRow.addView(rowHolder.percent_win);
         // Color yellow
-        Row.setBackgroundColor(Color.YELLOW);
+        tableRow.setBackgroundColor(Color.YELLOW);
 
         // add row to history Table
-        HistoryTable.addView(Row);
-
-        // add to DB
-        dal.addUser(name);
-
-        // TODO : to remove test !!
-        System.out.println(dal.getDb().toString());
+        HistoryTable.addView(tableRow);
     }
 
     // not complete !!!!!!!!!!!!!!!!!!!
     public void upDateHistoryTable(String name , boolean ifwin , boolean ifStendOff){
-
-        // need to edit table .
-
         dal.upDateWinOrLoss(name, ifwin, ifStendOff);
+        rowArrayList = dal.getDb();
     }
 
     public void removeRowFromHistory(String name){
-
-        // need to remove from table
-
         dal.removeRow(name);
+        rowArrayList = dal.getDb();
+    }
+
+    // TODO : remove this , only for test
+    public void printArray(){
+        for(int i = 0 ; i < rowArrayList.size() ; i++){
+            Row row = rowArrayList.get(i);
+            System.out.println(row.getName() + " , " + row.getWin() + " , " + row.getLoss() + " , " + row.getDraws() + " , " + row.getPercent_Win() + "%" );
+        }
+    }
+
+    public int sortArrayList(){
+        int indexOfMakValue = 0 ;
+        double max = 0 ;
+        for(int i = 0 ; i < rowArrayList.size() ; i++){
+            if(rowArrayList.get(i).getPercent_Win() > max){
+                indexOfMakValue = i ;
+                max = rowArrayList.get(i).getPercent_Win() ;
+            }
+        }
+        return indexOfMakValue;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_history);
-        dal = new DAL(this);
+
+        //dal = new DAL(this);
+
+        // TODO : remove this line
+        //dal.removeAll();
+
+        /*dal.addUser("1", 0);
+        dal.addUser("2" , 1);
+        dal.addUser("3" , 10);
+        dal.addUser("4" , 70);
+        dal.addUser("5" , 30);
+        dal.addUser("6" , 40);
+        dal.addUser("7" , 50);
+        dal.addUser("13" , 50);
+        dal.addUser("12" , 50);
+        dal.addUser("11" , 50);
+        dal.addUser("10" , 50);
+        /*dal.addUser("8");
+        dal.addUser("9");
+        dal.addUser("10");
+        dal.addUser("11");
+        dal.addUser("12");*/
 
         HistoryTable = (TableLayout)findViewById(R.id.history_table);
         HistoryTable.setStretchAllColumns(true);
 
+        rowArrayList = dal.getDb();
+        printArray();
 
-        // test history table
-        addToHistoryTable("maximum 15 Char");
-        addToHistoryTable("maximum 15 Char");
-        addToHistoryTable("maximum 15 Char");
-        addToHistoryTable("maximum 15 Char");
-        addToHistoryTable("maximum 15 Char");
-        addToHistoryTable("maximum 15 Char");
-        addToHistoryTable("maximum 15 Char");
-        addToHistoryTable("maximum 15 Char");
-        
+        int j = 0 ;
+        // print in history table
+        while ( !rowArrayList.isEmpty() && j < MAX_RESULT){
+            int i = sortArrayList();
+            Row row = rowArrayList.get(i) ;
+            addToHistoryTable(row.getName(), row.getWin(), row.getLoss(), row.getDraws(), row.getPercent_Win());
+            rowArrayList.remove(i);
+            j++ ;
+        }
+
+        System.out.println("after !!");
+        printArray();
+
+
+
 
 
 
