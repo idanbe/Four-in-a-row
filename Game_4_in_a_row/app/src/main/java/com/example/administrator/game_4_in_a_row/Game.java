@@ -32,6 +32,8 @@ public class Game extends AppCompatActivity {
     private  String PLAYER2_turn="Player2 turn";
     private String player1_name="Player1";
     private String player2_name="Player2";
+    private final String PLAYER_1 = "Player1";
+    private final String PLAYER_2 = "Player2";
     private final String TURN=" turn";
     static final String ONE_PLAYER ="one_player";
     static final String TWO_PLAYER ="two_player";
@@ -101,6 +103,13 @@ public class Game extends AppCompatActivity {
             {
                 player2_name=bundle.getString(p2_key).toString();
                 PLAYER2_turn=player2_name + TURN;
+            }
+            if(player1_name.equals(player2_name)){
+                PLAYER1_turn = PLAYER_1 + TURN;
+                PLAYER2_turn = PLAYER_2 + TURN;
+
+                player1_name = PLAYER_1;
+                player2_name = PLAYER_2 ;
             }
             if(!(bundle.getString(gameType_key)==null))
             {

@@ -9,11 +9,13 @@ import android.media.MediaPlayer;
 import android.preference.DialogPreference;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class Names extends AppCompatActivity {
 
@@ -32,6 +34,7 @@ public class Names extends AppCompatActivity {
     private Context context;
     private ProgressDialog progress ;
     private AlertDialog alertDialog;
+    static final String COMPUTER ="Computer";
     private static final String MUSIC_STATUS = "get_status_music";
     private MediaPlayer music;
 
@@ -78,6 +81,7 @@ public class Names extends AppCompatActivity {
             {
                 non_player_name =bundle.getString(onePlayer_key).toString();
                 p2.setVisibility(View.INVISIBLE);
+                p2.setText(COMPUTER);
             }
             if(!(bundle.getString(twoPlayer_key)==null))
             {
@@ -97,15 +101,29 @@ public class Names extends AppCompatActivity {
                 view = v ;
                 System.out.println("p1 = *" + p1.getText().toString() + "*");
                 alertDialog = new AlertDialog.Builder(Names.this).create();
+                String s  = "";
+                alertDialog.setTitle("Player Names is :");
                 if (p1.getText().toString().isEmpty()) {
-                    alertDialog.setTitle("Player Name is :");
-                    alertDialog.setMessage(onePlayer_key);
+                    s += onePlayer_key;
                 }
                 else {
-                    alertDialog.setTitle("Your Player Name is :");
-                    alertDialog.setMessage(p1.getText().toString());
+                    s += p1.getText().toString();
+                }
+                s += "\n VS \n";
+                if (p2.getText().toString().isEmpty()){
+                        s += twoPlayer_key;
+                }
+                else {
+                    s += p2.getText().toString();
                 }
 
+                // try to aligment text
+                /*TextView messageText = (TextView)alertDialog.findViewById(android.R.id.message);
+                messageText.setGravity(Gravity.CENTER);*/
+                if(p1.getText().toString().equals(p2.getText().toString())){
+                    s = onePlayer_key + "\n VS \n" + twoPlayer_key ;
+                }
+                alertDialog.setMessage(s);
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -119,8 +137,9 @@ public class Names extends AppCompatActivity {
 
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                                // add user to db
-                                dal.addUser(p1.getText().toString());
+                                p1.setText("");
+                                p2.setText("");
+
                                 progress.dismiss();
                                 // go to game
                                 startActivity(intent);
@@ -146,9 +165,10 @@ public class Names extends AppCompatActivity {
             public void onClick(View v) {
                 progress = ProgressDialog.show(get_Context(), "Pleas wait", "Load Game..", true);
                 progress.show();
-                intent = new Intent(v.getContext(), MainActivity.class);
+                p1.setText("");
+                p2.setText("");
                 progress.cancel();
-                startActivity(intent);
+                onBackPressed();
             }
         });
 
