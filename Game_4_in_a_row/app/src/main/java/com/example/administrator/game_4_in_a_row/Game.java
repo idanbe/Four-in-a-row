@@ -52,6 +52,7 @@ public class Game extends AppCompatActivity {
     private Random randomGenerator;
     private int randomCol;
     private Button back_button,reset_button;
+    private AiMove Ai;
     DAL dal ;
 
     @Override
@@ -108,6 +109,7 @@ public class Game extends AppCompatActivity {
 
         if(gameType.equals(ONE_PLAYER))
         {
+            Ai = new AiMove();
             player2_name=COMPUTER;
             PLAYER2_turn=COMPUTER + TURN;
         }
@@ -217,16 +219,8 @@ public class Game extends AppCompatActivity {
 
     private void comp_move() //computer move
     {
-        randomGenerator = new Random();
-
-        do
-        {
-            randomCol = randomGenerator.nextInt(Six);
-        }
-        while (check_ifCol_full(randomCol));
-        insert_coin(turn, randomCol);
-    //    SystemClock.sleep(500);
-    //    change_turn();
+        Ai.setCell_arr(cell_arr);
+        insert_coin(turn, Ai.Ai_move());
         return;
     }
 
