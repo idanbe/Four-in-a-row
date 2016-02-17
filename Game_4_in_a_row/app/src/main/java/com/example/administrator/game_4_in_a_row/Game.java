@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -11,6 +12,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.os.Vibrator;
+
+import java.util.Random;
+
 
 public class Game extends AppCompatActivity {
 
@@ -47,6 +51,8 @@ public class Game extends AppCompatActivity {
     static final String p2_key ="key2";
     static final String gameType_key ="gameType_key";
     private String gameType;
+    private Random randomGenerator;
+    private int randomCol;
     private Button back_button,reset_button;
     private AiMove Ai;
     DAL dal ;
