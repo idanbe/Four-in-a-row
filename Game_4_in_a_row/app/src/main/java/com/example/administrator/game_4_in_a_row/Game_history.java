@@ -40,13 +40,6 @@ public class Game_history extends AppCompatActivity {
         TextView percent_win;
     }
 
-    public Game_history(DAL dal){
-        this.dal = dal;
-    }
-
-    public Game_history(){
-
-    }
     // add row
     public void addToHistoryTable(String name , int win , int loss , int draws , double percent ){
 
