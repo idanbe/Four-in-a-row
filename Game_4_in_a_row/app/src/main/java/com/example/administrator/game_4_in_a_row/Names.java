@@ -146,10 +146,9 @@ public class Names extends AppCompatActivity {
             public void onClick(View v) {
                 progress = ProgressDialog.show(get_Context(), "Pleas wait", "Load Game..", true);
                 progress.show();
-                //intent = new Intent(v.getContext(), MainActivity.class);
-                onBackPressed();
+                intent = new Intent(v.getContext(), MainActivity.class);
                 progress.cancel();
-                //startActivity(intent);
+                startActivity(intent);
             }
         });
 

@@ -22,7 +22,7 @@ public class Settings extends AppCompatActivity {
     private final String SETTING_KEY_SOUND = "SETTING_KEY_SOUND";
     private final String SETTING_KEY_VIBRITON = "SETTING_KEY_VIBRITON";
 
-    private final String SHARED_PREFERENCES_NAME = "ShardPreferences_setting";
+    private static final String SHARED_PREFERENCES_NAME = "ShardPreferences_setting";
 
     private final String ON = "on";
     private final String OFF = "off";
@@ -35,6 +35,8 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+
 
         sound = (Button) findViewById(R.id.button_sound);
         vibriton = (Button) findViewById(R.id.button_Vibration);
