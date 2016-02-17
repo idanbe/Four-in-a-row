@@ -31,7 +31,6 @@ public class Settings extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +42,23 @@ public class Settings extends AppCompatActivity {
         sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
 
-        if(sharedpreferences.getString(SETTING_KEY_SOUND , null).equals(OFF)){
+
+        if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null){
+            sound.setText(SOUND_ON);
+            editor.putString(SETTING_KEY_SOUND, ON);
+            editor.commit();
+        }
+        else if(sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(OFF)){
             sound.setText(SOUND_OFF);
         }
 
-        if(sharedpreferences.getString(SETTING_KEY_VIBRITON , null).equals(OFF)){
+
+        if(sharedpreferences.getString(SETTING_KEY_VIBRITON , null) == null){
+            vibriton.setText(Vibrtion_ON);
+            editor.putString(SETTING_KEY_VIBRITON, ON);
+            editor.commit();
+        }
+        else if(sharedpreferences.getString(SETTING_KEY_VIBRITON , null).equals(OFF)){
             vibriton.setText(Vibrtion_OFF);
         }
 
@@ -56,7 +67,7 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String s = sharedpreferences.getString(SETTING_KEY_SOUND , null);
-                if( s == null || s.equals(ON) ) {
+                if( s.equals(ON) ) {
                     sound.setText(SOUND_OFF);
                     editor.putString(SETTING_KEY_SOUND, OFF);
                 }
@@ -74,7 +85,7 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String s = sharedpreferences.getString(SETTING_KEY_VIBRITON , null);
-                if( s == null || s.equals(ON) ) {
+                if( s.equals(ON) ) {
                     vibriton.setText(Vibrtion_OFF);
                     editor.putString(SETTING_KEY_VIBRITON , OFF);
                 }
