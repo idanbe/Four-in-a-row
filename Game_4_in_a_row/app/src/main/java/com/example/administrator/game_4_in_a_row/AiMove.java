@@ -29,95 +29,108 @@ public class AiMove
     public int Ai_move() //computer move
     {
 
-        if(find_Ai_threeSequence()!=NotFind)
+        check=find_Ai_threeSequence();
+        if(check!=NotFind)
         {
-            return find_Ai_threeSequence();
+            return check;
         }
-        if(find_rival_threeSequence()!=NotFind)
+        check=find_rival_threeSequence();
+        if(check!=NotFind)
         {
-            return find_rival_threeSequence();
+            return check;
         }
-        if(find_Ai_twoSequence() !=NotFind)
+        check=find_Ai_twoSequence();
+        if(check !=NotFind)
         {
-            return find_Ai_twoSequence();
+            return check;
         }
-
-        if(find_rival_twoSequence() !=NotFind)
+        check=find_rival_twoSequence();
+        if(check !=NotFind)
         {
-            return find_rival_twoSequence();
+            return check;
         }
-        if(find_Ai_OneCell()!=NotFind)
+        check=find_Ai_OneCell();
+        if(check!=NotFind)
         {
-            return find_Ai_OneCell();
+            return check;
         }
         return getRandomCol();
 
     }
 
-    private int find_Ai_OneCell()
-    {
-        return NotFind;
-    }
 
 
 
     private int find_Ai_threeSequence()
     {
-
-
-
-
-
-        return NotFind;
+        check=find_Sequence(PLAYER1,Three);
+        return check;
     }
 
     private int find_Ai_twoSequence()
     {
-
-        return NotFind;
+        check=find_Sequence(PLAYER1,TWO);
+        return check;
     }
 
 
+    private int find_Ai_OneCell()
+    {   check=find_Sequence(PLAYER1,ONE);
+        return check;
+    }
 
 
     private int find_rival_threeSequence()
     {
-        return NotFind;
+        check=find_Sequence(PLAYER2,Three);
+        return check;
+
     }
     private int find_rival_twoSequence()
     {
-        return NotFind;
+        check=find_Sequence(PLAYER2,TWO);
+        return check;
+
     }
 
 
-
-    private int find_Sequence(String player,int Sequence)
+    private int find_Sequence(String player,int seq)
     {
         for(i=Zero;i<Six;i++) {
-            for (j = Zero; j < Seven; j++) {
-                if ((check=check_up(i, j, player))!=NotFind) {
+            for (j = Zero; j < Seven; j++)
+            {
+                check=check_up(i, j, player,seq);
+                if (check!=NotFind)
+                {
                     return check ;
                 }
-                if ((check=check_Down(i, j, player))!=NotFind)
+                check=check_Down(i, j, player,seq);
+                if (check!=NotFind)
                 {
                     return check;
                 }
-                if ((check=check_Right(i, j, player))!=NotFind) {
+                check=check_Right(i, j, player,seq);
+                if (check!=NotFind) {
                     return check;
                 }
-                if ((check=check_Left(i, j, player))!=NotFind) {
+                check=check_Left(i, j, player,seq);
+                if (check!=NotFind) {
                     return check;
                 }
-                if ((check=check_Diagonal_up_Right(i, j, player))!=NotFind) {
+                check=check_Diagonal_up_Right(i, j, player,seq);
+                if (check!=NotFind) {
                     return check;
                 }
-                if ((check=check_Diagonal_up_Left(i, j, player))!=NotFind) {
+                check=check_Diagonal_up_Left(i, j, player,seq);
+                if (check!=NotFind) {
                     return check;
                 }
-                if ((check=check_Diagonal_Down_Right(i, j, player))!=NotFind) {
+                check=check_Diagonal_Down_Right(i, j, player,seq);
+                if (check!=NotFind) {
                     return check;
                 }
-                if ((check=check_Diagonal_Down_Left(i, j, player))!=NotFind) {
+                check=check_Diagonal_Down_Left(i, j, player,seq);
+                if ((check)!=NotFind) {
                     return check;
                 }
             }
@@ -197,111 +210,311 @@ public class AiMove
 
 
 
-    private int check_up(int r,int c,String player)   // r=row , c=col
+    private int check_up(int r,int c,String player,int seq)   // r=row , c=col
     {
-
         if(r>TWO)
         {
-            if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c].equals(player))
-                    &&(cell_arr[r-TWO][c].equals(player))&&(cell_arr[r-Three][c].equals(player)))
+            if(seq==Three)
             {
-                //return true; //find 4 cell up of player
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c].equals(player))
+                        &&(cell_arr[r-TWO][c].equals(player))&&(cell_arr[r-Three][c].equals(EMPTY)))
+                {
+                    return c;
+                }
+            }
+            if(seq==TWO)
+            {
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c].equals(player))
+                        &&(cell_arr[r-TWO][c].equals(EMPTY))&&(cell_arr[r-Three][c].equals(EMPTY)))
+                {
+                    return c;
+                }
+            }
+            if(seq==ONE)
+            {
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c].equals(EMPTY))
+                        &&(cell_arr[r-TWO][c].equals(EMPTY))&&(cell_arr[r-Three][c].equals(EMPTY)))
+                {
+                    return c;
+                }
             }
         }
         return NotFind;
     }
 
 
-    private int check_Down(int r,int c,String player)   // r=row , c=col
+    private int check_Down(int r,int c,String player,int seq)   // r=row , c=col
     {
-        if(r<Three)
+        if(seq==Three)
         {
-            if((cell_arr[r][c].equals(player))&&(cell_arr[r+ONE][c].equals(player))
-                    &&(cell_arr[r+TWO][c].equals(player))&&(cell_arr[r+Three][c].equals(player)))
-            {
-                //return true; //find 4 cell Down of player
-            }
+
         }
+        if(seq==TWO)
+        {
+
+        }
+        if(seq==ONE)
+        {
+
+        }
+
         return NotFind;
     }
 
 
-    private int check_Right(int r,int c,String player)   // r=row , c=col
+    private int check_Right(int r,int c,String player,int seq)   // r=row , c=col
     {
         if(c<Four)
         {
-            if((cell_arr[r][c].equals(player))&&(cell_arr[r][c+ONE].equals(player))
-                    &&(cell_arr[r][c+TWO].equals(player))&&(cell_arr[r][c+Three].equals(player)))
+            if(seq==Three)
             {
-                //return true; //find 4 cell Right of player
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r][c+ONE].equals(player))
+                        &&(cell_arr[r][c+TWO].equals(player))&&(cell_arr[r][c+Three].equals(EMPTY)))
+                {
+                    if((r<Five)&&((cell_arr[r+ONE][c+Three].equals(EMPTY))))
+                    {
+                        return NotFind;
+                    }
+                    return c+Three ;
+                }
+            }
+            if(seq==TWO)
+            {
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r][c+ONE].equals(player))
+                        &&(cell_arr[r][c+TWO].equals(EMPTY))&&(cell_arr[r][c+Three].equals(EMPTY)))
+                {
+                    if((r<Five)&&((cell_arr[r+ONE][c+TWO].equals(EMPTY))))
+                    {
+                        return NotFind;
+                    }
+                    return c+TWO ;
+                }
+            }
+            if(seq==ONE)
+            {
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r][c+ONE].equals(EMPTY))
+                        &&(cell_arr[r][c+TWO].equals(EMPTY))&&(cell_arr[r][c+Three].equals(EMPTY)))
+                {
+                    if((r<Five)&&((cell_arr[r+ONE][c+ONE].equals(EMPTY))))
+                    {
+                        return NotFind;
+                    }
+                    return c+ONE ;
+                }
             }
         }
         return NotFind;
     }
 
 
-    private int check_Left(int r,int c,String player)   // r=row , c=col
+    private int check_Left(int r,int c,String player,int seq)   // r=row , c=col
     {
+        Log.d("check4343","leftcheck");
         if(c>TWO)
         {
-            if((cell_arr[r][c].equals(player))&&(cell_arr[r][c-ONE].equals(player))
-                    &&(cell_arr[r][c-TWO].equals(player))&&(cell_arr[r][c-Three].equals(player)))
-            {
-                //return true; //find 4 cell Left of player
+                if (seq == Three) {
+
+                    if ((cell_arr[r][c].equals(player)) && (cell_arr[r][c - ONE].equals(player))
+                            && (cell_arr[r][c - TWO].equals(player)) && (cell_arr[r][c - Three].equals(EMPTY))) {
+                        if ((r < Five) && ((cell_arr[r + ONE][c - Three].equals(EMPTY)))) {
+                            return NotFind;
+                        }
+                        return c - Three;
+                    }
+
+                    if (seq == TWO) {
+                        if ((cell_arr[r][c].equals(player)) && (cell_arr[r][c - ONE].equals(player))
+                                && (cell_arr[r][c - TWO].equals(EMPTY)) && (cell_arr[r][c - Three].equals(EMPTY))) {
+                            if ((r < Five) && ((cell_arr[r + ONE][c - TWO].equals(EMPTY)))) {
+                                return NotFind;
+                            }
+                            return c - TWO;
+                        }
+                    }
+                    if (seq == ONE) {
+                        if ((cell_arr[r][c].equals(player)) && (cell_arr[r][c - ONE].equals(EMPTY))
+                                && (cell_arr[r][c - TWO].equals(EMPTY)) && (cell_arr[r][c - Three].equals(EMPTY))) {
+                            if ((r < Five) && ((cell_arr[r + ONE][c - ONE].equals(EMPTY)))) {
+                                return NotFind;
+                            }
+                            return c - ONE;
+                        }
+                    }
+                }
             }
-        }
         return NotFind;
     }
 
-    private int check_Diagonal_up_Right(int r,int c,String player)   // r=row , c=col
+    private int check_Diagonal_up_Right(int r,int c,String player,int seq)   // r=row , c=col
     {
-        if((r>TWO)&&(c<Four))
-        {
-            if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c+ONE].equals(player))
-                    &&(cell_arr[r-TWO][c+TWO].equals(player))&&(cell_arr[r-Three][c+Three].equals(player)))
-            {
-               // return true; //find 4 cell Diagonal up Right of player
-            }
-        }
+        if((r>TWO)&&(c<Four)) {
+                if (seq == Three) {
+                    if ((cell_arr[r][c].equals(player)) && (cell_arr[r - ONE][c + ONE].equals(player))
+                            && (cell_arr[r - TWO][c + TWO].equals(player)) && (cell_arr[r - Three][c + Three].equals(EMPTY))) {
+                        {
+                           if(cell_arr[r-TWO][c+Three].equals(EMPTY))
+                           {
+                               return NotFind;
+                           }
+                            return c+ Three;
+                        }
+                    }
+                }
+                if (seq == TWO)
+                {
+                    if ((cell_arr[r][c].equals(player)) && (cell_arr[r - ONE][c + ONE].equals(player))
+                            && (cell_arr[r - TWO][c + TWO].equals(EMPTY)) && (cell_arr[r - Three][c + Three].equals(EMPTY)))
+
+                        {
+                            if(cell_arr[r-ONE][c+TWO].equals(EMPTY))
+                            {
+                                return NotFind;
+                            }
+                            return c + TWO;
+                        }
+                }
+                if (seq == ONE)
+                {
+                    if ((cell_arr[r][c].equals(player)) && (cell_arr[r - ONE][c + ONE].equals(EMPTY))
+                            && (cell_arr[r - TWO][c + TWO].equals(EMPTY)) && (cell_arr[r - Three][c + Three].equals(EMPTY))) {
+                        if(cell_arr[r][c+ONE].equals(EMPTY))
+                        {
+                            return NotFind;
+                        }
+                        return c+ONE;
+                        }
+                    }
+                }
         return NotFind;
     }
 
-    private int check_Diagonal_up_Left(int r,int c,String player)   // r=row , c=col
+    private int check_Diagonal_up_Left(int r,int c,String player,int seq)   // r=row , c=col
     {
         if((r>TWO)&&(c>TWO))
-        {   if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c-ONE].equals(player))
-                &&(cell_arr[r-TWO][c-TWO].equals(player))&&(cell_arr[r-Three][c-Three].equals(player)))
+        {
+            if(seq==Three)
             {
-            //return true; //find 4 cell Diagonal up Left of player
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c-ONE].equals(player))
+                        &&(cell_arr[r-TWO][c-TWO].equals(player))&&(cell_arr[r-Three][c-Three].equals(EMPTY)))
+                {
+                    if(cell_arr[r-TWO][c-Three].equals(EMPTY))
+                    {
+                        return NotFind;
+                    }
+                    return c-Three;
+                }
+            }
+            if(seq==TWO)
+            {
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c-ONE].equals(player))
+                        &&(cell_arr[r-TWO][c-TWO].equals(EMPTY))&&(cell_arr[r-Three][c-Three].equals(EMPTY)))
+                {
+                    if(cell_arr[r-ONE][c-TWO].equals(EMPTY))
+                    {
+                        return NotFind;
+                    }
+                    return c-TWO;
+                }
+            }
+            if(seq==ONE)
+            {
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c-ONE].equals(EMPTY))
+                        &&(cell_arr[r-TWO][c-TWO].equals(EMPTY))&&(cell_arr[r-Three][c-Three].equals(EMPTY)))
+                {
+                    if(cell_arr[r][c-ONE].equals(EMPTY))
+                    {
+                        return NotFind;
+                    }
+                    return c -ONE;
+                }
             }
         }
         return NotFind;
     }
 
 
-    private int check_Diagonal_Down_Right(int r,int c,String player)   // r=row , c=col
+    private int check_Diagonal_Down_Right(int r,int c,String player,int seq)   // r=row , c=col
     {
         if((r<Three)&&(c<Four))
         {
-            if((cell_arr[r][c].equals(player))&&(cell_arr[r+ONE][c+ONE].equals(player))
-                    &&(cell_arr[r+TWO][c+TWO].equals(player))&&(cell_arr[r+Three][c+Three].equals(player)))
+            if (seq == Three)
             {
-                //return true; //find 4 cell Diagonal Down Right of player
+                    if ((cell_arr[r][c].equals(player)) && (cell_arr[r + ONE][c + ONE].equals(player))
+                            && (cell_arr[r + TWO][c + TWO].equals(player)) && (cell_arr[r + Three][c + Three].equals(EMPTY))) {
+                        if ((r < TWO) && (cell_arr[r + Four][c + Three].equals(EMPTY))) {
+                            return NotFind;
+                        }
+                        return c + Three;
+                    }
             }
+            if (seq == TWO) {
+                    if ((cell_arr[r][c].equals(player)) && (cell_arr[r + ONE][c + ONE].equals(player))
+                            && (cell_arr[r + TWO][c + TWO].equals(EMPTY)) && (cell_arr[r + Three][c + Three].equals(EMPTY))) {
+
+                        if ((r < TWO) && (cell_arr[r + Three][c + TWO].equals(EMPTY)))
+                        {
+                            return NotFind;
+                        }
+                        return c + TWO;
+                    }
+            }
+            if (seq == ONE) {
+
+                    if ((cell_arr[r][c].equals(player)) && (cell_arr[r + ONE][c + ONE].equals(EMPTY))
+                            && (cell_arr[r + TWO][c + TWO].equals(EMPTY)) && (cell_arr[r + Three][c + Three].equals(EMPTY)))
+                    {
+                        if ((r < TWO) && (cell_arr[r + TWO][c + ONE].equals(EMPTY)))
+                        {
+                            return NotFind;
+                        }
+                        return c + ONE;
+                    }
+                }
         }
         return NotFind;
     }
 
-    private int check_Diagonal_Down_Left(int r,int c,String player)   // r=row , c=col
+    private int check_Diagonal_Down_Left(int r,int c,String player,int seq)   // r=row , c=col
     {
         if((r<Three)&&(c>TWO))
         {
-            if((cell_arr[r][c].equals(player))&&(cell_arr[r+ONE][c-ONE].equals(player))
-                    &&(cell_arr[r+TWO][c-TWO].equals(player))&&(cell_arr[r+Three][c-Three].equals(player)))
+            if(seq==Three)
             {
-
-                //return true; //find 4 cell Diagonal Down Left of player
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r+ONE][c-ONE].equals(player))
+                        &&(cell_arr[r+TWO][c-TWO].equals(player))&&(cell_arr[r+Three][c-Three].equals(EMPTY)))
+                {
+                    if ((r < TWO) && (cell_arr[r + Four][c - Three].equals(EMPTY)))
+                    {
+                        return NotFind;
+                    }
+                    return c - Three;
+                }
             }
+            if(seq==TWO)
+            {
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r+ONE][c-ONE].equals(player))
+                        &&(cell_arr[r+TWO][c-TWO].equals(EMPTY))&&(cell_arr[r+Three][c-Three].equals(EMPTY)))
+                {
+                    if ((r < TWO) && (cell_arr[r + Three][c - TWO].equals(EMPTY)))
+                    {
+                        return NotFind;
+                    }
+                    return c - TWO;
+                }
+            }
+            if(seq==ONE)
+            {
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r+ONE][c-ONE].equals(EMPTY))
+                        &&(cell_arr[r+TWO][c-TWO].equals(EMPTY))&&(cell_arr[r+Three][c-Three].equals(EMPTY)))
+                {
+                    if ((r < TWO) && (cell_arr[r + TWO][c - ONE].equals(EMPTY)))
+                    {
+                        return NotFind;
+                    }
+                    return c - ONE;
+                }
+            }
+
         }
         return NotFind;
     }
