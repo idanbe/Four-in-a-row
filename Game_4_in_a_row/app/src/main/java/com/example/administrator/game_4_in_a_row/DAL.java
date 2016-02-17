@@ -20,7 +20,9 @@ public class DAL {
 
 
     private SQLiteOpenHelper helper;
-    private final int init = 0;
+    private final int INIT = 0;
+    private final String PERCENT_FORMAT = "#.##";
+    private final String ERROR = "error";
 
     // object like struct
     private static class WinnersHolder {
@@ -44,10 +46,10 @@ public class DAL {
 
             // add to table
             values.put(Tables.winnersTable.NAME, name);
-            values.put(Tables.winnersTable.WINS, 0);
-            values.put(Tables.winnersTable.LOSSES, 0);
-            values.put(Tables.winnersTable.STAND_OFF, 0);
-            values.put(Tables.winnersTable.PERCENT_OF_WINS , 0);
+            values.put(Tables.winnersTable.WINS, INIT);
+            values.put(Tables.winnersTable.LOSSES, INIT);
+            values.put(Tables.winnersTable.STAND_OFF, INIT);
+            values.put(Tables.winnersTable.PERCENT_OF_WINS , INIT);
 
             //save the values
             db.insert(Tables.winnersTable.TABLE_NAME, null, values);
@@ -94,7 +96,7 @@ public class DAL {
         avg = (info.win / temp) * 100 ;
 
         // double format
-        DecimalFormat twoDForm = new DecimalFormat("#.##");
+        DecimalFormat twoDForm = new DecimalFormat(PERCENT_FORMAT);
         values.put(Tables.winnersTable.PERCENT_OF_WINS , Double.valueOf(twoDForm.format(avg)) );
 
         // Which row to update, based on the ID
@@ -201,7 +203,7 @@ public class DAL {
                 }
                 //save in array
                 catch (Exception e){
-                    row.setName("error");
+                    row.setName(ERROR);
                 }
 
                 entryTimeColumnIndex = c.getColumnIndex(Tables.winnersTable.WINS);

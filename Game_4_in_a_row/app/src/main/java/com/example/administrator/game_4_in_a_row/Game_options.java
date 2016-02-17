@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
+
 
 public class Game_options extends AppCompatActivity {
 
@@ -19,9 +19,6 @@ public class Game_options extends AppCompatActivity {
     private RadioButton r1,r2,radioButton_select;
     private int selectedId;
     private RadioGroup radioType;
-    static final String gameType_key ="key3";
-    private String str;
-
 
 
 

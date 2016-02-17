@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
 
+    // check from sharedP the sound and vibrator
     private void checkSetting(){
         sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
