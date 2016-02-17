@@ -34,11 +34,8 @@ public class DAL {
     }
 
     // add row to DB
-    public void addUser(String name , double percent){
+    public void addUser(String name){
         SQLiteDatabase db = helper.getWritableDatabase();
-
-
-
 
         if ( ! thereIsRow(name))
         {
@@ -50,7 +47,7 @@ public class DAL {
             values.put(Tables.winnersTable.WINS, 0);
             values.put(Tables.winnersTable.LOSSES, 0);
             values.put(Tables.winnersTable.STAND_OFF, 0);
-            values.put(Tables.winnersTable.PERCENT_OF_WINS , percent);
+            values.put(Tables.winnersTable.PERCENT_OF_WINS , 0);
 
             //save the values
             db.insert(Tables.winnersTable.TABLE_NAME, null, values);
@@ -108,7 +105,7 @@ public class DAL {
 
 
     // get number of wins , loss , standoff according to user name
-    public WinnersHolder getPrevResult(String name){
+    private WinnersHolder getPrevResult(String name){
 
         WinnersHolder info = new WinnersHolder() ;
 
@@ -174,7 +171,7 @@ public class DAL {
     }
 
     // TODO : remove this function  , only for test
-    public Cursor getAllDBCursor(){
+    private Cursor getAllDBCursor(){
         SQLiteDatabase db = helper.getWritableDatabase();
         // get all DB
         Cursor c = db.rawQuery("SELECT * FROM " + Tables.winnersTable.TABLE_NAME, null);

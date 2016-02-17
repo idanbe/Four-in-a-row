@@ -2,22 +2,15 @@ package com.example.administrator.game_4_in_a_row;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.os.Vibrator;
-import android.view.ViewGroup.LayoutParams;
 
 import java.util.Random;
 
@@ -48,7 +41,7 @@ public class Game extends AppCompatActivity {
     private static MyView myView ;
     private boolean Game_on;
     private View view ;
-    private float witdh_cell;
+    private float width_cell;
     private Vibrator/*btoh tahat shel avirahm*/ v;
     private Bundle bundle;
     static final String p1_key ="key1";
@@ -56,14 +49,39 @@ public class Game extends AppCompatActivity {
     static final String gameType_key ="gameType_key";
     private String gameType;
     private Random randomGenerator;
-    private int randomcol;
+    private int randomCol;
     private Button back_button,reset_button;
+    DAL dal ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        dal = new DAL(this);
+//****************************************************************************************//
+
+        // function map for idan !!!
+        // all what you need is to put the correct function in the correct place .
+
+
+        // create user
+        dal.addUser("user name");
+
+        // add one **WIN** to user according to user name
+        dal.upDateWinOrLoss("user name", true, false);
+
+        // // add one **LOSS** to user according to user name
+        dal.upDateWinOrLoss("user name" , false , false);
+
+        // add one **DRAW** to user according to user name
+        dal.upDateWinOrLoss("user name" , false , true);
+
+        // remove all DB  and all history layout !!
+        dal.removeAll();
+
+        // remove user name from DB and all his statistics
+        dal.removeRow("user name");
 
 
         bundle = getIntent().getExtras();
@@ -136,35 +154,33 @@ public class Game extends AppCompatActivity {
 
 
 
-
-
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
                 if(Game_on )
                 {
-                    witdh_cell = v.getWidth() / Seven;
+                    width_cell = v.getWidth() / Seven;
 
-                    if (event.getX() < witdh_cell) {
+                    if (event.getX() < width_cell) {
                         insert_coin(turn, Zero);
                     }
-                    if ((event.getX() > (witdh_cell)) && (event.getX() < (witdh_cell * TWO))) {
+                    if ((event.getX() > (width_cell)) && (event.getX() < (width_cell * TWO))) {
                         insert_coin(turn, ONE);
                     }
-                    if ((event.getX() > (witdh_cell * TWO)) && (event.getX() < (witdh_cell * Three))) {
+                    if ((event.getX() > (width_cell * TWO)) && (event.getX() < (width_cell * Three))) {
                         insert_coin(turn, TWO);
                     }
-                    if ((event.getX() > (witdh_cell * Three)) && (event.getX() < (witdh_cell * Four))) {
+                    if ((event.getX() > (width_cell * Three)) && (event.getX() < (width_cell * Four))) {
                         insert_coin(turn, Three);
                     }
-                    if ((event.getX() > (witdh_cell * Four)) && (event.getX() < (witdh_cell * Five))) {
+                    if ((event.getX() > (width_cell * Four)) && (event.getX() < (width_cell * Five))) {
                         insert_coin(turn, Four);
                     }
-                    if ((event.getX() > (witdh_cell * Five)) && (event.getX() < (witdh_cell * Six))) {
+                    if ((event.getX() > (width_cell * Five)) && (event.getX() < (width_cell * Six))) {
                         insert_coin(turn, Five);
                     }
-                    if ((event.getX() > (witdh_cell * Six)) && (event.getX() < (witdh_cell * Seven))) {
+                    if ((event.getX() > (width_cell * Six)) && (event.getX() < (width_cell * Seven))) {
                         insert_coin(turn, Six);
                     }
                     myView.setCell_arr(cell_arr);
@@ -203,10 +219,10 @@ public class Game extends AppCompatActivity {
 
         do
         {
-            randomcol = randomGenerator.nextInt(Six);
+            randomCol = randomGenerator.nextInt(Six);
         }
-        while (check_ifCol_full(randomcol));
-        insert_coin(turn, randomcol);
+        while (check_ifCol_full(randomCol));
+        insert_coin(turn, randomCol);
     //    SystemClock.sleep(500);
     //    change_turn();
         return;

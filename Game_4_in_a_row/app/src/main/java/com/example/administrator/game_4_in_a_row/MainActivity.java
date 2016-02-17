@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -24,6 +26,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("@on", "onCreate");
+
+
+        DAL dal = new DAL(this);
+        dal.removeAll();
+
+        dal.addUser("a");
+        dal.upDateWinOrLoss("a", false, false);
+        dal.upDateWinOrLoss("a", false, false);
+        dal.upDateWinOrLoss("a" , false , false);
+        dal.upDateWinOrLoss("a" , false , false);
+        dal.upDateWinOrLoss("a" , false , false);
+        dal.upDateWinOrLoss("a" , false , false);
+        dal.upDateWinOrLoss("a" , false , false);
+        dal.upDateWinOrLoss("a" , false , true);
+        dal.upDateWinOrLoss("a" , false , true);
+        dal.upDateWinOrLoss("a" , false , true);
+        for(int i = 0 ; i < 200 ; i++){
+            dal.upDateWinOrLoss("a" , false , true);
+        }
+        dal.upDateWinOrLoss("a", true, false);
+        dal.removeRow("a");
+        dal.addUser("a");
+        dal.addUser("b");
+        dal.addUser("c");
+        dal.addUser("d");
+
+        dal.upDateWinOrLoss("b", true, false);
+        dal.upDateWinOrLoss("b", true, false);
+        dal.upDateWinOrLoss("a" , false , false);
+        dal.upDateWinOrLoss("a" , false , false);
+        dal.upDateWinOrLoss("c" , true , false);
+        dal.upDateWinOrLoss("c", false, false);
+        ArrayList<Row> rows = dal.getDb();
+        for(int i = 0 ; i < rows.size() ; i++){
+            Row row = rows.get(i);
+            System.out.println(row.getName() + " , " + row.getWin() + " , " + row.getLoss() + " , " + row.getDraws() + " , " + row.getPercent_Win() + "%" );
+        }
+
 
         single_button = (Button)findViewById(R.id.button_single);
         two_button = (Button)findViewById(R.id.button_two);

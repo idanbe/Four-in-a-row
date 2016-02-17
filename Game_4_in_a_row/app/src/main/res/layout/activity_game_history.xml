@@ -52,7 +52,7 @@
                 />
             <TextView
                 android:textAlignment="center"
-                android:text="Standoff"
+                android:text="Draws"
                 android:gravity="right"
                 android:padding="10dp"
                 />

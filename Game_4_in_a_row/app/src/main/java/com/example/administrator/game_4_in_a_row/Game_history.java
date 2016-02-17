@@ -85,7 +85,7 @@ public class Game_history extends AppCompatActivity {
         HistoryTable.addView(tableRow);
     }
 
-    // not complete !!!!!!!!!!!!!!!!!!!
+    // update
     public void upDateHistoryTable(String name , boolean ifwin , boolean ifStendOff){
         dal.upDateWinOrLoss(name, ifwin, ifStendOff);
         rowArrayList = dal.getDb();
@@ -123,34 +123,18 @@ public class Game_history extends AppCompatActivity {
 
         dal = new DAL(this);
 
-        // TODO : remove this line
-        dal.removeAll();
-
-        dal.addUser("1", 0);
-        dal.addUser("2" , 1);
-        dal.addUser("3" , 10);
-        dal.addUser("4" , 70);
-        dal.addUser("5" , 30);
-        dal.addUser("6" , 40);
-        dal.addUser("7" , 50);
-        dal.addUser("13" , 50);
-        dal.addUser("12" , 50);
-        dal.addUser("11" , 50);
-        dal.addUser("10" , 50);
-        /*dal.addUser("8");
-        dal.addUser("9");
-        dal.addUser("10");
-        dal.addUser("11");
-        dal.addUser("12");*/
-
         HistoryTable = (TableLayout)findViewById(R.id.history_table);
         HistoryTable.setStretchAllColumns(true);
 
-        rowArrayList = dal.getDb();
-        printArray();
 
+        // DB to array list
+        rowArrayList = dal.getDb();
+/*****************************************/
+        // print DB for test
+        printArray();
+/*****************************************/
+        // print to history table
         int j = 0 ;
-        // print in history table
         while ( !rowArrayList.isEmpty() && j < MAX_RESULT){
             int i = sortArrayList();
             Row row = rowArrayList.get(i) ;
@@ -158,41 +142,11 @@ public class Game_history extends AppCompatActivity {
             rowArrayList.remove(i);
             j++ ;
         }
-
+/*****************************************/
+         //print to test
         System.out.println("after !!");
         printArray();
-
-
-
-
-
-
-
-        /// TODO : test DB
-       /* dal.removeAll();
-        dal.addUser("aviram");
-        dal.upDateWinOrLoss("aviram", true, true);
-        System.out.println(dal.getDb().toString());
-        dal.upDateWinOrLoss("aviram", true, true);
-        System.out.println(dal.getDb().toString());
-        dal.upDateWinOrLoss("aviram", true, false);
-        System.out.println(dal.getDb().toString());
-        dal.upDateWinOrLoss("aviram", true, false);
-        System.out.println(dal.getDb().toString());
-        dal.upDateWinOrLoss("aviram", true, false);
-        System.out.println(dal.getDb().toString());
-        dal.upDateWinOrLoss("aviram", true, false);
-        System.out.println(dal.getDb().toString());
-        dal.upDateWinOrLoss("aviram", false, false);
-        System.out.println(dal.getDb().toString());
-        dal.upDateWinOrLoss("aviram", false, false);
-        System.out.println(dal.getDb().toString());
-        dal.addUser("alkobi");
-        System.out.println(dal.getDb().toString());
-        dal.removeRow("alkobi");
-        System.out.println(dal.getDb().toString());
-        dal.removeRow("aviram");
-        System.out.println(dal.getDb().toString());*/
+/********************************/
 
     }
 
