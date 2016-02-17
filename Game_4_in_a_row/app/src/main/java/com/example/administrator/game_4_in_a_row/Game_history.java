@@ -1,5 +1,8 @@
 package com.example.administrator.game_4_in_a_row;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +10,9 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -20,6 +26,7 @@ public class Game_history extends AppCompatActivity {
     private TableLayout HistoryTable ;
     private TableRow tableRow;
     private ArrayList<Row> rowArrayList ;
+    private Button resetTable ;
 
     private static final int MAX_RESULT = 10;
 
@@ -128,6 +135,7 @@ public class Game_history extends AppCompatActivity {
 
         dal = new DAL(this);
 
+        resetTable = (Button)findViewById(R.id.resetHistory);
         HistoryTable = (TableLayout)findViewById(R.id.history_table);
         HistoryTable.setStretchAllColumns(true);
 
@@ -152,6 +160,36 @@ public class Game_history extends AppCompatActivity {
         System.out.println("after !!");
         printArray();
 /********************************/
+
+        resetTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dal.removeAll();
+                AlertDialog alertDialog = new AlertDialog.Builder(Game_history.this).create();
+                alertDialog.setTitle("Remove All History :");
+                alertDialog.setMessage("All results will be deleted\n" + "Are you sure ?");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                View view1 = HistoryTable.getChildAt(0);
+                                View view2 = HistoryTable.getChildAt(1);
+                                HistoryTable.removeAllViews();
+                                HistoryTable.addView(view1);
+                                HistoryTable.addView(view2);
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+
+            }
+        });
 
     }
 

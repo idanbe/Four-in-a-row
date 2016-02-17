@@ -34,6 +34,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ1234567890.+-@',!?;#$%^()"
         android:id="@+id/player2_text"
         android:textSize="40dp"
         android:hint="player2"
@@ -44,6 +45,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ1234567890.+-@',!?;#$%^()"
         android:id="@+id/player1_textv"
         android:textSize="40dp"
         android:hint="player1"
@@ -51,5 +53,6 @@
         android:layout_above="@+id/player2_text"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="66dp" />
+
 
 </RelativeLayout>

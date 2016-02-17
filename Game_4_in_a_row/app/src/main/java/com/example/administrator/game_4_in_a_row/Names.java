@@ -81,7 +81,7 @@ public class Names extends AppCompatActivity {
                 alertDialog = new AlertDialog.Builder(Names.this).create();
                 if (p1.getText().toString().isEmpty()) {
                     alertDialog.setTitle("Player Name is :");
-                    alertDialog.setMessage("player 1");
+                    alertDialog.setMessage(onePlayer_key);
                 }
                 else {
                     alertDialog.setTitle("Your Player Name is :");
