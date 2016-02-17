@@ -29,35 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         DAL dal = new DAL(this);
-        dal.removeAll();
 
-        dal.addUser("a");
-        dal.upDateWinOrLoss("a", false, false);
-        dal.upDateWinOrLoss("a", false, false);
-        dal.upDateWinOrLoss("a" , false , false);
-        dal.upDateWinOrLoss("a" , false , false);
-        dal.upDateWinOrLoss("a" , false , false);
-        dal.upDateWinOrLoss("a" , false , false);
-        dal.upDateWinOrLoss("a" , false , false);
-        dal.upDateWinOrLoss("a" , false , true);
-        dal.upDateWinOrLoss("a" , false , true);
-        dal.upDateWinOrLoss("a" , false , true);
-        for(int i = 0 ; i < 200 ; i++){
-            dal.upDateWinOrLoss("a" , false , true);
-        }
-        dal.upDateWinOrLoss("a", true, false);
-        dal.removeRow("a");
-        dal.addUser("a");
-        dal.addUser("b");
-        dal.addUser("c");
-        dal.addUser("d");
-
-        dal.upDateWinOrLoss("b", true, false);
-        dal.upDateWinOrLoss("b", true, false);
-        dal.upDateWinOrLoss("a" , false , false);
-        dal.upDateWinOrLoss("a" , false , false);
-        dal.upDateWinOrLoss("c" , true , false);
-        dal.upDateWinOrLoss("c", false, false);
         ArrayList<Row> rows = dal.getDb();
         for(int i = 0 ; i < rows.size() ; i++){
             Row row = rows.get(i);

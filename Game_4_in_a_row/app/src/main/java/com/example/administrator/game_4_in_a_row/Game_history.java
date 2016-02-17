@@ -106,11 +106,16 @@ public class Game_history extends AppCompatActivity {
 
     public int sortArrayList(){
         int indexOfMakValue = 0 ;
-        double max = 0 ;
+        double maxPercent = 0 ;
+        int maxNumberOfWin = 0;
         for(int i = 0 ; i < rowArrayList.size() ; i++){
-            if(rowArrayList.get(i).getPercent_Win() > max){
+            if(rowArrayList.get(i).getPercent_Win() > maxPercent){
                 indexOfMakValue = i ;
-                max = rowArrayList.get(i).getPercent_Win() ;
+                maxPercent = rowArrayList.get(i).getPercent_Win() ;
+                maxNumberOfWin = rowArrayList.get(i).getWin();
+            }
+            else if(rowArrayList.get(i).getPercent_Win() == maxPercent && rowArrayList.get(i).getWin() > maxNumberOfWin){
+                indexOfMakValue = i;
             }
         }
         return indexOfMakValue;

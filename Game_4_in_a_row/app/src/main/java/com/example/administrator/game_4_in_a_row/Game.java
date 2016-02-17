@@ -61,6 +61,7 @@ public class Game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         dal = new DAL(this);
+
 //****************************************************************************************//
 
         // function map for idan !!!
@@ -68,8 +69,8 @@ public class Game extends AppCompatActivity {
         // function map for Avirahm gay !!!
 
 
-        // create user
-        dal.addUser("user name");
+       // create user
+       /* dal.addUser("user name");
 
         // add one **WIN** to user according to user name
         dal.upDateWinOrLoss("user name", true, false);
@@ -81,10 +82,10 @@ public class Game extends AppCompatActivity {
         dal.upDateWinOrLoss("user name" , false , true);
 
         // remove all DB  and all history layout !!
-        dal.removeAll();
+        //dal.removeAll();
 
         // remove user name from DB and all his statistics
-        dal.removeRow("user name");
+        //dal.removeRow("user name");*/
 
 
         bundle = getIntent().getExtras();
@@ -140,6 +141,7 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(v.getContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
         });
@@ -265,6 +267,8 @@ public class Game extends AppCompatActivity {
         //todo aviram adiot here is draw
         if(check_board_full())//Draw
         {
+            dal.addUser(player1_name);
+            dal.addUser(player2_name);
             dal.upDateWinOrLoss(player1_name , false , true); //set draw
             if(gameType.equals(TWO_PLAYER))
             {
@@ -300,9 +304,10 @@ public class Game extends AppCompatActivity {
     //todo aviram adiot here is WIN
         if(check_win(player))//win
         {
+            dal.addUser(player1_name);
+            dal.addUser(player2_name);
             if(player.equals(PLAYER1_turn)) //player 1 win
             {
-                dal.addUser(player1_name);
                 dal.upDateWinOrLoss(player1_name, true, false); //add win
                 if(gameType.equals(TWO_PLAYER)) {
                     dal.upDateWinOrLoss(player2_name, false, false); //add loss
@@ -310,7 +315,6 @@ public class Game extends AppCompatActivity {
             }
             else //player 2 win
             {
-                dal.addUser(player2_name);
                 dal.upDateWinOrLoss(player2_name, true, false); //add win
                 if(gameType.equals(TWO_PLAYER)) {
                     dal.upDateWinOrLoss(player1_name, false, false); //add loss
