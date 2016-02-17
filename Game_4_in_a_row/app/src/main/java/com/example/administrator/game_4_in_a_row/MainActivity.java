@@ -1,6 +1,7 @@
 package com.example.administrator.game_4_in_a_row;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
     static final String twoPlayer_key ="player2";
     static final String ONE_PLAYER ="one_player";
     static final String TWO_PLAYER ="two_player";
+    private static final String MUSIC_STATUS = "get_status_music";
+    private MediaPlayer music;
+    private static Boolean MusicOff = true ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +31,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d("@on", "onCreate");
 
+        music = MediaPlayer.create(MainActivity.this, R.raw.to_smuck);
+        music.setLooping(true);
 
+
+        if(MusicOff) {
+            music.start();
+            MusicOff = false;
+        }
         DAL dal = new DAL(this);
 
         ArrayList<Row> rows = dal.getDb();
@@ -51,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("debug","single player");
                 intent = new Intent(v.getContext(), Names.class);
                 intent.putExtra(onePlayer_key,ONE_PLAYER.toString());
+                intent.putExtra( MUSIC_STATUS , music.getCurrentPosition() );
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -63,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("debug","two players");
                 intent = new Intent(v.getContext(), Names.class);
                 intent.putExtra(twoPlayer_key,TWO_PLAYER.toString());
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
         });
@@ -108,10 +120,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("@on","onResume");
+        music.start();
+        Log.d("@on", "onResume");
     }
 
 
@@ -126,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        music.pause();
         Log.d("@on", "onPause");
     }
 

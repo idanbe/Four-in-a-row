@@ -656,4 +656,10 @@ public class Game extends AppCompatActivity {
         return false;
     }
 
+    // cancel back button
+    @Override
+    public void onBackPressed() {
+    }
+
+
 }

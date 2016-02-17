@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.preference.DialogPreference;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +32,9 @@ public class Names extends AppCompatActivity {
     private Context context;
     private ProgressDialog progress ;
     private AlertDialog alertDialog;
+    private static final String MUSIC_STATUS = "get_status_music";
+    private MediaPlayer music;
+
 
     public Context get_Context(){
         return context;
@@ -40,6 +44,19 @@ public class Names extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_names);
+
+        bundle = getIntent().getExtras();
+
+        /*if(bundle != null) {
+            int b = bundle.getInt(MUSIC_STATUS);
+            System.out.println("b = " + b);
+            music = MediaPlayer.create(Names.this, R.raw.to_smuck);
+            music.seekTo(bundle.getInt(MUSIC_STATUS));
+            music.start();
+
+        }*/
+
+
 
         context = this;
         dal = new DAL(this);
@@ -53,7 +70,7 @@ public class Names extends AppCompatActivity {
 
         // get game type
 
-        bundle = getIntent().getExtras();
+
 
         if (bundle != null)
         {
@@ -67,6 +84,7 @@ public class Names extends AppCompatActivity {
                 non_player_name =bundle.getString(twoPlayer_key).toString();
             }
         }
+
 
 
 
@@ -128,15 +146,16 @@ public class Names extends AppCompatActivity {
             public void onClick(View v) {
                 progress = ProgressDialog.show(get_Context(), "Pleas wait", "Load Game..", true);
                 progress.show();
-                intent = new Intent(v.getContext(), MainActivity.class);
+                //intent = new Intent(v.getContext(), MainActivity.class);
+                onBackPressed();
                 progress.cancel();
-                startActivity(intent);
+                //startActivity(intent);
             }
         });
 
 
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
