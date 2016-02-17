@@ -16,7 +16,8 @@ public class AiMove
     private int i,j;
     private Random randomGenerator;
     private int randomCol;
-
+    private int check;
+    private final int NotFind =-1;
 
 
     public AiMove()
@@ -27,17 +28,104 @@ public class AiMove
 
     public int Ai_move() //computer move
     {
+
+        if(find_Ai_threeSequence()!=NotFind)
+        {
+            return find_Ai_threeSequence();
+        }
+        if(find_rival_threeSequence()!=NotFind)
+        {
+            return find_rival_threeSequence();
+        }
+        if(find_Ai_twoSequence() !=NotFind)
+        {
+            return find_Ai_twoSequence();
+        }
+
+        if(find_rival_twoSequence() !=NotFind)
+        {
+            return find_rival_twoSequence();
+        }
+        if(find_Ai_OneCell()!=NotFind)
+        {
+            return find_Ai_OneCell();
+        }
         return getRandomCol();
 
+    }
 
-
-
-
+    private int find_Ai_OneCell()
+    {
+        return NotFind;
     }
 
 
 
-    
+    private int find_Ai_threeSequence()
+    {
+
+
+
+
+
+        return NotFind;
+    }
+
+    private int find_Ai_twoSequence()
+    {
+
+        return NotFind;
+    }
+
+
+
+
+    private int find_rival_threeSequence()
+    {
+        return NotFind;
+    }
+    private int find_rival_twoSequence()
+    {
+        return NotFind;
+    }
+
+
+
+    private int find_Sequence(String player,int Sequence)
+    {
+        for(i=Zero;i<Six;i++) {
+            for (j = Zero; j < Seven; j++) {
+                if ((check=check_up(i, j, player))!=NotFind) {
+                    return check ;
+                }
+                if ((check=check_Down(i, j, player))!=NotFind)
+                {
+                    return check;
+                }
+                if ((check=check_Right(i, j, player))!=NotFind) {
+                    return check;
+                }
+                if ((check=check_Left(i, j, player))!=NotFind) {
+                    return check;
+                }
+                if ((check=check_Diagonal_up_Right(i, j, player))!=NotFind) {
+                    return check;
+                }
+                if ((check=check_Diagonal_up_Left(i, j, player))!=NotFind) {
+                    return check;
+                }
+                if ((check=check_Diagonal_Down_Right(i, j, player))!=NotFind) {
+                    return check;
+                }
+                if ((check=check_Diagonal_Down_Left(i, j, player))!=NotFind) {
+                    return check;
+                }
+            }
+        }
+        return NotFind;
+    }
+
+
 
 
     private int getRandomCol()
@@ -108,6 +196,115 @@ public class AiMove
     }
 
 
+
+    private int check_up(int r,int c,String player)   // r=row , c=col
+    {
+
+        if(r>TWO)
+        {
+            if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c].equals(player))
+                    &&(cell_arr[r-TWO][c].equals(player))&&(cell_arr[r-Three][c].equals(player)))
+            {
+                //return true; //find 4 cell up of player
+            }
+        }
+        return NotFind;
+    }
+
+
+    private int check_Down(int r,int c,String player)   // r=row , c=col
+    {
+        if(r<Three)
+        {
+            if((cell_arr[r][c].equals(player))&&(cell_arr[r+ONE][c].equals(player))
+                    &&(cell_arr[r+TWO][c].equals(player))&&(cell_arr[r+Three][c].equals(player)))
+            {
+                //return true; //find 4 cell Down of player
+            }
+        }
+        return NotFind;
+    }
+
+
+    private int check_Right(int r,int c,String player)   // r=row , c=col
+    {
+        if(c<Four)
+        {
+            if((cell_arr[r][c].equals(player))&&(cell_arr[r][c+ONE].equals(player))
+                    &&(cell_arr[r][c+TWO].equals(player))&&(cell_arr[r][c+Three].equals(player)))
+            {
+                //return true; //find 4 cell Right of player
+            }
+        }
+        return NotFind;
+    }
+
+
+    private int check_Left(int r,int c,String player)   // r=row , c=col
+    {
+        if(c>TWO)
+        {
+            if((cell_arr[r][c].equals(player))&&(cell_arr[r][c-ONE].equals(player))
+                    &&(cell_arr[r][c-TWO].equals(player))&&(cell_arr[r][c-Three].equals(player)))
+            {
+                //return true; //find 4 cell Left of player
+            }
+        }
+        return NotFind;
+    }
+
+    private int check_Diagonal_up_Right(int r,int c,String player)   // r=row , c=col
+    {
+        if((r>TWO)&&(c<Four))
+        {
+            if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c+ONE].equals(player))
+                    &&(cell_arr[r-TWO][c+TWO].equals(player))&&(cell_arr[r-Three][c+Three].equals(player)))
+            {
+               // return true; //find 4 cell Diagonal up Right of player
+            }
+        }
+        return NotFind;
+    }
+
+    private int check_Diagonal_up_Left(int r,int c,String player)   // r=row , c=col
+    {
+        if((r>TWO)&&(c>TWO))
+        {   if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c-ONE].equals(player))
+                &&(cell_arr[r-TWO][c-TWO].equals(player))&&(cell_arr[r-Three][c-Three].equals(player)))
+            {
+            //return true; //find 4 cell Diagonal up Left of player
+            }
+        }
+        return NotFind;
+    }
+
+
+    private int check_Diagonal_Down_Right(int r,int c,String player)   // r=row , c=col
+    {
+        if((r<Three)&&(c<Four))
+        {
+            if((cell_arr[r][c].equals(player))&&(cell_arr[r+ONE][c+ONE].equals(player))
+                    &&(cell_arr[r+TWO][c+TWO].equals(player))&&(cell_arr[r+Three][c+Three].equals(player)))
+            {
+                //return true; //find 4 cell Diagonal Down Right of player
+            }
+        }
+        return NotFind;
+    }
+
+    private int check_Diagonal_Down_Left(int r,int c,String player)   // r=row , c=col
+    {
+        if((r<Three)&&(c>TWO))
+        {
+            if((cell_arr[r][c].equals(player))&&(cell_arr[r+ONE][c-ONE].equals(player))
+                    &&(cell_arr[r+TWO][c-TWO].equals(player))&&(cell_arr[r+Three][c-Three].equals(player)))
+            {
+
+                //return true; //find 4 cell Diagonal Down Left of player
+            }
+        }
+        return NotFind;
+    }
 
 
 
