@@ -375,6 +375,16 @@ public class AiMove
                             return c+ Three;
                         }
                     }
+                    if ((cell_arr[r][c].equals(player)) && (cell_arr[r - ONE][c + ONE].equals(player))
+                            && (cell_arr[r - TWO][c + TWO].equals(EMPTY)) && (cell_arr[r - Three][c + Three].equals(player))) {
+                        {
+                            if(cell_arr[r-ONE][c+TWO].equals(EMPTY))
+                            {
+                                return NotFind;
+                            }
+                            return c+ TWO;
+                        }
+                    }
                 }
                 if (seq == TWO)
                 {
@@ -419,6 +429,15 @@ public class AiMove
                     }
                     return c-Three;
                 }
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c-ONE].equals(player))
+                        &&(cell_arr[r-TWO][c-TWO].equals(EMPTY))&&(cell_arr[r-Three][c-Three].equals(player)))
+                {
+                    if(cell_arr[r-ONE][c-TWO].equals(EMPTY))
+                    {
+                        return NotFind;
+                    }
+                    return c-TWO;
+                }
             }
             if(seq==TWO)
             {
@@ -462,6 +481,14 @@ public class AiMove
                         }
                         return c + Three;
                     }
+                if ((cell_arr[r][c].equals(player)) && (cell_arr[r + ONE][c + ONE].equals(player))
+                        && (cell_arr[r + TWO][c + TWO].equals(EMPTY)) && (cell_arr[r + Three][c + Three].equals(player))) {
+
+                    if ((r < TWO) && (cell_arr[r + Three][c + TWO].equals(EMPTY))) {
+                        return NotFind;
+                    }
+                    return c + TWO;
+                }
             }
             if (seq == TWO) {
                     if ((cell_arr[r][c].equals(player)) && (cell_arr[r + ONE][c + ONE].equals(player))
@@ -504,6 +531,15 @@ public class AiMove
                         return NotFind;
                     }
                     return c - Three;
+                }
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r+ONE][c-ONE].equals(player))
+                        &&(cell_arr[r+TWO][c-TWO].equals(EMPTY))&&(cell_arr[r+Three][c-Three].equals(player)))
+                {
+                    if ((r < TWO) && (cell_arr[r + Three][c - TWO].equals(EMPTY)))
+                    {
+                        return NotFind;
+                    }
+                    return c - TWO;
                 }
             }
             if(seq==TWO)
