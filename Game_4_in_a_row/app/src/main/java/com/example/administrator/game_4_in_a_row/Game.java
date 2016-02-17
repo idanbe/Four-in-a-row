@@ -309,16 +309,16 @@ public class Game extends AppCompatActivity {
             if(player.equals(PLAYER1_turn)) //player 1 win
             {
                 dal.upDateWinOrLoss(player1_name, true, false); //add win
-                if(gameType.equals(TWO_PLAYER)) {
+              //  if(gameType.equals(TWO_PLAYER)) {
                     dal.upDateWinOrLoss(player2_name, false, false); //add loss
-                }
+                //}
             }
             else //player 2 win
             {
                 dal.upDateWinOrLoss(player2_name, true, false); //add win
-                if(gameType.equals(TWO_PLAYER)) {
+              //  if(gameType.equals(TWO_PLAYER)) {
                     dal.upDateWinOrLoss(player1_name, false, false); //add loss
-                }
+                //}
             }
             Game_on=false;
         }
