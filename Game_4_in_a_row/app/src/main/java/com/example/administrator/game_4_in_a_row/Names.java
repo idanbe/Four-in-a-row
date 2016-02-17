@@ -29,7 +29,6 @@ public class Names extends AppCompatActivity {
     private DAL dal;
     private View view ;
     private Context context;
-
     private ProgressDialog progress ;
     private AlertDialog alertDialog;
 

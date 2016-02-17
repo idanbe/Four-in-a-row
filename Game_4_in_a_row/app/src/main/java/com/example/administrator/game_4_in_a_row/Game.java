@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -36,13 +37,13 @@ public class Game extends AppCompatActivity {
     static final String TWO_PLAYER ="two_player";
     static final String COMPUTER ="Computer";
     static final String TIE ="It's a Tie";
-    static final String WIN ="Win";
+    static final String WIN =" Win";
     private String turn;
     private static MyView myView ;
     private boolean Game_on;
     private View view ;
     private float width_cell;
-    private Vibrator/*btoh tahat shel avirahm*/ v;
+    private Vibrator v;
     private Bundle bundle;
     static final String p1_key ="key1";
     static final String p2_key ="key2";
@@ -63,6 +64,7 @@ public class Game extends AppCompatActivity {
 
         // function map for idan !!!
         // all what you need is to put the correct function in the correct place .
+        // function map for Avirahm gay !!!
 
 
         // create user
@@ -266,8 +268,14 @@ public class Game extends AppCompatActivity {
 
     private void insert_coin(String player,int col)
     {
-        if(check_board_full())
+        //todo aviram adiot here is draw
+        if(check_board_full())//Draw
         {
+            dal.upDateWinOrLoss(player1_name , false , true); //set draw
+            if(gameType.equals(TWO_PLAYER))
+            {
+                dal.upDateWinOrLoss(player2_name , false , true);//set draw
+            }
             player_turn.setText(TIE);
             Game_on=false;
             return;
@@ -295,9 +303,25 @@ public class Game extends AppCompatActivity {
         }
 
 
-
+    //todo aviram adiot here is WIN
         if(check_win(player))//win
         {
+            if(player.equals(PLAYER1_turn)) //player 1 win
+            {
+                dal.addUser(player1_name);
+                dal.upDateWinOrLoss(player1_name, true, false); //add win
+                if(gameType.equals(TWO_PLAYER)) {
+                    dal.upDateWinOrLoss(player2_name, false, false); //add loss
+                }
+            }
+            else //player 2 win
+            {
+                dal.addUser(player2_name);
+                dal.upDateWinOrLoss(player2_name, true, false); //add win
+                if(gameType.equals(TWO_PLAYER)) {
+                    dal.upDateWinOrLoss(player1_name, false, false); //add loss
+                }
+            }
             Game_on=false;
         }
         change_turn();
@@ -517,7 +541,7 @@ public class Game extends AppCompatActivity {
         }
         return false;
     }
-        //todo aviram gay!!!
+
 
     private boolean check_Left(int r,int c,String player)   // r=row , c=col
     {
