@@ -277,6 +277,15 @@ public class AiMove
                     }
                     return c+Three ;
                 }
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r][c+ONE].equals(player))
+                        &&(cell_arr[r][c+TWO].equals(EMPTY))&&(cell_arr[r][c+Three].equals(player)))
+                {
+                    if((r<Five)&&((cell_arr[r+ONE][c+TWO].equals(EMPTY))))
+                    {
+                        return NotFind;
+                    }
+                    return c+TWO ;
+                }
             }
             if(seq==TWO)
             {
@@ -309,19 +318,26 @@ public class AiMove
 
     private int check_Left(int r,int c,String player,int seq)   // r=row , c=col
     {
-        Log.d("check4343","leftcheck");
         if(c>TWO)
         {
-                if (seq == Three) {
-
+                if (seq == Three)
+                {
                     if ((cell_arr[r][c].equals(player)) && (cell_arr[r][c - ONE].equals(player))
                             && (cell_arr[r][c - TWO].equals(player)) && (cell_arr[r][c - Three].equals(EMPTY))) {
-                        if ((r < Five) && ((cell_arr[r + ONE][c - Three].equals(EMPTY)))) {
+                        if ((r < Five) && ((cell_arr[r + ONE][c - Three].equals(EMPTY))))
+                        {
                             return NotFind;
                         }
                         return c - Three;
                     }
-
+                    if ((cell_arr[r][c].equals(player)) && (cell_arr[r][c - ONE].equals(player))
+                            && (cell_arr[r][c - TWO].equals(EMPTY)) && (cell_arr[r][c - Three].equals(player))) {
+                        if ((r < Five) && ((cell_arr[r + ONE][c - TWO].equals(EMPTY))))
+                        {
+                            return NotFind;
+                        }
+                        return c - TWO;
+                    }
                     if (seq == TWO) {
                         if ((cell_arr[r][c].equals(player)) && (cell_arr[r][c - ONE].equals(player))
                                 && (cell_arr[r][c - TWO].equals(EMPTY)) && (cell_arr[r][c - Three].equals(EMPTY))) {
