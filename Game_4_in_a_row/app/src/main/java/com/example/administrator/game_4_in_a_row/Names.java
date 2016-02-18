@@ -58,14 +58,8 @@ public class Names extends AppCompatActivity {
 
         SharedPreferences sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null || sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(ON) ) {
-            if (MainActivity.getMusic() == null || MainActivity.getMusic().isPlaying()){
-
-            }
-            else {
-                MainActivity.getMusic().start();
-            }
-
+        if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null || sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(ON) ){
+            MainActivity.getMusic().start();
             System.out.println("sound true !");
         }
 
@@ -155,13 +149,12 @@ public class Names extends AppCompatActivity {
                                 intent.putExtra(p2_key, p2.getText().toString());
                                 intent.putExtra(Game_Type_key, non_player_name.toString());
 
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                                 p1.setText("");
                                 p2.setText("");
 
                                 progress.dismiss();
-                                Names.this.finish();
                                 // go to game
                                 startActivity(intent);
                             }
@@ -174,6 +167,9 @@ public class Names extends AppCompatActivity {
                             }
                         });
                 alertDialog.show();
+
+
+
             }
         });
 
