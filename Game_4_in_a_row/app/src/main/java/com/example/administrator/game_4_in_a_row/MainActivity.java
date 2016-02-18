@@ -174,7 +174,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if( !music.isPlaying() ){
+        checkSetting();
+        if( !music.isPlaying() && SoundFlag ){
             music.start();
         }
         Log.d("@on", "onResume");
@@ -192,7 +193,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        music.pause();
+        if( music.isPlaying())
+            music.pause();
         Log.d("@on", "onPause");
     }
 

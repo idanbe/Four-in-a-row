@@ -42,10 +42,14 @@ public class Settings extends AppCompatActivity {
         if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null){
             sound.setText(SOUND_ON);
             editor.putString(SETTING_KEY_SOUND, ON);
+            if(!MainActivity.getMusic().isPlaying())
+                MainActivity.getMusic().start();
             editor.commit();
         }
         else if(sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(OFF)){
             sound.setText(SOUND_OFF);
+            if(MainActivity.getMusic().isPlaying())
+                MainActivity.getMusic().pause();
         }
         else {
             MainActivity.getMusic().start();
@@ -76,7 +80,8 @@ public class Settings extends AppCompatActivity {
                 {
                     sound.setText(SOUND_ON);
                     editor.putString(SETTING_KEY_SOUND, ON);
-                    MainActivity.getMusic().start();
+                    if(!MainActivity.getMusic().isPlaying())
+                        MainActivity.getMusic().start();
                 }
                 editor.commit();
             }
