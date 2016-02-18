@@ -1,6 +1,7 @@
 package com.example.administrator.game_4_in_a_row;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -34,7 +35,7 @@ public class MyView extends View {
     private final String PLAYER2="Y";
     private float rx,ry,witdh_cell,height_cell;
     private Vibrator v;
-
+    private static boolean vibe_flag;
 
     public MyView(Context context) {
         super(context);
@@ -113,7 +114,9 @@ public class MyView extends View {
                         rx=(witdh_cell*j); //x,y of cell to paint
                         ry=(height_cell*i);
                         canvas.drawRect(rx, ry, (rx + witdh_cell), (ry + height_cell), paint);
-                        v.vibrate(50);
+                        if(vibe_flag) {
+                            v.vibrate(50);
+                        }
                     }
                 }
         }
@@ -214,7 +217,10 @@ public class MyView extends View {
     }
 
 
-
+    public void setVibeFlag(Boolean b)
+    {
+        vibe_flag=b;
+    }
 
 
 }

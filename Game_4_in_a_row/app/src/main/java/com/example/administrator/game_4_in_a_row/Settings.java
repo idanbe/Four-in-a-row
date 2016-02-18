@@ -14,19 +14,15 @@ import android.widget.Button;
 public class Settings extends AppCompatActivity {
 
     private Button sound,vibriton;
-
     private final String SOUND_OFF="Sound Off";
     private final String SOUND_ON="Sound On";
     private final String Vibrtion_OFF="Vibration Off";
     private final String Vibrtion_ON="Vibration On";
     private final String SETTING_KEY_SOUND = "SETTING_KEY_SOUND";
     private final String SETTING_KEY_VIBRITON = "SETTING_KEY_VIBRITON";
-
     private static final String SHARED_PREFERENCES_NAME = "ShardPreferences_setting";
-
     private final String ON = "on";
     private final String OFF = "off";
-
     private SharedPreferences sharedpreferences ;
     SharedPreferences.Editor editor;
 
@@ -35,8 +31,6 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
-
 
         sound = (Button) findViewById(R.id.button_sound);
         vibriton = (Button) findViewById(R.id.button_Vibration);

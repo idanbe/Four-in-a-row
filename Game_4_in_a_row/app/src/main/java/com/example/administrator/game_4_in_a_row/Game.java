@@ -2,6 +2,7 @@ package com.example.administrator.game_4_in_a_row;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,9 +52,11 @@ public class Game extends AppCompatActivity {
     static final String p2_key ="key2";
     static final String gameType_key ="gameType_key";
     private String gameType;
-    private Random randomGenerator;
-    private int randomCol;
+    private boolean vibe_flag;
     private Button back_button,reset_button;
+    private SharedPreferences sharedpreferences ;
+    private static final String SHARED_PREFERENCES_NAME = "ShardPreferences_setting";
+    private final String SETTING_KEY_VIBRITON = "SETTING_KEY_VIBRITON";
     private AiMove Ai;
     DAL dal ;
 
@@ -63,6 +66,11 @@ public class Game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         dal = new DAL(this);
+
+        sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+
+
+
 
 //****************************************************************************************//
 
@@ -115,6 +123,9 @@ public class Game extends AppCompatActivity {
             {
                 gameType=bundle.getString(gameType_key);
             }
+
+
+
         }
 
         if(gameType.equals(ONE_PLAYER))
@@ -366,14 +377,18 @@ public class Game extends AppCompatActivity {
             if(turn.equals(PLAYER1_turn))
             {
                 myView.set_winer(PLAYER1);
-                v.vibrate(VIB_TIME);
+                if(vibe_flag) {
+                    v.vibrate(VIB_TIME);
+                }
                 player_turn.setText(player1_name + WIN);
 
             }
             else
             {
                 myView.set_winer(PLAYER2);
-                v.vibrate(VIB_TIME);
+                if (vibe_flag) {
+                    v.vibrate(VIB_TIME);
+                }
                 player_turn.setText(player2_name + WIN);
             }
         }
@@ -665,10 +680,27 @@ public class Game extends AppCompatActivity {
         return false;
     }
 
-    // cancel back button
+
+
     @Override
-    public void onBackPressed() {
+    protected void onPostResume()
+    {
+        super.onPostResume();
+        if(!(sharedpreferences.getString(SETTING_KEY_VIBRITON , null) == null))
+        {
+            if(sharedpreferences.getString(SETTING_KEY_VIBRITON , null).toString().equals("on"))
+            {
+                myView.setVibeFlag(true);
+                vibe_flag=true;
+            }
+            else
+            {
+                myView.setVibeFlag(false);
+                vibe_flag=false;
+            }
+        }
+
+
+
     }
-
-
 }
