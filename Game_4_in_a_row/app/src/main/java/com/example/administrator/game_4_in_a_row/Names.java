@@ -36,12 +36,14 @@ public class Names extends AppCompatActivity {
     private AlertDialog alertDialog;
     static final String COMPUTER ="Computer";
     private static final String MUSIC_STATUS = "get_status_music";
-    private MediaPlayer music;
+
 
 
     public Context get_Context(){
         return context;
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

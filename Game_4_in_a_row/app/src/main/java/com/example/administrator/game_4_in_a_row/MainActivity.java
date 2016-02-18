@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sharedpreferences ;
     SharedPreferences.Editor editor;
 
+    public static MediaPlayer getMusic(){
+        return music;
+    }
+
 
     // check from sharedP the sound and vibrator
     private void checkSetting(){
@@ -75,15 +79,10 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("lopp ? = " + music.isLooping());
 
 
-
         checkSetting();
 
         if(SoundFlag && !music.isPlaying()) {
             music.start();
-        }
-
-        if(VibritonFlag){
-            // TODO : stop vibrator's idan or not start
         }
 
         DAL dal = new DAL(this);

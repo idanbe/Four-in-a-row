@@ -66,11 +66,13 @@ public class Settings extends AppCompatActivity {
                 if( s.equals(ON) ) {
                     sound.setText(SOUND_OFF);
                     editor.putString(SETTING_KEY_SOUND, OFF);
+                    MainActivity.getMusic().pause();
                 }
                 else
                 {
                     sound.setText(SOUND_ON);
                     editor.putString(SETTING_KEY_SOUND, ON);
+                    MainActivity.getMusic().start();
                 }
                 editor.commit();
             }
