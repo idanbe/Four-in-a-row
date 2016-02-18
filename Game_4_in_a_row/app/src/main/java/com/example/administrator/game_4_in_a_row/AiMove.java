@@ -29,6 +29,12 @@ public class AiMove
     public int Ai_move() //computer move
     {
 
+       if(cell_arr[Five][Three].equals(EMPTY))
+       {
+           return Three;
+       }
+
+
         check=find_Ai_threeSequence();
         if(check!=NotFind)
         {
