@@ -14,9 +14,7 @@
     <string name="title_activity_game_history">Game History</string>
     <string name="textView_history">Game History</string>
     <string name="button_Vibration">Vibration On</string>
-    <string name="button_sound">Music On</string>
-    <string name="game_sound_on">Sound Game On</string>
-    <string name="game_sound_off">Sound Game Off</string>
+    <string name="button_sound">Sound On</string>
     <string name="title_activity_history_row">HistoryRow</string>
     <string name="title_activity_names">names</string>
     <string name="title_activity_game_options">Game_options</string>

@@ -149,6 +149,7 @@ public class Game_history extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedpreferences.edit();
         if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null || sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(ON) ){
             MainActivity.getMusic().start();
+
             System.out.println("sound true !");
         }
 
@@ -204,6 +205,8 @@ public class Game_history extends AppCompatActivity {
         });
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
