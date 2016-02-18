@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // check from sharedP the sound and vibrator
-    private void checkSetting(){
+    public void checkSetting(){
         sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
         if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null || sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(ON) ){
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onDestroy();
-                System.exit(1);
+                System.exit(0);
                 Log.d("debug", "exit");
             }
         });
@@ -165,12 +165,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
+    @Override
+    public void onBackPressed() {
+        finish();
+        System.exit(0);
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
+        if( !music.isPlaying() ){
+            music.start();
+        }
         Log.d("@on", "onResume");
     }
 
@@ -186,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        music.pause();
         Log.d("@on", "onPause");
     }
 

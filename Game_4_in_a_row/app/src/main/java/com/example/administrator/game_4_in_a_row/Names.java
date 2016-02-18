@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.preference.DialogPreference;
 import android.support.v7.app.AppCompatActivity;
@@ -35,7 +36,9 @@ public class Names extends AppCompatActivity {
     private ProgressDialog progress ;
     private AlertDialog alertDialog;
     static final String COMPUTER ="Computer";
-    private static final String MUSIC_STATUS = "get_status_music";
+    private final String SETTING_KEY_SOUND = "SETTING_KEY_SOUND";
+    private final String SHARED_PREFERENCES_NAME = "ShardPreferences_setting";
+    private final String ON = "on";
 
 
 
@@ -51,6 +54,15 @@ public class Names extends AppCompatActivity {
         setContentView(R.layout.activity_names);
 
         bundle = getIntent().getExtras();
+
+
+        SharedPreferences sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null || sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(ON) ){
+            MainActivity.getMusic().start();
+            System.out.println("sound true !");
+        }
+
 
         /*if(bundle != null) {
             int b = bundle.getInt(MUSIC_STATUS);

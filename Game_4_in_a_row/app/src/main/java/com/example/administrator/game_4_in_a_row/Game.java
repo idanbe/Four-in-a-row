@@ -681,6 +681,12 @@ public class Game extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        intent = new Intent(Game.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
 
     @Override
     protected void onPostResume()

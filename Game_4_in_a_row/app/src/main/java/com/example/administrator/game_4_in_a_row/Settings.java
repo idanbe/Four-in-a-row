@@ -47,6 +47,9 @@ public class Settings extends AppCompatActivity {
         else if(sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(OFF)){
             sound.setText(SOUND_OFF);
         }
+        else {
+            MainActivity.getMusic().start();
+        }
 
 
         if(sharedpreferences.getString(SETTING_KEY_VIBRITON , null) == null){
@@ -66,7 +69,8 @@ public class Settings extends AppCompatActivity {
                 if( s.equals(ON) ) {
                     sound.setText(SOUND_OFF);
                     editor.putString(SETTING_KEY_SOUND, OFF);
-                    MainActivity.getMusic().pause();
+                    if(MainActivity.getMusic().isPlaying())
+                        MainActivity.getMusic().pause();
                 }
                 else
                 {
