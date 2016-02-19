@@ -141,7 +141,7 @@ public class Game_history extends AppCompatActivity {
 
         dal = new DAL(this);
 
-        resetTable = (Button)findViewById(R.id.resetHistory);
+        resetTable = (Button)findViewById(R.id.resetData);
         HistoryTable = (TableLayout)findViewById(R.id.history_table);
         HistoryTable.setStretchAllColumns(true);
 

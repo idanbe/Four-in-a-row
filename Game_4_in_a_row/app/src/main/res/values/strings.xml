@@ -5,6 +5,7 @@
     <string name="button_two">Two Players</string>
     <string name="button_setting">Settings</string>
     <string name="button_Exit">Exit</string>
+    <string name="resetData">Reset Data</string>
     <string name="text_NAME_title">PLAYERS NAMES</string>
     <string name="button_statistics">Game Statistics</string>
     <string name="textView_Game_Statistics">Game Statistics</string>

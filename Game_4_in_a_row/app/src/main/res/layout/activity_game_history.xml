@@ -74,8 +74,8 @@
     <Button
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:text="Reset History"
-        android:id="@+id/resetHistory"
+        android:id="@+id/resetData"
+        android:text="@string/resetData"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:background="#3f0f06"
