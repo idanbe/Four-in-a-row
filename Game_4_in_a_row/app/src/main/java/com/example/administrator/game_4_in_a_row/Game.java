@@ -3,6 +3,7 @@ package com.example.administrator.game_4_in_a_row;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -151,8 +152,10 @@ public class Game extends AppCompatActivity {
 
         if (turn.equals(PLAYER1_turn)) {
             player_turn.setText(PLAYER1_turn);
+            player_turn.setTextColor(Color.RED);
         } else {
             player_turn.setText(PLAYER2_turn);
+            player_turn.setTextColor(Color.YELLOW);
         }
 
 
@@ -284,7 +287,6 @@ public class Game extends AppCompatActivity {
 
     private void insert_coin(String player,int col)
     {
-        //todo aviram adiot here is draw
         if(check_board_full())//Draw
         {
             dal.addUser(player1_name);
@@ -308,7 +310,6 @@ public class Game extends AppCompatActivity {
         if(i==-ONE)//col is full
         {
             return;
-
         }
 
         if(player.equals(PLAYER1_turn))
@@ -320,8 +321,6 @@ public class Game extends AppCompatActivity {
             cell_arr[i][col]=PLAYER2;
         }
 
-
-    //todo aviram adiot here is WIN
         if(check_win(player))//win
         {
             dal.addUser(player1_name);
@@ -329,16 +328,12 @@ public class Game extends AppCompatActivity {
             if(player.equals(PLAYER1_turn)) //player 1 win
             {
                 dal.upDateWinOrLoss(player1_name, true, false); //add win
-              //  if(gameType.equals(TWO_PLAYER)) {
-                    dal.upDateWinOrLoss(player2_name, false, false); //add loss
-                //}
+                dal.upDateWinOrLoss(player2_name, false, false); //add loss
             }
             else //player 2 win
             {
                 dal.upDateWinOrLoss(player2_name, true, false); //add win
-              //  if(gameType.equals(TWO_PLAYER)) {
-                    dal.upDateWinOrLoss(player1_name, false, false); //add loss
-                //}
+                dal.upDateWinOrLoss(player1_name, false, false); //add loss
             }
             Game_on=false;
         }
@@ -361,6 +356,7 @@ public class Game extends AppCompatActivity {
             {
                 turn=PLAYER2_turn;
                 player_turn.setText(PLAYER2_turn);
+                player_turn.setTextColor(Color.YELLOW);
                 if(gameType.equals(ONE_PLAYER)) {
                     comp_move();
                 }
@@ -370,6 +366,7 @@ public class Game extends AppCompatActivity {
             {
                 turn=PLAYER1_turn;
                 player_turn.setText(PLAYER1_turn);
+                player_turn.setTextColor(Color.RED);
             }
         }
         else //game end
