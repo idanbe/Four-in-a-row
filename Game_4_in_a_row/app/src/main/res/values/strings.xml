@@ -5,7 +5,7 @@
     <string name="button_two">Two Players</string>
     <string name="button_setting">Settings</string>
     <string name="button_Exit">Exit</string>
-    <string name="button_history">Game History</string>
+    <string name="button_statistics">Game Statistics</string>
     <string name="textView_settings">Settings</string>
     <string name="action_settings">Settings</string>
     <string name="textView_game">FOUR IN A ROW</string>

@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         single_button = (Button)findViewById(R.id.button_single);
         two_button = (Button)findViewById(R.id.button_two);
         setting_button = (Button)findViewById(R.id.button_setting);
-        game_history_button = (Button)findViewById(R.id.button_history);
+        game_history_button = (Button)findViewById(R.id.button_statistics);
         exit_button = (Button)findViewById(R.id.button_Exit);
 
 
