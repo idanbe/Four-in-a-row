@@ -178,8 +178,8 @@ public class Game_history extends AppCompatActivity {
             public void onClick(View v) {
                 dal.removeAll();
                 AlertDialog alertDialog = new AlertDialog.Builder(Game_history.this).create();
-                alertDialog.setTitle("Remove All History :");
-                alertDialog.setMessage("All results will be deleted\n" + "Are you sure ?");
+                alertDialog.setTitle("Remove All Data From Table :");
+                alertDialog.setMessage("All Data will be deleted\n" + "Are you sure ?");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
