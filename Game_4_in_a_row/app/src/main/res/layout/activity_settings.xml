@@ -14,6 +14,7 @@
         android:textSize="50dp"
         android:id="@+id/textView_settings"
         android:text="@string/textView_settings"
+        android:textColor="#66a3ff"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp" />
