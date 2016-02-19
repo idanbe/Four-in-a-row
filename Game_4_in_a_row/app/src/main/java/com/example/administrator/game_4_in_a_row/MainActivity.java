@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
 
        if(music == null || !music.isPlaying()){
-            music = MediaPlayer.create(MainActivity.this, R.raw.to_smuck);
+            music = MediaPlayer.create(MainActivity.this, R.raw.background_sound);
             music.setLooping(true);
         }
 

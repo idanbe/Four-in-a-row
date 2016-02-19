@@ -17,7 +17,7 @@ public class Music extends Service {
     public void onCreate() {
         super.onCreate();
         player = new MediaPlayer();
-        player = MediaPlayer.create(Music.this, R.raw.to_smuck);
+        player = MediaPlayer.create(Music.this, R.raw.background_sound);
         player.setLooping(true);    // Set looping
         player.setVolume(100, 100);  // set volume
     }
