@@ -19,7 +19,6 @@ import java.util.Random;
 
 
 public class Game extends AppCompatActivity {
-
     private final int Zero=0,ONE=1,TWO=2,Three=3,Four=4,Five=5,Six=6,Seven=7;
     private int VIB_TIME=400;
     private int i,j;
@@ -54,6 +53,8 @@ public class Game extends AppCompatActivity {
     static final String gameType_key ="gameType_key";
     private String gameType;
     private boolean vibe_flag;
+    private Random randomGenerator;
+    private int randomint;
     private Button back_button,reset_button;
     private SharedPreferences sharedpreferences ;
     private static final String SHARED_PREFERENCES_NAME = "ShardPreferences_setting";
@@ -67,11 +68,8 @@ public class Game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         dal = new DAL(this);
-
+        randomGenerator = new Random();
         sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
-
-
-
 
 //****************************************************************************************//
 
@@ -116,7 +114,6 @@ public class Game extends AppCompatActivity {
             if(player1_name.equals(player2_name)){
                 PLAYER1_turn = PLAYER_1 + TURN;
                 PLAYER2_turn = PLAYER_2 + TURN;
-
                 player1_name = PLAYER_1;
                 player2_name = PLAYER_2 ;
             }
@@ -134,6 +131,20 @@ public class Game extends AppCompatActivity {
             Ai = new AiMove();
             player2_name=COMPUTER;
             PLAYER2_turn=COMPUTER + TURN;
+            turn = PLAYER1_turn;
+        }
+        else
+        {
+            randomint = randomGenerator.nextInt(TWO);//0\1
+            Log.d("test3636",""+randomint);
+            if(randomint==Zero)
+            {
+                turn=PLAYER1_turn;
+            }
+            else
+            {
+                turn=PLAYER2_turn;
+            }
         }
 
         Game_on = true;
@@ -141,7 +152,7 @@ public class Game extends AppCompatActivity {
         clear_cell_Arr();
         win_cell = new int[Four][TWO];
         view = findViewById(R.id.view);
-        turn = PLAYER1_turn;
+        //turn = PLAYER1_turn;
         myView = new MyView(this);
         myView.set_find_win(false);
         v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
