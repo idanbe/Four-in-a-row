@@ -39,7 +39,8 @@ public class Names extends AppCompatActivity {
     private final String SETTING_KEY_SOUND = "SETTING_KEY_SOUND";
     private final String SHARED_PREFERENCES_NAME = "ShardPreferences_setting";
     private final String ON = "on";
-
+    private final String NAME_PLAYERS = "Names of players:";
+    private final String VS = "\n VS \n";
 
 
     public Context get_Context(){
@@ -103,27 +104,20 @@ public class Names extends AppCompatActivity {
             }
         }
 
-
-
-
-
-
-            //
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 view = v ;
-                System.out.println("p1 = *" + p1.getText().toString() + "*");
                 alertDialog = new AlertDialog.Builder(Names.this).create();
                 String s  = "";
-                alertDialog.setTitle("Player Names is :");
+                alertDialog.setTitle(NAME_PLAYERS);
                 if (p1.getText().toString().isEmpty()) {
                     s += onePlayer_key;
                 }
                 else {
                     s += p1.getText().toString();
                 }
-                s += "\n VS \n";
+                s += VS;
                 if (p2.getText().toString().isEmpty()){
                         s += twoPlayer_key;
                 }
