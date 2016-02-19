@@ -8,6 +8,18 @@
     tools:context="com.example.administrator.game_4_in_a_row.Names">
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        android:id="@+id/text_NAME_title"
+        android:text="@string/text_NAME_title"
+        android:textColor="#66a3ff"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp" />
+
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,8 +51,10 @@
         android:textSize="40dp"
         android:hint="player2"
         android:maxLength="10"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/button_next"
+        android:layout_alignLeft="@+id/player1_textv"
+        android:layout_alignStart="@+id/player1_textv"
+        android:layout_marginBottom="58dp" />
 
     <EditText
         android:layout_width="wrap_content"
