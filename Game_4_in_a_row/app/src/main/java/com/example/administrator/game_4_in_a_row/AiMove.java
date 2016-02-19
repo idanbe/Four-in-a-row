@@ -304,6 +304,15 @@ public class AiMove
                     }
                     return c+TWO ;
                 }
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r][c+ONE].equals(EMPTY))
+                        &&(cell_arr[r][c+TWO].equals(player))&&(cell_arr[r][c+Three].equals(EMPTY)))
+                {
+                    if((r<Five)&&((cell_arr[r+ONE][c+ONE].equals(EMPTY))))
+                    {
+                        return NotFind;
+                    }
+                    return c+ONE ;
+                }
             }
             if(seq==ONE)
             {
