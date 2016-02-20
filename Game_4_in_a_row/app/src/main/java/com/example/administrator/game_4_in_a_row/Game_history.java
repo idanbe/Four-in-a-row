@@ -32,8 +32,6 @@ public class Game_history extends AppCompatActivity {
     private final String SETTING_KEY_SOUND = "SETTING_KEY_SOUND";
     private final String SHARED_PREFERENCES_NAME = "ShardPreferences_setting";
     private final String ON = "on";
-
-
     private static final int MAX_RESULT = 10;
 
 
@@ -58,7 +56,6 @@ public class Game_history extends AppCompatActivity {
 
         RowHolder rowHolder = new RowHolder();
         tableRow = new TableRow(this);
-
         rowHolder.name = new TextView(this);
         rowHolder.win = new TextView(this);
         rowHolder.loss = new TextView(this);
@@ -149,7 +146,6 @@ public class Game_history extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedpreferences.edit();
         if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null || sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(ON) ){
             MainActivity.getMusic().start();
-            System.out.println("sound true !");
         }
 
         // DB to array list

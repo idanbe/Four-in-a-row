@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private static MediaPlayer music;
     private static Boolean SoundFlag;
     private static Boolean VibritonFlag;
-
     private final String SETTING_KEY_SOUND = "SETTING_KEY_SOUND";
     private final String SETTING_KEY_VIBRITON = "SETTING_KEY_VIBRITON";
     private final String SHARED_PREFERENCES_NAME = "ShardPreferences_setting";
@@ -46,19 +45,15 @@ public class MainActivity extends AppCompatActivity {
         editor = sharedpreferences.edit();
         if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null || sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(ON) ){
             SoundFlag = true;
-            System.out.println("sound true !");
         }
         else{
             SoundFlag = false;
-            System.out.println("sound false !");
         }
         if(sharedpreferences.getString(SETTING_KEY_VIBRITON , null) == null || sharedpreferences.getString(SETTING_KEY_VIBRITON , null).equals(ON)){
             VibritonFlag = true ;
-            System.out.println("v true !");
         }
         else {
             VibritonFlag = false;
-            System.out.println("v false !");
         }
     }
 
@@ -66,18 +61,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("@on", "onCreate");
-
-
 
        if(music == null || !music.isPlaying()){
             music = MediaPlayer.create(MainActivity.this, R.raw.background_sound);
             music.setLooping(true);
         }
-
-
-        System.out.println("lopp ? = " + music.isLooping());
-
 
         checkSetting();
 
@@ -105,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
         single_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("debug","single player");
                 intent = new Intent(v.getContext(), Names.class);
                 intent.putExtra(onePlayer_key,ONE_PLAYER.toString());
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -117,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
         two_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("debug","two players");
                 intent = new Intent(v.getContext(), Names.class);
                 intent.putExtra(twoPlayer_key,TWO_PLAYER.toString());
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -129,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
         setting_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("debug","settings");
                 intent = new Intent(v.getContext(), Settings.class);
                 startActivity(intent);
             }
@@ -140,10 +125,8 @@ public class MainActivity extends AppCompatActivity {
         game_history_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("debug","game history");
                 intent = new Intent(v.getContext(), Game_history.class);
                 startActivity(intent);
-
             }
         });
 
@@ -153,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 onDestroy();
                 System.exit(0);
-                Log.d("debug", "exit");
             }
         });
 
@@ -178,14 +160,12 @@ public class MainActivity extends AppCompatActivity {
         if( !music.isPlaying() && SoundFlag ){
             music.start();
         }
-        Log.d("@on", "onResume");
     }
 
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("@on", "onStop");
 
     }
 
@@ -195,16 +175,13 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         if( music.isPlaying())
             music.pause();
-        Log.d("@on", "onPause");
-    }
+            }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("@on", "onDestroy");
-    }
-
+            }
 
 
     @Override

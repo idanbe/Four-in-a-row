@@ -61,19 +61,7 @@ public class Names extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedpreferences.edit();
         if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null || sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(ON) ){
             MainActivity.getMusic().start();
-            System.out.println("sound true !");
         }
-
-
-        /*if(bundle != null) {
-            int b = bundle.getInt(MUSIC_STATUS);
-            System.out.println("b = " + b);
-            music = MediaPlayer.create(Names.this, R.raw.to_smuck);
-            music.seekTo(bundle.getInt(MUSIC_STATUS));
-            music.start();
-
-        }*/
-
 
 
         context = this;
@@ -84,12 +72,7 @@ public class Names extends AppCompatActivity {
         p1 = (EditText)findViewById(R.id.player1_textv);
         p2 = (EditText)findViewById(R.id.player2_text);
 
-
-
-        // get game type
-
-
-
+        //get game type
         if (bundle != null)
         {
             if(!(bundle.getString(onePlayer_key)==null))
@@ -125,9 +108,7 @@ public class Names extends AppCompatActivity {
                     s += p2.getText().toString();
                 }
 
-                // try to aligment text
-                /*TextView messageText = (TextView)alertDialog.findViewById(android.R.id.message);
-                messageText.setGravity(Gravity.CENTER);*/
+
                 if(p1.getText().toString().equals(p2.getText().toString())){
                     s = onePlayer_key + "\n VS \n" + twoPlayer_key ;
                 }

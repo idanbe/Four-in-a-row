@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+//settings of game sound and vibration
 public class Settings extends AppCompatActivity {
 
     private Button sound,vibriton;
@@ -65,7 +66,7 @@ public class Settings extends AppCompatActivity {
             vibriton.setText(Vibrtion_OFF);
         }
 
-
+            //sound button on/off
         sound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +88,7 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-
+        //vibration button on/off
         vibriton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
