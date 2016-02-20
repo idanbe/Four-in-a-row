@@ -5,9 +5,9 @@ import android.util.Log;
 
 import java.util.Random;
 
+//this class make find next move of computer
 public class AiMove
 {
-
     private final int Zero=0,ONE=1,TWO=2,Three=3,Four=4,Five=5,Six=6,Seven=7;
     private final String EMPTY ="E";
     private final String PLAYER1="R";
@@ -22,26 +22,24 @@ public class AiMove
 
     public AiMove()
     {
-        cell_arr =new String[Six][Seven];
-        clear_cell_Arr();
+        cell_arr =new String[Six][Seven]; //array of board game
+        clear_cell_Arr(); //clear board game
     }
 
     public int Ai_move() //computer move
     {
-
        if(cell_arr[Five][Three].equals(EMPTY))
        {
            return Three;
        }
 
-
-        check=find_Ai_threeSequence();
-        if(check!=NotFind)
+        check=find_Ai_threeSequence();  //find three sequence coins of computer
+        if(check!=NotFind)              // to complete 4 sequence and win
         {
-            return check;
+            return check; //return next move
         }
-        check=find_rival_threeSequence();
-        if(check!=NotFind)
+        check=find_rival_threeSequence(); //find rival three sequence coins
+        if(check!=NotFind)                //and block him for win
         {
             return check;
         }
@@ -65,33 +63,34 @@ public class AiMove
     }
 
 
-
-
+    //Y== color of computer , E == empty cell
+    //find three sequence YYYE/EYYY/YEYY...
     private int find_Ai_threeSequence()
     {
         check=find_Sequence(PLAYER1,Three);
         return check;
     }
-
+    //find two sequence YYEE/EEYY/EYEY..
     private int find_Ai_twoSequence()
     {
         check=find_Sequence(PLAYER1,TWO);
         return check;
     }
 
-
+    //find one cell: YEEE/EYEE/EEYE/EEEY
     private int find_Ai_OneCell()
     {   check=find_Sequence(PLAYER1,ONE);
         return check;
     }
-
-
+    //R= COLOR OF PLAYER
+    //find rival three sequence of R: RRRE/ERRR/RERR/RRER
     private int find_rival_threeSequence()
     {
         check=find_Sequence(PLAYER2,Three);
         return check;
 
     }
+    //find two sequence of R:RREE/EERR/ERER/RERE
     private int find_rival_twoSequence()
     {
         check=find_Sequence(PLAYER2,TWO);
@@ -99,7 +98,7 @@ public class AiMove
 
     }
 
-
+    //this method get player to search and sequence
     private int find_Sequence(String player,int seq)
     {
         for(i=Zero;i<Six;i++) {
@@ -146,7 +145,7 @@ public class AiMove
 
 
 
-
+    //get a random col for insert coin
     private int getRandomCol()
     {
         randomGenerator = new Random();
@@ -162,7 +161,7 @@ public class AiMove
 
 
 
-
+    //clear array of board
     private void clear_cell_Arr()
     {
         for (i =Zero; i < Six; i++)
@@ -174,7 +173,7 @@ public class AiMove
         }
     }
 
-
+    //set array of board
     public void setCell_arr(String[][] arr)
     {
         for(i=Zero;i<Six;i++)
@@ -185,21 +184,8 @@ public class AiMove
             }
         }
     }
-    private boolean check_ifBoradEmpty()
-    {
-        for( i=Zero;i<Six;i++)
-        {
-            for (int j=Zero;j<Seven;j++)
-            {
-                if(!(cell_arr[i][j].equals(EMPTY)))
-                {
-                    return false;//borad not empty
-                }
-            }
-        }
-        return true;
-    }
 
+    //check if col is full
     private boolean check_ifCol_full(int col)
     {
         int i=Five;
@@ -399,14 +385,14 @@ public class AiMove
                             return c+ Three;
                         }
                     }
-                    if ((cell_arr[r][c].equals(player)) && (cell_arr[r - ONE][c + ONE].equals(player))
-                            && (cell_arr[r - TWO][c + TWO].equals(EMPTY)) && (cell_arr[r - Three][c + Three].equals(player))) {
+                    if ((cell_arr[r][c].equals(player)) && (cell_arr[r - ONE][c + ONE].equals(EMPTY))
+                            && (cell_arr[r - TWO][c + TWO].equals(player)) && (cell_arr[r - Three][c + Three].equals(player))) {
                         {
-                            if(cell_arr[r-ONE][c+TWO].equals(EMPTY))
+                            if(cell_arr[r][c+ONE].equals(EMPTY))
                             {
                                 return NotFind;
                             }
-                            return c+ TWO;
+                            return c+ ONE;
                         }
                     }
                 }
