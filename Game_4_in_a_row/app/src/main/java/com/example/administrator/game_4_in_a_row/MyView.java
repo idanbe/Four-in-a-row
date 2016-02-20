@@ -16,12 +16,13 @@ import java.util.concurrent.TimeUnit;
 import android.os.Vibrator;
 
 
-
+//view for paint on board game
 public class MyView extends View {
 
     // values
+    private final int Zero=0,ONE=1,TWO=2,Three=3,Four=4,Five=5,Six=6,Seven=7;
     private Paint paint;
-    private static final int zero=0;
+    private int Vibe_Time=50;
     private static final int ten=10;
     private Path path;
     private Random random;
@@ -36,23 +37,22 @@ public class MyView extends View {
     private float rx,ry,witdh_cell,height_cell;
     private Vibrator v;
     private static boolean vibe_flag;
+    private int i,j;
+
 
     public MyView(Context context) {
         super(context);
-        init(null, 0);
-        Log.d("check4145","init 1");
+        init(null, Zero);
     }
 
     public MyView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs, 0);
-        Log.d("check4145", "init 2");
+        init(attrs,Zero);
     }
 
     public MyView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs, defStyle);
-        Log.d("check4145", "init 3");
     }
 
 
@@ -66,9 +66,9 @@ public class MyView extends View {
             paint.setStyle(Paint.Style.FILL_AND_STROKE);
             path = new Path();
             random = new Random();
-            cell_arr = new String[6][7];
+            cell_arr = new String[Six][Seven];
             clear_cell_Arr();
-            win_cell= new int[4][2];
+            win_cell= new int[Four][TWO];
             v =(Vibrator)this.getContext().getSystemService(Context.VIBRATOR_SERVICE);
 
     }
@@ -83,8 +83,8 @@ public class MyView extends View {
         top = getPaddingTop();
         width = w - (getPaddingLeft() + getPaddingRight());
         height = h - (getPaddingTop() + getPaddingBottom());
-        witdh_cell=(width/7);
-        height_cell=(height/6);
+        witdh_cell=(width/Seven);
+        height_cell=(height/Six);
         rx=right; //x of first cell
         ry=top; //y of first cell
     }
@@ -92,14 +92,14 @@ public class MyView extends View {
 
 
 
-    @Override
+    @Override    //Draw on board
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);
 
-        for (int i = 0; i < 6; i++)
+        for (i = Zero; i < Six; i++)
         {
-                for (int j = 0; j < 7; j++) {
+                for (j = Zero; j < Seven; j++) {
 
                     if (!cell_arr[i][j].equals(EMPTY))//if cell not empty paint
                     {
@@ -115,16 +115,16 @@ public class MyView extends View {
                         ry=(height_cell*i);
                         canvas.drawRect(rx, ry, (rx + witdh_cell), (ry + height_cell), paint);
                         if(vibe_flag) {
-                            v.vibrate(50);
+                            v.vibrate(Vibe_Time); //vibration
                         }
                     }
                 }
         }
         if(find_win) //mark 4 cells of win
         {
-            for (int i = 0; i < 4; i++) {
-                    rx = (witdh_cell * win_cell[i][1]); //x,y of cell to paint
-                    ry = (height_cell * win_cell[i][0]);
+            for (i = Zero; i < Four; i++) {
+                    rx = (witdh_cell * win_cell[i][ONE]); //x,y of cell to paint
+                    ry = (height_cell * win_cell[i][Zero]);
 
 
                 if(Winner.equals(PLAYER1))
@@ -132,20 +132,20 @@ public class MyView extends View {
                     paint.setColor(Color.rgb(159, 0, 15));
 
                 }
-                else
+                else //player 2 win
                 {
                     paint.setColor(Color.rgb(253, 208, 23 ));
 
-                }
-                canvas.drawRect(rx, ry, (rx + witdh_cell), (ry + height_cell)-10, paint);
-                         }
+                }//mark cells of win
+                canvas.drawRect(rx, ry, (rx + witdh_cell), (ry + height_cell)-ten, paint);
+            }
 
         }
     }
 
 
 
-
+        //set winner
     public void set_winer(String win)
     {
         Winner=win;
@@ -169,19 +169,18 @@ public class MyView extends View {
         return false;
     }
 
-
+    //treu==has a winner /false == game on no winner
     public void set_find_win(boolean b)
     {
         find_win=b;
     }
 
+    //clear all board
     private void clear_cell_Arr()
     {
-
-        Log.d("check777", "clear_cell_Arr");
-        for (int i = 0; i < 6; i++)
+        for (i = Zero; i < Six; i++)
         {
-            for (int j = 0; j < 7; j++)
+            for (j =Zero; j < Seven; j++)
             {
                 cell_arr[i][j]=EMPTY;
             }
@@ -189,34 +188,32 @@ public class MyView extends View {
     }
 
 
-
+    //get array of coins to paint on board
     public void setCell_arr(String[][] arr)
     {
-        for(int i=0;i<6;i++)
+        for(i=Zero;i<Six;i++)
         {
-            for(int j=0;j<7;j++)
+            for(j=Zero;j<Seven;j++)
             {
                 cell_arr[i][j]=arr[i][j];
             }
         }
     }
 
+    //get 4 cells that come to win
     public void setwin_Cell(int[][] arr)
     {
-
-        for (int i=0;i<4;i++)
+        for (i=Zero;i<Four;i++)
         {
-            for(int j =0; j<2;j++)
+            for(j =Zero; j<TWO;j++)
             {
                 win_cell[i][j]=arr[i][j];
             }
         }
-        Log.d("check949", "in set win cell");
-
         return;
     }
 
-
+    //set vibration on/off
     public void setVibeFlag(Boolean b)
     {
         vibe_flag=b;
