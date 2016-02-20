@@ -25,23 +25,23 @@
         android:layout_height="wrap_content"
         android:text="Next"
         android:id="@+id/button_next"
+        android:background="@drawable/buttonshape2"
+        android:textColor="@drawable/buttontext"
         android:layout_alignTop="@+id/button_back"
-        android:layout_toRightOf="@+id/button_back"
-        android:layout_toEndOf="@+id/button_back"
-        android:layout_marginLeft="60dp"
-        android:layout_marginStart="60dp" />
+        android:layout_alignRight="@+id/text_NAME_title"
+        android:layout_alignEnd="@+id/text_NAME_title" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
         android:id="@+id/button_back"
+        android:background="@drawable/buttonshape2"
+        android:textColor="@drawable/buttontext"
+        android:layout_marginBottom="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="56dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginBottom="48dp" />
+        android:layout_alignLeft="@+id/text_NAME_title"
+        android:layout_alignStart="@+id/text_NAME_title" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ1234567890אבגדהוזחטיכלמנסעפצקרשתףץךםן"
         android:id="@+id/player2_text"
         android:textSize="40dp"
-        android:hint="player2"
+        android:hint="Player2"
         android:maxLength="10"
         android:layout_above="@+id/button_next"
         android:layout_alignLeft="@+id/player1_textv"
@@ -62,7 +62,7 @@
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ1234567890אבגדהוזחטיכלמנסעפצקרשתףץךםן"
         android:id="@+id/player1_textv"
         android:textSize="40dp"
-        android:hint="player1"
+        android:hint="Player1"
         android:maxLength="10"
         android:layout_above="@+id/player2_text"
         android:layout_centerHorizontal="true"

@@ -6,7 +6,7 @@
     <string name="button_setting">Settings</string>
     <string name="button_Exit">Exit</string>
     <string name="resetData">Reset Data</string>
-    <string name="text_NAME_title">PLAYERS NAMES</string>
+    <string name="text_NAME_title">Players Names</string>
     <string name="button_statistics">Game Statistics</string>
     <string name="textView_Game_Statistics">Game Statistics</string>
     <string name="textView_settings">Settings</string>
@@ -21,8 +21,6 @@
     <string name="title_activity_names">Players Names</string>
     <string name="title_activity_game_options">Game_options</string>
     <string name="title_activity_device_list">DeviceListActivity</string>
-
-    <string name="hello_world">Hello world!</string>
 
 
 </resources>

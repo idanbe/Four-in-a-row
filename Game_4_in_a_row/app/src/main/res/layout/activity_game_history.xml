@@ -76,10 +76,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/resetData"
         android:text="@string/resetData"
+        android:background="@drawable/buttonshape2"
+        android:textColor="@drawable/buttontext"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:background="#3f0f06"
-        android:textColor="#40ff14" />
+         />
 
 
 </RelativeLayout>

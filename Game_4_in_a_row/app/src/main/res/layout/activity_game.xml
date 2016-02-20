@@ -54,6 +54,8 @@
         android:layout_height="wrap_content"
         android:text="Reset"
         android:id="@+id/button_Reset"
+        android:background="@drawable/buttonshape2"
+        android:textColor="@drawable/buttontext"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/textView_game"
         android:layout_alignEnd="@+id/textView_game" />
@@ -63,6 +65,8 @@
         android:layout_height="wrap_content"
         android:text="Back"
         android:id="@+id/button_backGame"
+        android:background="@drawable/buttonshape2"
+        android:textColor="@drawable/buttontext"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/textView_game"
         android:layout_alignStart="@+id/textView_game" />
