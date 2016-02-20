@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -143,12 +142,11 @@ public class Game extends AppCompatActivity {
         }
 
 
-            //back button
+        //back button
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(v.getContext(), MainActivity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
         //reset game button
@@ -165,7 +163,7 @@ public class Game extends AppCompatActivity {
         });
 
 
-            //costom view of board game
+        //costom view of board game
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -210,10 +208,10 @@ public class Game extends AppCompatActivity {
         {
             for ( j=Zero;j<Seven;j++)
             {
-               if(cell_arr[i][j].equals(EMPTY))
-               {
-                   return false;//there  is empty cell
-               }
+                if(cell_arr[i][j].equals(EMPTY))
+                {
+                    return false;//there  is empty cell
+                }
             }
         }
         return true;
@@ -237,10 +235,7 @@ public class Game extends AppCompatActivity {
             dal.addUser(player1_name);
             dal.addUser(player2_name);
             dal.upDateWinOrLoss(player1_name , false , true); //set draw
-            if(gameType.equals(TWO_PLAYER))
-            {
-                dal.upDateWinOrLoss(player2_name , false , true);//set draw
-            }
+            dal.upDateWinOrLoss(player2_name , false , true);//set draw
             player_turn.setText(TIE);
             Game_on=false;
             return;
@@ -365,14 +360,14 @@ public class Game extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-        //clear all board game
+    //clear all board game
     private void clear_cell_Arr()
     {
         for (i = Zero; i < Six; i++)
         {
             for ( j = Zero; j < Seven; j++)
             {
-            cell_arr[i][j]=EMPTY;
+                cell_arr[i][j]=EMPTY;
             }
         }
     }
@@ -389,7 +384,7 @@ public class Game extends AppCompatActivity {
             player=PLAYER2;
         }
 
-            for(i=Zero;i<Six;i++)
+        for(i=Zero;i<Six;i++)
         {
             for(j=Zero;j<Seven;j++)
             {
@@ -411,7 +406,7 @@ public class Game extends AppCompatActivity {
                 }
                 if(check_Diagonal_up_Right(i, j, player))
                 {
-                  return true; // win found 4 cell Diagonal Up Right
+                    return true; // win found 4 cell Diagonal Up Right
                 }
                 if(check_Diagonal_up_Left(i, j, player))
                 {
@@ -439,7 +434,7 @@ public class Game extends AppCompatActivity {
         if(r>TWO)
         {
             if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c].equals(player))
-            &&(cell_arr[r-TWO][c].equals(player))&&(cell_arr[r-Three][c].equals(player)))
+                    &&(cell_arr[r-TWO][c].equals(player))&&(cell_arr[r-Three][c].equals(player)))
             {
                 win_cell[Zero][Zero]=r;
                 win_cell[Zero][ONE]=c;
@@ -556,20 +551,20 @@ public class Game extends AppCompatActivity {
     {
         if((r>TWO)&&(c>TWO))
         {   if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c-ONE].equals(player))
-                    &&(cell_arr[r-TWO][c-TWO].equals(player))&&(cell_arr[r-Three][c-Three].equals(player)))
-            {
-                win_cell[Zero][Zero]=r;
-                win_cell[Zero][ONE]=c;
-                win_cell[ONE][Zero]=r-ONE;
-                win_cell[ONE][ONE]=c-ONE;
-                win_cell[TWO][ONE]=r-TWO;
-                win_cell[TWO][ONE]=c-TWO;
-                win_cell[Three][Zero]=r-Three;
-                win_cell[Three][ONE]=c-Three;
-                myView.setwin_Cell(win_cell);
-                myView.set_find_win(true);
-                return true; //find 4 cell Diagonal up Left of player
-            }
+                &&(cell_arr[r-TWO][c-TWO].equals(player))&&(cell_arr[r-Three][c-Three].equals(player)))
+        {
+            win_cell[Zero][Zero]=r;
+            win_cell[Zero][ONE]=c;
+            win_cell[ONE][Zero]=r-ONE;
+            win_cell[ONE][ONE]=c-ONE;
+            win_cell[TWO][ONE]=r-TWO;
+            win_cell[TWO][ONE]=c-TWO;
+            win_cell[Three][Zero]=r-Three;
+            win_cell[Three][ONE]=c-Three;
+            myView.setwin_Cell(win_cell);
+            myView.set_find_win(true);
+            return true; //find 4 cell Diagonal up Left of player
+        }
         }
         return false;
     }
@@ -622,10 +617,10 @@ public class Game extends AppCompatActivity {
     }
 
 
-    @Override
+   /*@Override
     public void onBackPressed() {
 
-    }
+    }*/
 
     @Override
     protected void onPostResume()

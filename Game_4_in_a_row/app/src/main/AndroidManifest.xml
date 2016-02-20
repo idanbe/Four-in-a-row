@@ -25,11 +25,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Game"
-            android:label="@string/title_activity_game"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".Game_history"
             android:label="@string/title_activity_game_history"
             android:screenOrientation="portrait" >
@@ -37,6 +32,17 @@
         <activity
             android:name=".Names"
             android:label="@string/title_activity_names" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.administrator.game_4_in_a_row.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Game"
+            android:label="@string/title_activity_game"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.administrator.game_4_in_a_row.MainActivity" />
         </activity>
     </application>
 
