@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 intent = new Intent(v.getContext(), Names.class);
                 intent.putExtra(onePlayer_key,ONE_PLAYER.toString());
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
@@ -106,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 intent = new Intent(v.getContext(), Names.class);
                 intent.putExtra(twoPlayer_key,TWO_PLAYER.toString());
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
         });
@@ -134,8 +132,8 @@ public class MainActivity extends AppCompatActivity {
         exit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onDestroy();
-                System.exit(0);
+                finish();
+                System.exit(1);
             }
         });
 
@@ -181,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-            }
+    }
 
 
     @Override

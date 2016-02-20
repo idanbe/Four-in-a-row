@@ -145,8 +145,10 @@ public class Game_history extends AppCompatActivity {
         SharedPreferences sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null || sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(ON) ){
+           if(MainActivity.getMusic() != null && !MainActivity.getMusic().isPlaying())
             MainActivity.getMusic().start();
         }
+
 
         // DB to array list
         rowArrayList = dal.getDb();
@@ -200,6 +202,8 @@ public class Game_history extends AppCompatActivity {
         });
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -53,7 +53,8 @@ public class Settings extends AppCompatActivity {
                 MainActivity.getMusic().pause();
         }
         else {
-            MainActivity.getMusic().start();
+            if(MainActivity.getMusic() != null)
+                MainActivity.getMusic().start();
         }
 
 
@@ -108,6 +109,12 @@ public class Settings extends AppCompatActivity {
 
 
     }
+
+    /*@Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Settings.this, MainActivity.class);
+        startActivity(intent);
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

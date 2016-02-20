@@ -148,7 +148,6 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(v.getContext(), MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
         });
@@ -336,7 +335,6 @@ public class Game extends AppCompatActivity {
         }
         return;
     }
-
 
 
 
@@ -626,9 +624,7 @@ public class Game extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        intent = new Intent(Game.this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+
     }
 
     @Override
