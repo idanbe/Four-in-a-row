@@ -41,6 +41,7 @@ public class Game extends AppCompatActivity {
     static final String COMPUTER ="Computer";
     static final String TIE ="It's a Tie";
     static final String WIN =" Win";
+    private final String ON ="on";
     private String turn;
     private static MyView myView ;
     private boolean Game_on;
@@ -62,6 +63,7 @@ public class Game extends AppCompatActivity {
     private AiMove Ai;
     DAL dal ;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,32 +72,6 @@ public class Game extends AppCompatActivity {
         dal = new DAL(this);
         randomGenerator = new Random();
         sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
-
-//****************************************************************************************//
-
-        // function map for idan !!!
-        // all what you need is to put the correct function in the correct place .
-        // function map for Avirahm gay !!!
-
-
-       // create user
-       /* dal.addUser("user name");
-
-        // add one **WIN** to user according to user name
-        dal.upDateWinOrLoss("user name", true, false);
-
-        // // add one **LOSS** to user according to user name
-        dal.upDateWinOrLoss("user name" , false , false);
-
-        // add one **DRAW** to user according to user name
-        dal.upDateWinOrLoss("user name" , false , true);
-
-        // remove all DB  and all history layout !!
-        //dal.removeAll();
-
-        // remove user name from DB and all his statistics
-        //dal.removeRow("user name");*/
-
 
         bundle = getIntent().getExtras();
 
@@ -111,24 +87,23 @@ public class Game extends AppCompatActivity {
                 player2_name=bundle.getString(p2_key).toString();
                 PLAYER2_turn=player2_name + TURN;
             }
-            if(player1_name.equals(player2_name)){
+            if(player1_name.equals(player2_name))
+            {
                 PLAYER1_turn = PLAYER_1 + TURN;
                 PLAYER2_turn = PLAYER_2 + TURN;
                 player1_name = PLAYER_1;
                 player2_name = PLAYER_2 ;
             }
-            if(!(bundle.getString(gameType_key)==null))
+            if(!(bundle.getString(gameType_key)==null)) //get game type
             {
                 gameType=bundle.getString(gameType_key);
             }
-
-
-
         }
 
-        if(gameType.equals(ONE_PLAYER))
+
+        if(gameType.equals(ONE_PLAYER))  //player vs comp
         {
-            Ai = new AiMove();
+            Ai = new AiMove(); //class move of computer
             player2_name=COMPUTER;
             PLAYER2_turn=COMPUTER + TURN;
             turn = PLAYER1_turn;
@@ -136,7 +111,6 @@ public class Game extends AppCompatActivity {
         else
         {
             randomint = randomGenerator.nextInt(TWO);//0\1
-            Log.d("test3636",""+randomint);
             if(randomint==Zero)
             {
                 turn=PLAYER1_turn;
@@ -149,18 +123,17 @@ public class Game extends AppCompatActivity {
 
         Game_on = true;
         cell_arr = new String[Six][Seven];
-        clear_cell_Arr();
+        clear_cell_Arr();  //clear board
         win_cell = new int[Four][TWO];
         view = findViewById(R.id.view);
-        //turn = PLAYER1_turn;
         myView = new MyView(this);
         myView.set_find_win(false);
         v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         player_turn = (TextView) findViewById(R.id.text_player_turn);
-
         back_button = (Button)findViewById(R.id.button_backGame);
         reset_button = (Button)findViewById(R.id.button_Reset);
 
+        //set edit text turn
         if (turn.equals(PLAYER1_turn)) {
             player_turn.setText(PLAYER1_turn);
             player_turn.setTextColor(Color.RED);
@@ -170,7 +143,7 @@ public class Game extends AppCompatActivity {
         }
 
 
-
+            //back button
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,10 +152,10 @@ public class Game extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //reset game button
         reset_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 intent = new Intent(v.getContext(), Game.class);
                 intent.putExtra(p1_key, player1_name);
                 intent.putExtra(p2_key, player2_name);
@@ -193,11 +166,10 @@ public class Game extends AppCompatActivity {
         });
 
 
-
+            //costom view of board game
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
                 if(Game_on )
                 {
                     width_cell = v.getWidth() / Seven;
@@ -223,19 +195,16 @@ public class Game extends AppCompatActivity {
                     if ((event.getX() > (width_cell * Six)) && (event.getX() < (width_cell * Seven))) {
                         insert_coin(turn, Six);
                     }
-                    myView.setCell_arr(cell_arr);
+                    myView.setCell_arr(cell_arr); //set arayy of coins to paint
                     v.invalidate();
-
                 }
                 return false;
             }
         });
-
-
-
     }
 
 
+    //check if board game full
     private boolean check_board_full()
     {
         for(i=Zero;i<Six;i++)
@@ -248,51 +217,17 @@ public class Game extends AppCompatActivity {
                }
             }
         }
-
         return true;
     }
 
 
-    private void comp_move() //computer move
+    // computer make a move
+    private void comp_move()
     {
-        Ai.setCell_arr(cell_arr);
+        Ai.setCell_arr(cell_arr);//pass computer move class board array
         insert_coin(turn, Ai.Ai_move());
         return;
     }
-
-
-
-
-
-    private boolean check_ifBoradEmpty()
-    {
-        for( i=Zero;i<Six;i++)
-        {
-            for (int j=Zero;j<Seven;j++)
-            {
-                if(!(cell_arr[i][j].equals(EMPTY)))
-                {
-                    return false;//borad not empty
-                }
-            }
-        }
-        return true;
-    }
-
-    private boolean check_ifCol_full(int col)
-    {
-        int i=Five;
-        while ((i>=Zero)&&(!cell_arr[i][col].equals(EMPTY)))//check if empty cell in col
-        {
-            i=i-ONE;
-        }
-        if(i==-ONE)//col is full
-        {
-            return true;
-        }
-        return false;  //col not full
-    }
-
 
 
 
@@ -312,12 +247,11 @@ public class Game extends AppCompatActivity {
             return;
         }
 
-
-        int i=Five;
-            while ((i>=Zero)&&(!cell_arr[i][col].equals(EMPTY)))//check if empty cell in col
-            {
-                i=i-ONE;
-            }
+        i=Five;
+        while ((i>=Zero)&&(!cell_arr[i][col].equals(EMPTY)))//check if empty cell in col
+        {
+            i=i-ONE;
+        }
         if(i==-ONE)//col is full
         {
             return;
@@ -325,14 +259,14 @@ public class Game extends AppCompatActivity {
 
         if(player.equals(PLAYER1_turn))
         {
-            cell_arr[i][col]=PLAYER1;
+            cell_arr[i][col]=PLAYER1; //set coin on board
         }
         else
         {
             cell_arr[i][col]=PLAYER2;
         }
 
-        if(check_win(player))//win
+        if(check_win(player))//check if player win
         {
             dal.addUser(player1_name);
             dal.addUser(player2_name);
@@ -368,10 +302,10 @@ public class Game extends AppCompatActivity {
                 turn=PLAYER2_turn;
                 player_turn.setText(PLAYER2_turn);
                 player_turn.setTextColor(Color.YELLOW);
-                if(gameType.equals(ONE_PLAYER)) {
+                if(gameType.equals(ONE_PLAYER)) //player vs computer
+                {
                     comp_move();
                 }
-
             }
             else
             {
@@ -384,14 +318,14 @@ public class Game extends AppCompatActivity {
         {
             if(turn.equals(PLAYER1_turn))
             {
-                myView.set_winer(PLAYER1);
-                if(vibe_flag) {
-                    v.vibrate(VIB_TIME);
+                myView.set_winer(PLAYER1); //set on edit text player1 win
+                if(vibe_flag)
+                {
+                    v.vibrate(VIB_TIME); // long vibration for win
                 }
                 player_turn.setText(player1_name + WIN);
-
             }
-            else
+            else  //player 2 win
             {
                 myView.set_winer(PLAYER2);
                 if (vibe_flag) {
@@ -433,7 +367,7 @@ public class Game extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+        //clear all board game
     private void clear_cell_Arr()
     {
         for (i = Zero; i < Six; i++)
@@ -445,7 +379,8 @@ public class Game extends AppCompatActivity {
         }
     }
 
-    private boolean check_win(String player) // player1/player2
+    //method to find win
+    private boolean check_win(String player) // player == player1/player2
     {
         if(player.equals(PLAYER1_turn))
         {
@@ -700,9 +635,10 @@ public class Game extends AppCompatActivity {
     protected void onPostResume()
     {
         super.onPostResume();
+        //get vibration on/off
         if(!(sharedpreferences.getString(SETTING_KEY_VIBRITON , null) == null))
         {
-            if(sharedpreferences.getString(SETTING_KEY_VIBRITON , null).toString().equals("on"))
+            if(sharedpreferences.getString(SETTING_KEY_VIBRITON , null).toString().equals(ON))
             {
                 myView.setVibeFlag(true);
                 vibe_flag=true;
