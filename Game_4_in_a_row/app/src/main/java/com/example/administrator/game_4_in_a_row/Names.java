@@ -97,16 +97,18 @@ public class Names extends AppCompatActivity {
                     s += p1.getText().toString();
                 }
                 s += VS;
-                if (p2.getText().toString().isEmpty()){
+                if (p2.getText().toString().isEmpty() && non_player_name.equals(twoPlayer_key)){
+                        System.out.println("non = " + non_player_name + " , " + "tow = " + twoPlayer_key);
                         s += twoPlayer_key;
                 }
                 else {
-                    s += p2.getText().toString();
+                    s += COMPUTER;
                 }
                 // VS Massage
-                if(p1.getText().toString().equals(p2.getText().toString())){
+                if(p1.getText().toString().equals(p2.getText().toString()) && non_player_name.equals(twoPlayer_key)){
                     s = onePlayer_key + VS + twoPlayer_key ;
                 }
+
                 alertDialog.setMessage(s);
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, OK,
                         new DialogInterface.OnClickListener() {
