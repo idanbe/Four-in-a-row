@@ -15,6 +15,7 @@ public class About extends AppCompatActivity {
     private static final String SHARED_PREFERENCES_NAME = "ShardPreferences_setting";
     private final String ON = "on";
     private Button back;
+    private Boolean SoundFlag = false ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class About extends AppCompatActivity {
         if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null || sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(ON) ){
             if(MainActivity.getMusic() != null)
                 MainActivity.getMusic().start();
+                SoundFlag = true ;
         }
 
 
@@ -43,25 +45,24 @@ public class About extends AppCompatActivity {
 
     }
 
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_about, menu);
-        return true;
+    protected void onResume() {
+        super.onResume();
+        if( !MainActivity.getMusic().isPlaying() && SoundFlag ){
+            MainActivity.getMusic().start();
+        }
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    protected void onPause() {
+        super.onPause();
+        if( MainActivity.getMusic().isPlaying()) {
+            SoundFlag = true;
+            MainActivity.getMusic().pause();
         }
-
-        return super.onOptionsItemSelected(item);
+        else {
+            SoundFlag = false ;
+        }
     }
 }

@@ -59,9 +59,26 @@ public class Game extends AppCompatActivity {
     private SharedPreferences sharedpreferences ;
     private static final String SHARED_PREFERENCES_NAME = "ShardPreferences_setting";
     private final String SETTING_KEY_VIBRITON = "SETTING_KEY_VIBRITON";
+    private final String SETTING_KEY_SOUND = "SETTING_KEY_SOUND";
+    private Boolean SoundFlag = false ;
+
     private AiMove Ai;
     DAL dal ;
 
+
+    private void checkSound(){
+        SharedPreferences sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null || sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(ON) ){
+            if(MainActivity.getMusic() != null) {
+                MainActivity.getMusic().start();
+                SoundFlag = true;
+            }
+        }
+        else {
+            SoundFlag = false ;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +88,15 @@ public class Game extends AppCompatActivity {
         dal = new DAL(this);
         randomGenerator = new Random();
         sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+
+        SharedPreferences sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null || sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(ON) ){
+            if(MainActivity.getMusic() != null) {
+                MainActivity.getMusic().start();
+                SoundFlag = true;
+            }
+        }
 
         bundle = getIntent().getExtras();
 
@@ -331,6 +357,24 @@ public class Game extends AppCompatActivity {
         return;
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkSound();
+        if( !MainActivity.getMusic().isPlaying() && SoundFlag ){
+            MainActivity.getMusic().start();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if( MainActivity.getMusic().isPlaying()) {
+            MainActivity.getMusic().pause();
+        }
+
+    }
 
 
 
