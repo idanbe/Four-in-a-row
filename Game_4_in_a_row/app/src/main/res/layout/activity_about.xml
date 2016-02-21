@@ -29,4 +29,14 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/textView_About"
+        android:id="@+id/textViewAbout"
+        android:layout_below="@+id/textView_About"
+        android:layout_alignLeft="@+id/textView_About"
+        android:layout_alignStart="@+id/textView_About" />
+
 </RelativeLayout>

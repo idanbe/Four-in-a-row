@@ -27,4 +27,5 @@
     <string name="textView_About">About</string>
     <string name="button_about_back">Back</string>
     <string name="button_backSittings">Back</string>
+    <string name="textViewAbout"></string>
 </resources>

@@ -38,7 +38,7 @@ public class Game extends AppCompatActivity {
     static final String ONE_PLAYER ="one_player";
     static final String TWO_PLAYER ="two_player";
     static final String COMPUTER ="Computer";
-    static final String TIE ="It's a Tie";
+    static final String TIE ="It's a Draw";
     static final String WIN =" Win";
     private final String ON ="on";
     private String turn;
