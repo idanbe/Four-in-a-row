@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     static final String twoPlayer_key ="player2";
     static final String ONE_PLAYER ="one_player";
     static final String TWO_PLAYER ="two_player";
-    private static final String MUSIC_STATUS = "get_status_music";
     private static MediaPlayer music;
     private static Boolean SoundFlag;
     private static Boolean VibritonFlag;
@@ -34,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sharedpreferences ;
     SharedPreferences.Editor editor;
 
+
+    // music
     public static MediaPlayer getMusic(){
         return music;
     }
@@ -62,24 +63,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //  loop mus
        if(music == null || !music.isPlaying()){
             music = MediaPlayer.create(MainActivity.this, R.raw.background_sound);
             music.setLooping(true);
         }
 
+        // status of setting
         checkSetting();
 
+        // if music on
         if(SoundFlag && !music.isPlaying()) {
             music.start();
         }
 
         DAL dal = new DAL(this);
-
-        ArrayList<Row> rows = dal.getDb();
-        for(int i = 0 ; i < rows.size() ; i++){
-            Row row = rows.get(i);
-            System.out.println(row.getName() + " , " + row.getWin() + " , " + row.getLoss() + " , " + row.getDraws() + " , " + row.getPercent_Win() + "%" );
-        }
 
 
         single_button = (Button)findViewById(R.id.button_single);

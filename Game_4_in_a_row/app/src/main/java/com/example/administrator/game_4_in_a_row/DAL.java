@@ -23,6 +23,7 @@ public class DAL {
     private final int INIT = 0;
     private final String PERCENT_FORMAT = "#.##";
     private final String ERROR = "error";
+    private final int PERCENT_100 = 100;
 
     // object like struct
     private static class WinnersHolder {
@@ -93,7 +94,7 @@ public class DAL {
         }
         double avg = 0;
         double temp = (info.loss + info.win + info.standoff);
-        avg = (info.win / temp) * 100 ;
+        avg = (info.win / temp) * PERCENT_100 ;
 
         // double format
         DecimalFormat twoDForm = new DecimalFormat(PERCENT_FORMAT);
@@ -153,8 +154,6 @@ public class DAL {
         return c;
     }
 
-    //**********************************************************************//
-    // TODO : remove this function  , only for test
     // remove all rows
     public  void removeAll(){
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -172,7 +171,7 @@ public class DAL {
         db.delete(Tables.winnersTable.TABLE_NAME, selection, null);
     }
 
-    // TODO : remove this function  , only for test
+
     private Cursor getAllDBCursor(){
         SQLiteDatabase db = helper.getWritableDatabase();
         // get all DB
@@ -181,7 +180,6 @@ public class DAL {
         return c;
     }
 
-    // TODO : remove this function , only for test
     // write all DB in ArrayList
     public ArrayList<Row> getDb(){
 
@@ -215,7 +213,7 @@ public class DAL {
                 }
                 //save in array
                 catch (Exception e){
-                    row.setWin(0);
+                    row.setWin(INIT);
                 }
 
                 entryTimeColumnIndex = c.getColumnIndex(Tables.winnersTable.LOSSES);
@@ -227,7 +225,7 @@ public class DAL {
                 }
                 //save in array
                 catch (Exception e){
-                    row.setLoss(0);
+                    row.setLoss(INIT);
                 }
                 entryTimeColumnIndex = c.getColumnIndex(Tables.winnersTable.STAND_OFF);
 
@@ -238,7 +236,7 @@ public class DAL {
                 }
                 //save in array
                 catch (Exception e){
-                    row.setDraws(0);
+                    row.setDraws(INIT);
                 }
 
                 entryTimeColumnIndex = c.getColumnIndex(Tables.winnersTable.PERCENT_OF_WINS);
@@ -250,7 +248,7 @@ public class DAL {
                 }
                 //save in array
                 catch (Exception e){
-                    row.setPercent_Win(0);
+                    row.setPercent_Win(INIT);
                 }
 
                 arrayListRow.add(row);

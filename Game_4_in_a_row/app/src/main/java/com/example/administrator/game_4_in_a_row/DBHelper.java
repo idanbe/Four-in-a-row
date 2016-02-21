@@ -33,6 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
         );
     }
 
+    // drop table
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // drop table

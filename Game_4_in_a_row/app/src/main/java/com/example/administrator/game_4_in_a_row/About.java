@@ -18,14 +18,13 @@ public class About extends AppCompatActivity {
         back = (Button)findViewById(R.id.button_about_back);
 
 
+        // back button
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-
-
 
 
     }

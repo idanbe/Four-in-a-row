@@ -6,17 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
-import android.preference.DialogPreference;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class Names extends AppCompatActivity {
 
@@ -30,10 +26,7 @@ public class Names extends AppCompatActivity {
     static final String Game_Type_key ="gameType_key";
     private Bundle bundle;
     private String non_player_name ="";
-    private DAL dal;
     private View view ;
-    private Context context;
-    private ProgressDialog progress ;
     private AlertDialog alertDialog;
     static final String COMPUTER ="Computer";
     private final String SETTING_KEY_SOUND = "SETTING_KEY_SOUND";
@@ -41,12 +34,8 @@ public class Names extends AppCompatActivity {
     private final String ON = "on";
     private final String NAME_PLAYERS = "Names of players:";
     private final String VS = "\n VS \n";
-
-
-    public Context get_Context(){
-        return context;
-    }
-
+    private final String OK = "OK";
+    private final String CANCEL = "Cancel";
 
 
     @Override
@@ -65,9 +54,7 @@ public class Names extends AppCompatActivity {
         }
 
 
-        context = this;
-        dal = new DAL(this);
-
+        // get objects
         back_button = (Button)findViewById(R.id.button_back);
         next_button = (Button)findViewById(R.id.button_next);
         p1 = (EditText)findViewById(R.id.player1_textv);
@@ -88,12 +75,16 @@ public class Names extends AppCompatActivity {
             }
         }
 
+        // next button
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 view = v ;
                 alertDialog = new AlertDialog.Builder(Names.this).create();
+                // restart string
                 String s  = "";
+
+                // set players from users
                 alertDialog.setTitle(NAME_PLAYERS);
                 if (p1.getText().toString().isEmpty()) {
                     s += onePlayer_key;
@@ -108,32 +99,32 @@ public class Names extends AppCompatActivity {
                 else {
                     s += p2.getText().toString();
                 }
-
-
+                // VS Massage
                 if(p1.getText().toString().equals(p2.getText().toString())){
-                    s = onePlayer_key + "\n VS \n" + twoPlayer_key ;
+                    s = onePlayer_key + VS + twoPlayer_key ;
                 }
                 alertDialog.setMessage(s);
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, OK,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
-                                progress = ProgressDialog.show(Names.this, "Pleas wait", "Load Game..", true);
+
                                 // go to game
                                 intent = new Intent(view.getContext(), Game.class);
                                 intent.putExtra(p1_key, p1.getText().toString());
                                 intent.putExtra(p2_key, p2.getText().toString());
                                 intent.putExtra(Game_Type_key, non_player_name.toString());
 
-                                p1.setText("");
-                                p2.setText("");
+                                // restart edit test
+                                p1.setText(non_player_name);
+                                p2.setText(non_player_name);
 
-                                progress.dismiss();
                                 // go to game
                                 startActivity(intent);
                             }
                         });
-                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
+                //  cancel button
+                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, CANCEL,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -151,11 +142,9 @@ public class Names extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progress = ProgressDialog.show(get_Context(), "Pleas wait", "Load Game..", true);
-                progress.show();
-                p1.setText("");
-                p2.setText("");
-                progress.cancel();
+                // restart name player
+                p1.setText(non_player_name);
+                p2.setText(non_player_name);
                 onBackPressed();
             }
         });

@@ -33,6 +33,14 @@ public class Game_history extends AppCompatActivity {
     private final String SHARED_PREFERENCES_NAME = "ShardPreferences_setting";
     private final String ON = "on";
     private static final int MAX_RESULT = 10;
+    private static final String PERCENT = "%";
+    private static final String REMOVE_TITTLE_MASSAGE = "Remove All Data From Table :";
+    private static final String REMOVE_BODY_MASSAGE = "All Data will be deleted\n" + "Are you sure ?";
+    private static final String OK = "OK";
+    private static final String CANCEL = "Cancel";
+    private static final int TABLE_FINAL_ROWS_1 = 0;
+    private static final int TABLE_FINAL_ROWS_2 = 1;
+
 
 
     //object like struct
@@ -44,13 +52,6 @@ public class Game_history extends AppCompatActivity {
         TextView percent_win;
     }
 
-    public Game_history(DAL dal){
-        this.dal = dal;
-    }
-
-    public Game_history(){
-
-    }
     // add row
     public void addToHistoryTable(String name , int win , int loss , int draws , double percent ){
 
@@ -79,7 +80,7 @@ public class Game_history extends AppCompatActivity {
         rowHolder.standoff.setGravity(Gravity.CENTER);
 
         // percent_win col
-        rowHolder.percent_win.setText(percent + "%");
+        rowHolder.percent_win.setText(percent + PERCENT);
         rowHolder.percent_win.setGravity(Gravity.RIGHT);
 
         // add to row
@@ -96,7 +97,7 @@ public class Game_history extends AppCompatActivity {
     }
 
     // update
-    public void upDateHistoryTable(String name , boolean ifwin , boolean ifStendOff){
+    public void upDateHistoryTable(String name , boolean ifwin , boolean ifStendOff) {
         dal.upDateWinOrLoss(name, ifwin, ifStendOff);
         rowArrayList = dal.getDb();
     }
@@ -106,13 +107,13 @@ public class Game_history extends AppCompatActivity {
         rowArrayList = dal.getDb();
     }
 
-    // TODO : remove this , only for test
+    /*// TODO : not remove !!
     public void printArray(){
         for(int i = 0 ; i < rowArrayList.size() ; i++){
             Row row = rowArrayList.get(i);
             System.out.println(row.getName() + " , " + row.getWin() + " , " + row.getLoss() + " , " + row.getDraws() + " , " + row.getPercent_Win() + "%" );
         }
-    }
+    }*/
 
     public int sortArrayList(){
         int indexOfMakValue = 0 ;
@@ -141,6 +142,7 @@ public class Game_history extends AppCompatActivity {
         resetTable = (Button)findViewById(R.id.resetData);
         back = (Button)findViewById(R.id.button_backHistory);
 
+        // create Table layout
         HistoryTable = (TableLayout)findViewById(R.id.history_table);
         HistoryTable.setStretchAllColumns(true);
 
@@ -154,10 +156,7 @@ public class Game_history extends AppCompatActivity {
 
         // DB to array list
         rowArrayList = dal.getDb();
-/*****************************************/
-        // print DB for test
-        printArray();
-/*****************************************/
+
         // print to history table
         int j = 0 ;
         while ( !rowArrayList.isEmpty() && j < MAX_RESULT){
@@ -167,12 +166,9 @@ public class Game_history extends AppCompatActivity {
             rowArrayList.remove(i);
             j++ ;
         }
-/*****************************************/
-         //print to test
-        System.out.println("after !!");
-        printArray();
-/********************************/
 
+
+        // back button
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -181,25 +177,30 @@ public class Game_history extends AppCompatActivity {
             }}
         );
 
+        // rest table button
         resetTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dal.removeAll();
                 AlertDialog alertDialog = new AlertDialog.Builder(Game_history.this).create();
-                alertDialog.setTitle("Remove All Data From Table :");
-                alertDialog.setMessage("All Data will be deleted\n" + "Are you sure ?");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                alertDialog.setTitle(REMOVE_TITTLE_MASSAGE);
+                alertDialog.setMessage(REMOVE_BODY_MASSAGE);
+                // ok button
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, OK,
                         new DialogInterface.OnClickListener() {
+                            // remove all result rows
                             public void onClick(DialogInterface dialog, int which) {
-                                View view1 = HistoryTable.getChildAt(0);
-                                View view2 = HistoryTable.getChildAt(1);
+                                // final rows (0, 1 in Table layout)
+                                View view1 = HistoryTable.getChildAt(TABLE_FINAL_ROWS_1);
+                                View view2 = HistoryTable.getChildAt(TABLE_FINAL_ROWS_2);
                                 HistoryTable.removeAllViews();
                                 HistoryTable.addView(view1);
                                 HistoryTable.addView(view2);
                                 dialog.dismiss();
                             }
                         });
-                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
+                // cancel button
+                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, CANCEL,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

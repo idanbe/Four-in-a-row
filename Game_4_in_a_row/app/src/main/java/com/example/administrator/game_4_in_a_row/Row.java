@@ -11,10 +11,12 @@ public class Row{
     private int Draws;
     private double Percent_Win;
 
+    // null constructor
     public Row(){
 
     }
 
+    // constructor
     public Row(String name , int win , int loss , int draws , double percent){
         this.Name = name;
         this.Win = win;
@@ -24,13 +26,13 @@ public class Row{
     }
 
 
+    // geters and seters
     public String getName() {
         return this.Name;
     }
     public void setName(String name) {
         this.Name = name;
     }
-
 
     public int getWin() {
         return this.Win;
@@ -39,14 +41,12 @@ public class Row{
         this.Win = win;
     }
 
-
     public int getLoss() {
         return this.Loss;
     }
     public void setLoss(int loss) {
         this.Loss = loss;
     }
-
 
     public int getDraws() {
         return this.Draws;
@@ -61,7 +61,5 @@ public class Row{
     public void setPercent_Win(double percent_win) {
         this.Percent_Win = percent_win;
     }
-
-
 
 }

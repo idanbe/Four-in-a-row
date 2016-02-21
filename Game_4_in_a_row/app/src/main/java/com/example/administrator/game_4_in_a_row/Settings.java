@@ -33,6 +33,7 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        // object
         sound = (Button) findViewById(R.id.button_sound);
         vibriton = (Button) findViewById(R.id.button_Vibration);
         back = (Button)findViewById(R.id.button_backSittings);
@@ -40,6 +41,7 @@ public class Settings extends AppCompatActivity {
         editor = sharedpreferences.edit();
 
 
+        // check setting sound from shared file
         if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null){
             sound.setText(SOUND_ON);
             editor.putString(SETTING_KEY_SOUND, ON);
@@ -58,6 +60,7 @@ public class Settings extends AppCompatActivity {
         }
 
 
+        // check setting vibriton from shared file
         if(sharedpreferences.getString(SETTING_KEY_VIBRITON , null) == null){
             vibriton.setText(Vibrtion_ON);
             editor.putString(SETTING_KEY_VIBRITON, ON);
@@ -67,7 +70,7 @@ public class Settings extends AppCompatActivity {
             vibriton.setText(Vibrtion_OFF);
         }
 
-            //sound button on/off
+        //sound button on/off
         sound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +112,7 @@ public class Settings extends AppCompatActivity {
 
 
 
+        // back button
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,14 +122,6 @@ public class Settings extends AppCompatActivity {
 
     }
 
-
-
-
-    /*@Override
-    public void onBackPressed() {
-        Intent intent = new Intent(Settings.this, MainActivity.class);
-        startActivity(intent);
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
