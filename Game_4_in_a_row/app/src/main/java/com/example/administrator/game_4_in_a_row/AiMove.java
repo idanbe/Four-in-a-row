@@ -437,16 +437,17 @@ public class AiMove
                     {
                         return NotFind;
                     }
+
                     return c-Three;
                 }
-                if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c-ONE].equals(player))
-                        &&(cell_arr[r-TWO][c-TWO].equals(EMPTY))&&(cell_arr[r-Three][c-Three].equals(player)))
+                if((cell_arr[r][c].equals(player))&&(cell_arr[r-ONE][c-ONE].equals(EMPTY))
+                        &&(cell_arr[r-TWO][c-TWO].equals(player))&&(cell_arr[r-Three][c-Three].equals(player)))
                 {
-                    if(cell_arr[r-ONE][c-TWO].equals(EMPTY))
+                    if(cell_arr[r][c-ONE].equals(EMPTY))
                     {
                         return NotFind;
                     }
-                    return c-TWO;
+                    return c-ONE;
                 }
             }
             if(seq==TWO)
@@ -494,7 +495,7 @@ public class AiMove
                 if ((cell_arr[r][c].equals(player)) && (cell_arr[r + ONE][c + ONE].equals(player))
                         && (cell_arr[r + TWO][c + TWO].equals(EMPTY)) && (cell_arr[r + Three][c + Three].equals(player))) {
 
-                    if ((r < TWO) && (cell_arr[r + Three][c + TWO].equals(EMPTY))) {
+                    if (cell_arr[r + Three][c + TWO].equals(EMPTY)) {
                         return NotFind;
                     }
                     return c + TWO;
@@ -504,7 +505,7 @@ public class AiMove
                     if ((cell_arr[r][c].equals(player)) && (cell_arr[r + ONE][c + ONE].equals(player))
                             && (cell_arr[r + TWO][c + TWO].equals(EMPTY)) && (cell_arr[r + Three][c + Three].equals(EMPTY))) {
 
-                        if ((r < TWO) && (cell_arr[r + Three][c + TWO].equals(EMPTY)))
+                        if ((cell_arr[r + Three][c + TWO].equals(EMPTY)))
                         {
                             return NotFind;
                         }
@@ -516,7 +517,7 @@ public class AiMove
                     if ((cell_arr[r][c].equals(player)) && (cell_arr[r + ONE][c + ONE].equals(EMPTY))
                             && (cell_arr[r + TWO][c + TWO].equals(EMPTY)) && (cell_arr[r + Three][c + Three].equals(EMPTY)))
                     {
-                        if ((r < TWO) && (cell_arr[r + TWO][c + ONE].equals(EMPTY)))
+                        if ((cell_arr[r + TWO][c + ONE].equals(EMPTY)))
                         {
                             return NotFind;
                         }
@@ -545,7 +546,7 @@ public class AiMove
                 if((cell_arr[r][c].equals(player))&&(cell_arr[r+ONE][c-ONE].equals(player))
                         &&(cell_arr[r+TWO][c-TWO].equals(EMPTY))&&(cell_arr[r+Three][c-Three].equals(player)))
                 {
-                    if ((r < TWO) && (cell_arr[r + Three][c - TWO].equals(EMPTY)))
+                    if ((cell_arr[r + Three][c - TWO].equals(EMPTY)))
                     {
                         return NotFind;
                     }
@@ -557,7 +558,7 @@ public class AiMove
                 if((cell_arr[r][c].equals(player))&&(cell_arr[r+ONE][c-ONE].equals(player))
                         &&(cell_arr[r+TWO][c-TWO].equals(EMPTY))&&(cell_arr[r+Three][c-Three].equals(EMPTY)))
                 {
-                    if ((r < TWO) && (cell_arr[r + Three][c - TWO].equals(EMPTY)))
+                    if ((cell_arr[r + Three][c - TWO].equals(EMPTY)))
                     {
                         return NotFind;
                     }
@@ -569,7 +570,7 @@ public class AiMove
                 if((cell_arr[r][c].equals(player))&&(cell_arr[r+ONE][c-ONE].equals(EMPTY))
                         &&(cell_arr[r+TWO][c-TWO].equals(EMPTY))&&(cell_arr[r+Three][c-Three].equals(EMPTY)))
                 {
-                    if ((r < TWO) && (cell_arr[r + TWO][c - ONE].equals(EMPTY)))
+                    if ((cell_arr[r + TWO][c - ONE].equals(EMPTY)))
                     {
                         return NotFind;
                     }
