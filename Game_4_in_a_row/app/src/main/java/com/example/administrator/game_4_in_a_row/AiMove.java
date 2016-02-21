@@ -151,7 +151,7 @@ public class AiMove
         randomGenerator = new Random();
         do
         {
-            randomCol = randomGenerator.nextInt(Six);
+            randomCol = randomGenerator.nextInt(Seven);
         }
         while (check_ifCol_full(randomCol));
 
