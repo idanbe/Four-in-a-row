@@ -24,6 +24,7 @@ public class Names extends AppCompatActivity {
     static final String onePlayer_key ="player1";
     static final String twoPlayer_key ="player2";
     static final String Game_Type_key ="gameType_key";
+    private static final String TWO_PLAYER = "two_player" ;
     private Bundle bundle;
     private String non_player_name ="";
     private View view ;
@@ -90,22 +91,21 @@ public class Names extends AppCompatActivity {
 
                 // set players from users
                 alertDialog.setTitle(NAME_PLAYERS);
-                if (p1.getText().toString().isEmpty()) {
+                if (p1.getText().toString().isEmpty() || p1.getText().toString().equals(COMPUTER)) {
                     s += onePlayer_key;
                 }
                 else {
                     s += p1.getText().toString();
                 }
                 s += VS;
-                if (p2.getText().toString().isEmpty() && non_player_name.equals(twoPlayer_key)){
-                        System.out.println("non = " + non_player_name + " , " + "tow = " + twoPlayer_key);
+                if ( (p2.getText().toString().isEmpty() && non_player_name.equals(TWO_PLAYER)) || p2.getText().toString().equals(COMPUTER)){
                         s += twoPlayer_key;
                 }
                 else {
-                    s += COMPUTER;
+                    s += p2.getText().toString();
                 }
                 // VS Massage
-                if(p1.getText().toString().equals(p2.getText().toString()) && non_player_name.equals(twoPlayer_key)){
+                if(p1.getText().toString().equals(p2.getText().toString()) && non_player_name.equals(TWO_PLAYER)){
                     s = onePlayer_key + VS + twoPlayer_key ;
                 }
 
