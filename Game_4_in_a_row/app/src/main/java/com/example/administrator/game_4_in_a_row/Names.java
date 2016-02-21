@@ -36,6 +36,7 @@ public class Names extends AppCompatActivity {
     private final String VS = "\n VS \n";
     private final String OK = "OK";
     private final String CANCEL = "Cancel";
+    private final String RESET_NAME_PLAYERS = "";
 
 
     @Override
@@ -59,6 +60,9 @@ public class Names extends AppCompatActivity {
         next_button = (Button)findViewById(R.id.button_next);
         p1 = (EditText)findViewById(R.id.player1_textv);
         p2 = (EditText)findViewById(R.id.player2_text);
+
+        p1.setText(non_player_name);
+        p2.setText(non_player_name);
 
         //get game type
         if (bundle != null)
@@ -116,8 +120,8 @@ public class Names extends AppCompatActivity {
                                 intent.putExtra(Game_Type_key, non_player_name.toString());
 
                                 // restart edit test
-                                p1.setText(non_player_name);
-                                p2.setText(non_player_name);
+                                p1.setText(RESET_NAME_PLAYERS);
+                                p2.setText(RESET_NAME_PLAYERS);
 
                                 // go to game
                                 startActivity(intent);
@@ -143,8 +147,8 @@ public class Names extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // restart name player
-                p1.setText(non_player_name);
-                p2.setText(non_player_name);
+                p1.setText(RESET_NAME_PLAYERS);
+                p2.setText(RESET_NAME_PLAYERS);
                 onBackPressed();
             }
         });
@@ -169,6 +173,8 @@ public class Names extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            intent = new Intent(Names.this, Settings.class);
+            startActivity(intent);
             return true;
         }
 
