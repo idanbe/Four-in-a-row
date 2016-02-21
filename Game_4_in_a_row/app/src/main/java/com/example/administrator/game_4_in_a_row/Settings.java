@@ -37,6 +37,8 @@ public class Settings extends AppCompatActivity {
         sound = (Button) findViewById(R.id.button_sound);
         vibriton = (Button) findViewById(R.id.button_Vibration);
         back = (Button)findViewById(R.id.button_backSittings);
+
+        // shared file
         sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
 

@@ -54,10 +54,12 @@
         android:textColor="@drawable/buttontext"
         android:text="@string/button_backSittings"
         android:id="@+id/button_backSittings"
-        android:layout_marginTop="44dp"
-        android:layout_below="@+id/button_Vibration"
-        android:layout_alignRight="@+id/button_Vibration"
-        android:layout_alignEnd="@+id/button_Vibration" />
+        android:layout_marginBottom="42dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textView_settings"
+        android:layout_alignEnd="@+id/textView_settings"
+        android:layout_alignLeft="@+id/textView_settings"
+        android:layout_alignStart="@+id/textView_settings" />
 
 
 </RelativeLayout>
