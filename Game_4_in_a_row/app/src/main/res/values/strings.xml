@@ -5,7 +5,7 @@
     <string name="button_two">Two Players</string>
     <string name="button_setting">Settings</string>
     <string name="button_Exit">Exit</string>
-    <string name="resetData">Reset Data</string>
+    <string name="resetData">Reset</string>
     <string name="text_NAME_title">Players Names</string>
     <string name="button_statistics">Game Statistics</string>
     <string name="textView_Game_Statistics">Game Statistics</string>
@@ -17,10 +17,14 @@
     <string name="title_activity_game_history">Game Statistics</string>
     <string name="button_Vibration">Vibration On</string>
     <string name="button_sound">Sound On</string>
+    <string name="button_backHistory">Back</string>
     <string name="title_activity_history_row">HistoryRow</string>
     <string name="title_activity_names">Players Names</string>
     <string name="title_activity_game_options">Game_options</string>
     <string name="title_activity_device_list">DeviceListActivity</string>
-
-
+    <string name="button_about">About</string>
+    <string name="title_activity_about">About</string>
+    <string name="textView_About">About</string>
+    <string name="button_about_back">Back</string>
+    <string name="button_backSittings">Back</string>
 </resources>

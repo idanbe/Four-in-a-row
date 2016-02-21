@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private Intent intent;
-    private Button single_button,two_button,setting_button,game_history_button,exit_button;
+    private Button single_button,two_button,setting_button,game_history_button,about_button,exit_button;
     static final String onePlayer_key ="player1";
     static final String twoPlayer_key ="player2";
     static final String ONE_PLAYER ="one_player";
@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         setting_button = (Button)findViewById(R.id.button_setting);
         game_history_button = (Button)findViewById(R.id.button_statistics);
         exit_button = (Button)findViewById(R.id.button_Exit);
+        about_button = (Button)findViewById(R.id.button_about);
 
 
         // single player
@@ -127,6 +128,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        // About
+        about_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(v.getContext(), About.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         // exit
         exit_button.setOnClickListener(new View.OnClickListener() {

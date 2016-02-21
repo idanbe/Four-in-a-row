@@ -28,7 +28,7 @@ public class Game_history extends AppCompatActivity {
     private TableLayout HistoryTable ;
     private TableRow tableRow;
     private ArrayList<Row> rowArrayList ;
-    private Button resetTable ;
+    private Button resetTable,back ;
     private final String SETTING_KEY_SOUND = "SETTING_KEY_SOUND";
     private final String SHARED_PREFERENCES_NAME = "ShardPreferences_setting";
     private final String ON = "on";
@@ -139,6 +139,8 @@ public class Game_history extends AppCompatActivity {
         dal = new DAL(this);
 
         resetTable = (Button)findViewById(R.id.resetData);
+        back = (Button)findViewById(R.id.button_backHistory);
+
         HistoryTable = (TableLayout)findViewById(R.id.history_table);
         HistoryTable.setStretchAllColumns(true);
 
@@ -170,6 +172,14 @@ public class Game_history extends AppCompatActivity {
         System.out.println("after !!");
         printArray();
 /********************************/
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                onBackPressed();
+            }}
+        );
 
         resetTable.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -46,5 +46,18 @@
         android:layout_alignRight="@+id/button_Vibration"
         android:layout_alignEnd="@+id/button_Vibration" />
 
+    <Button
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:background="@drawable/buttonshape2"
+        android:textColor="@drawable/buttontext"
+        android:text="@string/button_backSittings"
+        android:id="@+id/button_backSittings"
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/button_Vibration"
+        android:layout_alignRight="@+id/button_Vibration"
+        android:layout_alignEnd="@+id/button_Vibration" />
+
 
 </RelativeLayout>

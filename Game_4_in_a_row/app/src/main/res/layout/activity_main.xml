@@ -72,11 +72,8 @@
         android:textSize="20sp"
         android:textColor="@drawable/buttontext"
         android:background="@drawable/buttonshape"
-        android:layout_below="@+id/button_statistics"
-        android:layout_alignLeft="@+id/button_statistics"
-        android:layout_alignStart="@+id/button_statistics"
-        android:layout_alignRight="@+id/button_statistics"
-        android:layout_alignEnd="@+id/button_statistics" />
+        android:layout_below="@+id/button_about"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -88,5 +85,17 @@
         android:id="@+id/button_statistics"
         android:text="@string/button_statistics"
         android:layout_below="@+id/button_setting"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_about"
+        android:id="@+id/button_about"
+        android:textSize="20sp"
+        android:background="@drawable/buttonshape"
+        android:textColor="@drawable/buttontext"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/button_statistics"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

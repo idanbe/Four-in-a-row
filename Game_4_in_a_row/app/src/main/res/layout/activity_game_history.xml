@@ -72,15 +72,26 @@
     </TableLayout>
 
     <Button
-        android:layout_width="170dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/resetData"
         android:text="@string/resetData"
         android:background="@drawable/buttonshape2"
         android:textColor="@drawable/buttontext"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-         />
+        android:layout_alignRight="@+id/textView_Game_Statistics"
+        android:layout_alignEnd="@+id/textView_Game_Statistics" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="@string/button_backHistory"
+        android:id="@+id/button_backHistory"
+        android:background="@drawable/buttonshape2"
+        android:textColor="@drawable/buttontext"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/textView_Game_Statistics"
+        android:layout_alignStart="@+id/textView_Game_Statistics" />
 
 
 </RelativeLayout>

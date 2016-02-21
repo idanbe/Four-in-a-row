@@ -14,7 +14,7 @@ import android.widget.Button;
 //settings of game sound and vibration
 public class Settings extends AppCompatActivity {
 
-    private Button sound,vibriton;
+    private Button sound,vibriton,back;
     private final String SOUND_OFF="Sound Off";
     private final String SOUND_ON="Sound On";
     private final String Vibrtion_OFF="Vibration Off";
@@ -35,7 +35,7 @@ public class Settings extends AppCompatActivity {
 
         sound = (Button) findViewById(R.id.button_sound);
         vibriton = (Button) findViewById(R.id.button_Vibration);
-
+        back = (Button)findViewById(R.id.button_backSittings);
         sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
 
@@ -108,7 +108,18 @@ public class Settings extends AppCompatActivity {
         });
 
 
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
     }
+
+
+
 
     /*@Override
     public void onBackPressed() {
