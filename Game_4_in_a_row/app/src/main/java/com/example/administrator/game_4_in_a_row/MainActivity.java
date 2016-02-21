@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         if( music.isPlaying())
             music.pause();
-            }
+    }
 
 
     @Override

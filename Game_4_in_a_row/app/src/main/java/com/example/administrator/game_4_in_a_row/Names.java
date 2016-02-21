@@ -38,7 +38,22 @@ public class Names extends AppCompatActivity {
     private final String OK = "OK";
     private final String CANCEL = "Cancel";
     private final String RESET_NAME_PLAYERS = "";
+    private Boolean SoundFlag = false ;
 
+
+    private void checkSound(){
+        SharedPreferences sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null || sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(ON) ){
+            if(MainActivity.getMusic() != null) {
+                MainActivity.getMusic().start();
+                SoundFlag = true;
+            }
+        }
+        else {
+            SoundFlag = false ;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +66,13 @@ public class Names extends AppCompatActivity {
         SharedPreferences sharedpreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         if(sharedpreferences.getString(SETTING_KEY_SOUND, null) == null || sharedpreferences.getString(SETTING_KEY_SOUND, null).equals(ON) ){
-            if(MainActivity.getMusic() != null)
+            if(MainActivity.getMusic() != null) {
                 MainActivity.getMusic().start();
+                SoundFlag = true;
+            }
         }
+
+
 
 
         // get objects
@@ -158,6 +177,22 @@ public class Names extends AppCompatActivity {
 
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkSound();
+        if( !MainActivity.getMusic().isPlaying() && SoundFlag ){
+            MainActivity.getMusic().start();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if( MainActivity.getMusic().isPlaying())
+            MainActivity.getMusic().pause();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
