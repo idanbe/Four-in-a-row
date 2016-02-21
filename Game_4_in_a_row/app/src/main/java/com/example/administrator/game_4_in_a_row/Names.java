@@ -117,7 +117,10 @@ public class Names extends AppCompatActivity {
                     s += p1.getText().toString();
                 }
                 s += VS;
-                if ( (p2.getText().toString().isEmpty() && non_player_name.equals(TWO_PLAYER) || (p2.getText().toString().equals(COMPUTER) && non_player_name.equals(TWO_PLAYER)) )){
+                if( !non_player_name.equals(TWO_PLAYER)){
+                    s += COMPUTER;
+                }
+                else if ( (p2.getText().toString().isEmpty() || (p2.getText().toString().equals(COMPUTER) && non_player_name.equals(TWO_PLAYER)) )){
                         s += twoPlayer_key;
                 }
 
