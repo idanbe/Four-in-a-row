@@ -124,6 +124,20 @@ public class Settings extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if( !MainActivity.getMusic().isPlaying() && sound.getText().toString().equals(SOUND_ON) ){
+            MainActivity.getMusic().start();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if( MainActivity.getMusic().isPlaying())
+            MainActivity.getMusic().pause();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
