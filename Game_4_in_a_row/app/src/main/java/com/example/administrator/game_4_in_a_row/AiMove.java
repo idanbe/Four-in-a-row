@@ -33,7 +33,6 @@ public class AiMove
            return Three;
        }
 
-        /* TODO return this 
         check=find_Ai_threeSequence();  //find three sequence coins of computer
         if(check!=NotFind)              // to complete 4 sequence and win
         {
@@ -59,7 +58,6 @@ public class AiMove
         {
             return check;
         }
-        /*/
         return getRandomCol();
 
     }
